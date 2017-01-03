@@ -378,8 +378,8 @@ Restore configuration files.
 * [~/.profile](configs/.profile)
 * [~/.tmux.conf](configs/.tmux.conf)
 
-Move `.vim` to `%USERPROFILE%\vimfiles` and create a symlink to `~/.vim` in WSL.<br/>
-Move `.gitconfig` to `%USERPROFILE%\.gitconfig` and create a symlink to `~/.gitconfig` in WSL.<br/>
+Move `.vim` to `%USERPROFILE%\vimfiles` and create a symlink to `~/.vim`.<br/>
+Move `.gitconfig` to `%USERPROFILE%\.gitconfig` and create a symlink to `~/.gitconfig`.<br/>
 Repplace `{name}`, `{email}` and `{username}` in `.gitconfig`.
 
 Change **sudo** settings by executing `sudo EDITOR=vim visudo`.
