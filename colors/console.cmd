@@ -1,0 +1,19 @@
+reg add "HKEY_CURRENT_USER\Console" /v "FaceName" /t REG_SZ /d "DejaVuSansMono NF" /f
+reg add "HKEY_CURRENT_USER\Console" /v "FontSize" /t REG_DWORD /d 0xE0000 /f
+reg add "HKEY_CURRENT_USER\Console" /v "WindowSize" /t REG_DWORD /d 0x280078 /f
+reg add "HKEY_CURRENT_USER\Console" /v "ColorTable00" /t REG_DWORD /d 0x001e1e1e /f
+reg add "HKEY_CURRENT_USER\Console" /v "ColorTable04" /t REG_DWORD /d 0x00ff615a /f
+reg add "HKEY_CURRENT_USER\Console" /v "ColorTable02" /t REG_DWORD /d 0x00b1e969 /f
+reg add "HKEY_CURRENT_USER\Console" /v "ColorTable06" /t REG_DWORD /d 0x00ebd99c /f
+reg add "HKEY_CURRENT_USER\Console" /v "ColorTable01" /t REG_DWORD /d 0x005da9f6 /f
+reg add "HKEY_CURRENT_USER\Console" /v "ColorTable05" /t REG_DWORD /d 0x00e86aff /f
+reg add "HKEY_CURRENT_USER\Console" /v "ColorTable03" /t REG_DWORD /d 0x0082fff7 /f
+reg add "HKEY_CURRENT_USER\Console" /v "ColorTable07" /t REG_DWORD /d 0x00dcdcdc /f
+reg add "HKEY_CURRENT_USER\Console" /v "ColorTable08" /t REG_DWORD /d 0x00787878 /f
+reg add "HKEY_CURRENT_USER\Console" /v "ColorTable12" /t REG_DWORD /d 0x00f58c80 /f
+reg add "HKEY_CURRENT_USER\Console" /v "ColorTable10" /t REG_DWORD /d 0x00ddf88f /f
+reg add "HKEY_CURRENT_USER\Console" /v "ColorTable14" /t REG_DWORD /d 0x00eee5b2 /f
+reg add "HKEY_CURRENT_USER\Console" /v "ColorTable09" /t REG_DWORD /d 0x00a5c7ff /f
+reg add "HKEY_CURRENT_USER\Console" /v "ColorTable13" /t REG_DWORD /d 0x00ddaaff /f
+reg add "HKEY_CURRENT_USER\Console" /v "ColorTable11" /t REG_DWORD /d 0x00b7fff9 /f
+reg add "HKEY_CURRENT_USER\Console" /v "ColorTable15" /t REG_DWORD /d 0x00ffffff /f
