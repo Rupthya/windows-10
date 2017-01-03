@@ -677,7 +677,7 @@ Install third party software.
 * [gVim](http://www.vim.org)
 
 ## Environment
-Add the following entries to the `Path` environment variable (adjust as needed).
+Add entries to the `Path` environment variable (adjust as needed).
 
 ```
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin
@@ -688,7 +688,7 @@ C:\Program Files\Git\cmd
 C:\Program Files\NASM\2.12.02
 ```
 
-Set the `NODE_PATH` environment variable to the following value (adjust as needed).
+Set the `NODE_PATH` environment variable (adjust as needed).
 
 ```
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Web\External\node_modules
