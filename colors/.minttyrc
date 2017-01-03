@@ -1,0 +1,31 @@
+BoldAsFont=yes
+Font=DejaVuSansMono NF
+FontHeight=9
+CursorType=underscore
+RightClickAction=paste
+Columns=120
+Rows=40
+Term=xterm-256color
+Printer=Microsoft Print to PDF
+ConfirmExit=no
+
+BackgroundColour=30,30,30
+ForegroundColour=220,220,220
+CursorColour=220,220,220
+
+Black=30,30,30
+Red=255,97,90
+Green=177,233,105
+Yellow=235,217,156
+Blue=93,169,246
+Magenta=232,106,255
+Cyan=130,255,247
+White=220,220,220
+BoldBlack=120,120,120
+BoldRed=245,140,128
+BoldGreen=221,248,143
+BoldYellow=238,229,178
+BoldBlue=165,199,255
+BoldMagenta=221,170,255
+BoldCyan=183,255,249
+BoldWhite=255,255,255
