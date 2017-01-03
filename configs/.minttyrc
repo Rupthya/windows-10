@@ -8,11 +8,9 @@ Rows=40
 Term=xterm-256color
 Printer=Microsoft Print to PDF
 ConfirmExit=no
-
 BackgroundColour=30,30,30
 ForegroundColour=220,220,220
 CursorColour=220,220,220
-
 Black=30,30,30
 Red=255,97,90
 Green=177,233,105

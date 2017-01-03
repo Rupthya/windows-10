@@ -1,0 +1,33 @@
+[user]
+  name = {name}
+  email = {email}
+
+[credential "https://github.com"]
+  username = {username}
+
+[core]
+  autocrlf = true
+  safecrlf = false
+  whitespace = cr-at-eol
+  filemode = false
+  compression = 9
+
+[alias]
+  cm = !git add --all && git commit -m
+  co = checkout
+  st = status
+  tags = tag -l
+
+[diff]
+  mnemonicprefix = true
+
+[push]
+  default = simple
+
+[color "diff"]
+  meta = yellow bold
+  frag = magenta
+
+[color "status"]
+  added = green
+  changed = yellow
