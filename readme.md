@@ -606,7 +606,7 @@ Individual Components
 Execute `bash.exe` in the command prompt.
 
 ```sh
-sudo apt-get install git subversion build-essential nasm nodejs npm
+sudo apt-get install git subversion build-essential ninja-build nasm nodejs npm
 sudo ln -s /usr/bin/nodejs /usr/bin/node
 ```
 
