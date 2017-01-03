@@ -123,8 +123,7 @@ Configure [Visual Studio Code](https://code.visualstudio.com) (optional).
 }
 ```
 
-Uninstall unwanted applications in `Settings > System > Apps & features`.
-
+Uninstall unwanted applications in `Settings > System > Apps & features`.<br/>
 Uninstall unwanted optional features in `Settings > System > Apps & features > Manage optional features`.
 
 ## Automatic Windows Updates
@@ -378,6 +377,10 @@ Restore configuration files.
 * [~/.minttyrc](configs/.minttyrc)
 * [~/.profile](configs/.profile)
 * [~/.tmux.conf](configs/.tmux.conf)
+
+Move `.vim` to `%USERPROFILE%\vimfiles` and create a symlink to `~/.vim` in WSL.<br/>
+Move `.gitconfig` to `%USERPROFILE%\.gitconfig` and create a symlink to `~/.gitconfig` in WSL.<br/>
+Repplace `{name}`, `{email}` and `{username}` in `.gitconfig`.
 
 Change **sudo** settings by executing `sudo EDITOR=vim visudo`.
 
