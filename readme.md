@@ -688,7 +688,11 @@ C:\Program Files\Git\cmd
 C:\Program Files\NASM\2.12.02
 ```
 
-Set the `NODE_PATH` environment variable to `C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Web\External\node_modules`.
+Set the `NODE_PATH` environment variable to the following value (adjust as needed).
+
+```
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Web\External\node_modules
+```
 
 ## Start Menu
 ![Start Menu](layout.png)
