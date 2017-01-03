@@ -590,6 +590,7 @@ Individual Components
   [✓] Testing tools core features
 + Development activities
   [✓] JavaScript and TypeScript language support
+  [✓] Node.js support
   [✓] Visual Studio C++ core features
 + Games and Graphics
   [✓] Graphics debugger and GPU profilier for DirectX
@@ -675,16 +676,19 @@ Install third party software.
 * [Blender](https://www.blender.org)
 * [gVim](http://www.vim.org)
 
-## Path
-Add the following entries to the Windows Path environment variable (adjust as needed).
+## Environment
+Add the following entries to the `Path` environment variable (adjust as needed).
 
 ```
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Web\External
 C:\Program Files (x86)\Java\jdk1.8.0_92\bin
 C:\Program Files\7-Zip
 C:\Program Files\Git\cmd
 C:\Program Files\NASM\2.12.02
 ```
+
+Set the `NODE_PATH` environment variable to `C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Web\External\node_modules`.
 
 ## Start Menu
 ![Start Menu](layout.png)
