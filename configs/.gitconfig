@@ -13,10 +13,10 @@
   compression = 9
 
 [alias]
-  cm = !git add --all && git commit -m
+  br = branch
   co = checkout
   st = status
-  tags = tag -l
+  cm = !git add --all && git commit -m
 
 [diff]
   mnemonicprefix = true
