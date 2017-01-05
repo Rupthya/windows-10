@@ -1,11 +1,8 @@
 # Path
-set path = (/opt/llvm/bin /opt/binaryen/bin /opt/emsdk $path)
+set path = (/opt/llvm/bin /opt/emsdk /opt/binaryen/bin $path)
 
 # Limits
 ulimit -S -c 0
-
-# User
-setenv UID `id -u`
 
 # Unicode
 setenv UTF8 `locale -m | grep -i utf | head -1`
@@ -20,8 +17,9 @@ setenv LC_COLLATE C
 setenv LC_ALL
 
 # Applications
-setenv PAGER less
+setenv NODE_PATH /usr/local/lib/node_modules
 setenv EDITOR `whereis -bq vim vi | head -1`
+setenv PAGER less
 
 # Colors
 setenv CLICOLOR 1
@@ -31,11 +29,12 @@ setenv LSCOLORS ExGxFxdxCxDxDxBxAbBxFx
 alias .. "cd .."
 
 alias ls  "ls-F -D '%F %H:%M' -h"
-alias lsa "ls-F -D '%F %H:%M' -ha"
 alias ll  "ls-F -D '%F %H:%M' -hl"
+alias lsa "ls-F -D '%F %H:%M' -ha"
 alias lla "ls-F -D '%F %H:%M' -hla"
 
 alias vim "${EDITOR} -p"
+alias vimdiff "${EDITOR} -d"
 alias grep "grep --color=auto --binary-files=without-match"
 alias less "less -i -R"
 
@@ -71,7 +70,7 @@ if ($?prompt) then
     set session = `tmux ls -F '#{session_id} #{session_name}' | awk -vv=$id '$1 == "$"v { print $2 }'`
     set prompt = "${prompt}%{\e[90m%}[%{\e[0m%}${session}%{\e[90m%}]%{\e[0m%} "
   endif
-  if ("$UID" == "0") then
+  if ("`id -u`" == "0") then
     set prompt = "${prompt}%{\e[31m%}%N%{\e[0m%}"
   else
     set prompt = "${prompt}%{\e[32m%}%N%{\e[0m%}"

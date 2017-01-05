@@ -1,19 +1,10 @@
 # Path
-PATH="/opt/cmake/bin:/opt/llvm/bin:/opt/java/bin:/opt/emsdk:/opt/binaryen/bin"
+PATH="/opt/cmake/bin:/opt/llvm/bin:/opt/emsdk:/opt/binaryen/bin:/opt/java/bin"
 PATH="${PATH}:/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin"
 export PATH
 
 # Limits
 ulimit -S -c 0
-
-# User
-setenv UID `id -u`
-
-# History
-export HISTCONTROL=ignoreboth
-export HISTSIZE=1000
-export HISTFILESIZE=2000
-shopt -s histappend
 
 # Unicode
 export UTF8=$(locale -m | grep -i utf | head -1)
@@ -28,38 +19,32 @@ export LC_COLLATE="C"
 export LC_ALL=
 
 # Applications
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-#export EDITOR=$(which nvim vim vi 2>/dev/null | head -1)
-export EDITOR=$(which vim vi 2>/dev/null | head -1)
+export NODE_PATH="/usr/local/lib/node_modules"
+export EDITOR="$(which vim vi 2>/dev/null | head -1)"
 export PAGER="less"
 
 # Colors
-LC_COLORS=
-LS_COLORS="${LS_COLORS}di=1;34:"
-LS_COLORS="${LS_COLORS}ln=35;40:"
-LS_COLORS="${LS_COLORS}so=32;40:"
-LS_COLORS="${LS_COLORS}pi=33;40:"
-LS_COLORS="${LS_COLORS}ex=31;40:"
-LS_COLORS="${LS_COLORS}bd=34;46:"
-LS_COLORS="${LS_COLORS}cd=34;43:"
-LS_COLORS="${LS_COLORS}su=0;41:"
-LS_COLORS="${LS_COLORS}sg=0;46:"
-LS_COLORS="${LS_COLORS}tw=0;42:"
-LS_COLORS="${LS_COLORS}ow=1;34"
-export LS_COLORS
+export CLICOLOR=1
+export LSCOLORS="ExGxFxdxCxDxDxBxAbBxFx"
+export LS_COLORS="di=1;34:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=1;34"
 
 # Aliases
 alias ..="cd .."
 
-alias ls="ls -F --color=auto --group-directories-first"
-alias lsa="ls -a"
+if [ "$(uname -s)" = "Darwin" ]; then
+  alias ls="ls -FG"
+  alias ll="ls -lh"
+else
+  alias ls="ls -F --color=auto --group-directories-first"
+  alias ll="ls -lh --time-style long-iso"
+fi
 
-alias ll="ls -lh --time-style long-iso"
+alias lsa="ls -a"
 alias lla="ll -a"
 
 alias vim="${EDITOR} -p"
+alias vimdiff="${EDITOR} -d"
 alias grep="grep --color=auto"
-alias less="less -i -R"
 alias sudo="sudo "
 
 alias tm="tmux -2"
@@ -67,12 +52,12 @@ alias ta="tm attach -t"
 alias ts="tm new-session -s"
 alias tl="tm list-sessions"
 
-if [ -d /mnt/c/Windows ]; then
-  alias ping="wcmd : ping"
-fi
-
 # Settings
 export HISTFILE="${HOME}/.history"
+export HISTCONTROL=ignoreboth
+export HISTSIZE=1000
+export HISTFILESIZE=2000
+shopt -s histappend
 
 PS1=
 if [ -n "${TMUX}" ]; then

@@ -38,7 +38,14 @@ endif
 syntax on
 autocmd BufEnter * :syntax sync fromstart
 colorscheme wombat
-set t_Co=256
+
+let &t_Co=256
+let &t_ti="\e[?1049h"
+let &t_te="\e[?1049l"
+
+if has("termguicolors")
+  set termguicolors
+endif
 
 " Indentation
 filetype plugin indent on
@@ -61,8 +68,9 @@ set matchtime=0               " how many 100ms to blink when matching brackets
 set wrap                      " wrap text instead of scrolling
 set number                    " display line numbers
 set history=50                " command line history
-set conceallevel=2            " hide concealed text
+set conceallevel=0            " do not hide concealed text
 set concealcursor=inv         " conceal cursor modes
+set nofoldenable              " disable folding
 set noeol                     " no newline at the end of a file
 
 " Indenting
@@ -150,6 +158,7 @@ let g:is_kornshell=1
 
 " File Type Settings
 autocmd FileType make,changelog set noexpandtab
+autocmd FileType json highlight link jsonCommentError Comment
 
 " Tab Line
 set showtabline=2
