@@ -20,7 +20,7 @@ setenv LC_COLLATE C
 setenv LC_ALL
 
 # Applications
-setenv PAGER  less
+setenv PAGER less
 setenv EDITOR `whereis -bq vim vi | head -1`
 
 # Colors
@@ -43,6 +43,8 @@ alias tm "tmux -2"
 alias ta "tm attach -t"
 alias ts "tm new-session -s"
 alias tl "tm list-sessions"
+
+alias je "jexec"
 
 # Settings
 if ($?prompt) then
