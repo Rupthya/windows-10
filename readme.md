@@ -553,6 +553,11 @@ Install third party software.
 * [Blender](https://www.blender.org)
 * [gVim](http://www.vim.org)
 
+## Optional
+Install optional software.
+
+* [SQL Server Management Studio](https://msdn.microsoft.com/en-us/library/mt238290.aspx)
+
 ## Environment
 Add entries to the `Path` environment variable (adjust as needed).
 
