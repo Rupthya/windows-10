@@ -83,7 +83,7 @@ Settings
 Open Microsoft Edge with: A specific page or pages
   about:blank
 Open Microsoft Edge with: Previous pages
-Open new tabs withj: A blank page
+Open new tabs with: A blank page
 [View advanced settings]
   Ask me what to do with each download: Off
   Have Cortana assist me in Microsoft Edge: Off
@@ -498,9 +498,9 @@ sudo ln -s /usr/bin/nodejs /usr/bin/node
 Install CMake.
 
 ```sh
-wget https://cmake.org/files/v3.7/cmake-3.7.1-Linux-x86_64.tar.gz
+wget https://cmake.org/files/v3.7/cmake-3.7.2-Linux-x86_64.tar.gz
 sudo mkdir /opt/cmake
-sudo tar xvzf cmake-3.7.1-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
+sudo tar xvzf cmake-3.7.2-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
 ```
 
 ### Java
@@ -508,9 +508,9 @@ Install Java.
 
 ```sh
 wget --no-check-certificate --no-cookies - --header "Cookie: oraclelicense=accept-securebackup-cookie" \
-  http://download.oracle.com/otn-pub/java/jdk/8u111-b14/jre-8u111-linux-x64.tar.gz
+  http://download.oracle.com/otn-pub/java/jdk/8u111-b14/jdk-8u121-linux-x64.tar.gz
 sudo mkdir /opt/java
-sudo tar xvzf jre-8u111-linux-x64.tar.gz -C /opt/java --strip-components 1
+sudo tar xvzf jdk-8u121-linux-x64.tar.gz -C /opt/java --strip-components 1
 ```
 
 ### Android
