@@ -508,7 +508,7 @@ Install Java.
 
 ```sh
 wget --no-check-certificate --no-cookies - --header "Cookie: oraclelicense=accept-securebackup-cookie" \
-  http://download.oracle.com/otn-pub/java/jdk/8u111-b14/jdk-8u121-linux-x64.tar.gz
+  http://download.oracle.com/otn-pub/java/jdk/8u121-b13/e9e7ea248e2c4826b92b3f075a80e441/jdk-8u121-linux-x64.tar.gz
 sudo mkdir /opt/java
 sudo tar xvzf jdk-8u121-linux-x64.tar.gz -C /opt/java --strip-components 1
 ```
