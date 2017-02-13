@@ -139,7 +139,7 @@ gpedit.msc > Computer Configuration > Administrative Templates > Windows Compone
 If you need to be able to input German characters on a U.S. keyboard, you can use a custom [keymap](keymap.zip).
 
 ## Windows Defender
-Disable the Windows Defender cloud-based protection, sample submission and notifications.
+Disable Windows Defender cloud-based protection, sample submission and notifications.
 
 ```
 Settings > Update & security > Windows Defender
@@ -148,18 +148,61 @@ Automatic sample submission: Off
 Enhanced notifications: Off
 ```
 
-Disable the Windows Defender real-time protection.
+Disable Windows Defender real-time protection.
 
 ```
 gpedit.msc > Computer Configuration > Administrative Templates > Windows Components > Windows Defender > Real-time Protection
 + Turn off real-time protection: Enabled
 ```
 
-Disable the Windows Defender notification icon.
+Disable Windows Defender.
+
+```
+gpedit.msc > Computer Configuration > Administrative Templates > Windows Components > Windows Defender
++ Turn off Windows Defender: Enabled
+```
+
+Disable Windows Defender notification icon.
 
 ```
 Task Manager > Startup
 + Windows Defender notification icon: Disabled
+```
+
+Disable Windows Defender services.
+
+```cmd
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t REG_DWORD /d 1 /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableRoutinelyTakingAction" /t REG_DWORD /d 1 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdBoot" /v "Start" /t REG_DWORD /d 4 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdFilter" /v "Start" /t REG_DWORD /d 4 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdNisDrv" /v "Start" /t REG_DWORD /d 4 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdNisSvc" /v "Start" /t REG_DWORD /d 4 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d 4 /f
+```
+
+Reboot the system.
+
+```cmd
+takeown /a /r /f "C:\Program Files (x86)\Windows Defender"
+takeown /a /r /f "C:\Program Files (x86)\Windows Defender\*.*"
+icacls "C:\Program Files (x86)\Windows Defender" /grant %username%:F
+icacls "C:\Program Files (x86)\Windows Defender\*.*" /grant %username%:F
+rd /q /s "C:\Program Files (x86)\Windows Defender"
+
+takeown /a /r /f "C:\Program Files\Windows Defender"
+takeown /a /r /f "C:\Program Files\Windows Defender\*.*"
+icacls "C:\Program Files\Windows Defender" /grant %username%:F
+icacls "C:\Program Files\Windows Defender\*.*" /grant %username%:F
+rd /q /s "C:\Program Files\Windows Defender"
+
+takeown /a /r /f "C:\ProgramData\Microsoft\Windows Defender"
+takeown /a /r /f "C:\ProgramData\Microsoft\Windows Defender\*.*"
+takeown /a /r /f "C:\ProgramData\Microsoft\Windows Defender\DEFINI~1\Default\*.*"
+icacls "C:\ProgramData\Microsoft\Windows Defender" /grant %username%:F
+icacls "C:\ProgramData\Microsoft\Windows Defender\*.*" /grant %username%:F
+icacls "C:\ProgramData\Microsoft\Windows Defender\DEFINI~1\Default\*.*" /grant %username%:F
+rd /q /s "C:\ProgramData\Microsoft\Windows Defender"
 ```
 
 Reboot the system.
