@@ -104,7 +104,7 @@ Configure [Visual Studio Code](https://code.visualstudio.com) (optional).
 
 ```json
 {
-  "editor.fontFamily": "DejaVu Sans Mono, Consolas, Courier New, monospace",
+  "editor.fontFamily": "DejaVu Sans Mono, Consolas, monospace",
   "editor.fontSize": 12,
   "editor.tabSize": 2,
   "editor.detectIndentation": false,
@@ -117,9 +117,10 @@ Configure [Visual Studio Code](https://code.visualstudio.com) (optional).
   "editor.codeLens": false,
   "editor.folding": false,
   "explorer.openEditors.visible": 0,
-  "window.openFilesInNewWindow": false,
-  "files.eol": "\n",
-  "files.trimTrailingWhitespace": true
+  "window.openFilesInNewWindow": "off",
+  "files.trimTrailingWhitespace": true,
+  "files.hotExit": "off",
+  "files.eol": "\n"
 }
 ```
 
