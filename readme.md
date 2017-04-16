@@ -230,8 +230,8 @@ Open Microsoft Edge with: A specific page or pages
 Open Microsoft Edge with: Previous pages
 Open new tabs with: A blank page
 [View advanced settings]
+  Open sites in apps: Off
   Ask me what to do with each download: Off
-  Have Cortana assist me in Microsoft Edge: Off
   [Change search engine]
     Select: Google Search (discovered)
     [Set as default]
@@ -276,9 +276,11 @@ Uninstall unwanted optional features in `Settings > System > Apps & features > M
 Disable automatic Windows updates.
 
 ```
-gpedit.msc > Computer Configuration > Administrative Templates > Windows Components > Windows Update
+gpedit.msc > Computer Configuration > Administrative Templates > Windows Components
+
+Windows Update
 + Configure Automatic Updates: Enabled
-  Configure automatic updating: 2 - Notify for download and notify for install
+  Configure automatic updating: 2 - Notify for download and auto install
 ```
 
 ## Keymap
@@ -311,8 +313,6 @@ Disable unwanted services. Skip entries when required.
 ```
 services.msc
 + Certificate Propagation: Disabled
-+ DataCollectionPublishingService: Disabled
-+ Downloaded Maps Manager: Disabled
 + Geolocation Service: Disabled
 + Microsoft (R) Diagnostics Hub Standard Collector Service: Disabled
 + Superfetch: Disabled
@@ -320,18 +320,16 @@ services.msc
 + Xbox Live …: Disabled
 ```
 
-## Help & Support
-Disable Help & Support (F1 hotkey in Windows applications).
+## Notifications (Optional)
+Disable notifications and Action Center.
 
-```cmd
-taskkill /f /im HelpPane.exe
-takeown /a /f C:\Windows\HelpPane.exe
-icacls C:\Windows\HelpPane.exe /grant %username%:F
-move C:\Windows\HelpPane.exe C:\Windows\HelpPane.exe.bak
+```
+gpedit.msc > User Configuration > Administrative Templates > Start Menu and Taskbar
++ Remove Notifications and Action Center: Enabled
 ```
 
 ## Firewall
-Disable all rules in the Windows Firewall settings.
+Disable all rules in the Windows Firewall settings. Enable the following rules.
 
 ```
 wf.msc
