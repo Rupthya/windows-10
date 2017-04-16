@@ -87,15 +87,37 @@ Settings > Apps
 Disable Windows Defender real-time protection.
 
 ```
-gpedit.msc > Computer Configuration > Administrative Templates > Windows Components > Windows Defender > Real-time Protection
+gpedit.msc > Computer Configuration > Administrative Templates > Windows Components
+Windows Defender Antivirus
++ Turn off Windows Defender Antivirus: Enabled
+
+Windows Defender Antivirus > Real-time Protection
 + Turn off real-time protection: Enabled
-```
++ Turn on behavior monitoring: Disabled
++ Scan all downloaded files and attachments: Disabled
++ Monitor file and program activity on your computer: Disabled
++ Configure monitoring for incoming and outgoing file and program activity: Disabled
 
-Disable Windows Defender.
+Windows Defender Antivirus > MAPS
++ Configure the 'Block at First Sight' feature: Disabled
++ Join Microsoft MAPS: Disabled
++ Send file samples when further analysis is required: Disabled
 
-```
-gpedit.msc > Computer Configuration > Administrative Templates > Windows Components > Windows Defender
-+ Turn off Windows Defender: Enabled
+Windows Defender Antivirus > Network Inspection System
++ Turn on protocol recognition: Disabled
+
+Windows Defender Antivirus > Signature Updates
++ Allow definition updates from Microsoft Update: Disabled
+
+Windows Defender Application Guard
++ Turn On/Off Windows Defender Application Guard (WDAG): Disabled
+
+Windows Defender SmartScreen > Explorer
++ Configure App Install Control: Disabled
++ Configure Windows Defender SmartScreen: Disabled
+
+Windows Defender SmartScreen > Microsoft Edge
++ Configure Windows Defender SmartScreen: Disabled
 ```
 
 Disable Windows Defender notification icon.
@@ -105,46 +127,9 @@ Task Manager > Startup
 + Windows Defender notification icon: Disabled
 ```
 
-## Uninstall Windows Defender (Optional, Dangerous)
-Disable Windows Defender services.
-
-```cmd
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t REG_DWORD /d 1 /f
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableRoutinelyTakingAction" /t REG_DWORD /d 1 /f
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdBoot" /v "Start" /t REG_DWORD /d 4 /f
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdFilter" /v "Start" /t REG_DWORD /d 4 /f
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdNisDrv" /v "Start" /t REG_DWORD /d 4 /f
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdNisSvc" /v "Start" /t REG_DWORD /d 4 /f
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d 4 /f
-```
-
 Reboot the system.
 
-```cmd
-takeown /a /r /f "C:\Program Files (x86)\Windows Defender"
-takeown /a /r /f "C:\Program Files (x86)\Windows Defender\*.*"
-icacls "C:\Program Files (x86)\Windows Defender" /grant %username%:F
-icacls "C:\Program Files (x86)\Windows Defender\*.*" /grant %username%:F
-rd /q /s "C:\Program Files (x86)\Windows Defender"
-
-takeown /a /r /f "C:\Program Files\Windows Defender"
-takeown /a /r /f "C:\Program Files\Windows Defender\*.*"
-icacls "C:\Program Files\Windows Defender" /grant %username%:F
-icacls "C:\Program Files\Windows Defender\*.*" /grant %username%:F
-rd /q /s "C:\Program Files\Windows Defender"
-
-takeown /a /r /f "C:\ProgramData\Microsoft\Windows Defender"
-takeown /a /r /f "C:\ProgramData\Microsoft\Windows Defender\*.*"
-takeown /a /r /f "C:\ProgramData\Microsoft\Windows Defender\DEFINI~1\Default\*.*"
-icacls "C:\ProgramData\Microsoft\Windows Defender" /grant %username%:F
-icacls "C:\ProgramData\Microsoft\Windows Defender\*.*" /grant %username%:F
-icacls "C:\ProgramData\Microsoft\Windows Defender\DEFINI~1\Default\*.*" /grant %username%:F
-rd /q /s "C:\ProgramData\Microsoft\Windows Defender"
-```
-
-Reboot the system.
-
-## Network
+## Updates
 Connect to the Internet and sign in using a Microsoft account (optional).
 
 Install missing device drivers and pending updates.
