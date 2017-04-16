@@ -329,36 +329,36 @@ gpedit.msc > User Configuration > Administrative Templates > Start Menu and Task
 ```
 
 ## Firewall
-Disable all rules in the Windows Firewall settings. Enable the following rules.
+Disable all rules in Windows Firewall keeping the following entries.
 
 ```
 wf.msc
 + Inbound Rules
+  + Connect
   + Core Networking - …
   + Delivery Optimization (…)
-  + File and Printer Sharing (Echo Request …)
+  + Hyper-V …
   + Remomte Desktop - …
   + SSH Server Proxy Service
 + Outbound Rules
+  + Connect
   + Core Networking - …
-  + File and Printer Sharing (Echo Request …)
+  + Hyper-V …
 ```
 
-Modify inbound rules for the IPv4 and IPv6 "Private, Public" domain echo requests.
+Enable inbound rules for "File and Printer Sharing (Echo Request …)". Modify "Private,Public"
+rules for inbound and outbound IPv4 and IPv6 Echo Requests and select "Any IP address" under
+"Remote IP address" in the "Scope" tab.
 
-To enable the WSL SSH Server, you need to create a new inbound rule for port 22.
-
-```
-Rule Properties > Scope
-Remote IP address: Any IP address
-```
+To enable the WSL SSH Server, you need to replace the "SSH Server Proxy Service" inbound rule
+with a new inbound rule for port 22.
 
 ## Notifications
 Disable unwanted notifications.
 
 ```
 Control Panel > System and Security > Security and Maintenance
-  (Turn off all messages.)
+  [Turn off all messages about …]
 ```
 
 ## Windows Libraries
@@ -369,6 +369,8 @@ Move unwanted Windows libraries.
 3. Select the `Location` tab and enter a new location e.g. `%AppData%\Camera Roll`.
 4. Right click on `Saved Pictures` and select `Properties`.
 5. Select the `Location` tab and enter a new location e.g. `%AppData%\Saved Pictures`.
+
+Repeat the process for `%UserProfile%\Videos\Captures`.
 
 ## Settings
 Use common sense in **Settings**, **Control Panel**, **Explorer Options** and **Indexing Optinos**.
@@ -453,13 +455,6 @@ sudo apt autoremove
 sudo apt install p7zip-full zip unzip tree htop
 ```
 
-On WSL 14.04 you need to fix a small compatibility issue for the SSH server to work properly.
-
-```sh
-sudo dpkg-divert --local --rename --add /sbin/initctl
-sudo ln -s /bin/true /sbin/initctl
-```
-
 ### SSH Server
 Modify the following lines in `/etc/ssh/sshd_config` replacing `{username}` with your WSL username.
 
@@ -468,7 +463,6 @@ HostKey /etc/ssh/ssh_host_rsa_key
 #HostKey /etc/ssh/ssh_host_dsa_key
 #HostKey /etc/ssh/ssh_host_ecdsa_key
 #HostKey /etc/ssh/ssh_host_ed25519_key
-UsePrivilegeSeparation no
 AllowUsers {username}
 ```
 
@@ -476,13 +470,6 @@ Create a new RSA key.
 
 ```sh
 sudo ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key
-```
-
-On WSL 14.04 you need to disable the Windows **SSH Server Proxy** service.
-
-```
-services.msc
-+ SSH Server Proxy: Disabled
 ```
 
 Start the server.
@@ -539,9 +526,9 @@ sudo ln -s /usr/bin/nodejs /usr/bin/node
 Install CMake.
 
 ```sh
-wget https://cmake.org/files/v3.7/cmake-3.7.2-Linux-x86_64.tar.gz
+wget https://cmake.org/files/v3.8/cmake-3.8.0-Linux-x86_64.tar.gz
 sudo mkdir /opt/cmake
-sudo tar xvzf cmake-3.7.2-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
+sudo tar xvzf cmake-3.8.0-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
 ```
 
 ### Java
@@ -564,10 +551,12 @@ sudo apt-get install android-tools-adb
 Install Android NDK.
 
 ```sh
-wget https://dl.google.com/android/repository/android-ndk-r13b-linux-x86_64.zip
-sudo unzip android-ndk-r13b-linux-x86_64.zip -d /opt/android
-sudo /opt/android/android-ndk-r13b/build/tools/make_standalone_toolchain.py --arch arm --install-dir /opt/android/arm
-sudo /opt/android/android-ndk-r13b/build/tools/make_standalone_toolchain.py --arch arm64 --install-dir /opt/android/arm64
+wget https://dl.google.com/android/repository/android-ndk-r14b-linux-x86_64.zip
+sudo unzip android-ndk-r14b-linux-x86_64.zip -d /opt/android
+sudo /opt/android/android-ndk-r14b/build/tools/make_standalone_toolchain.py \
+  --api 21 --stl libc++ --arch arm --install-dir /opt/android/arm
+sudo /opt/android/android-ndk-r14b/build/tools/make_standalone_toolchain.py \
+  --api 21 --stl libc++ --arch arm64 --install-dir /opt/android/arm64
 ```
 
 ## Fonts
@@ -606,7 +595,6 @@ Add entries to the `Path` environment variable (adjust as needed).
 ```
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Web\External
-C:\Program Files (x86)\Java\jdk1.8.0_92\bin
 C:\Program Files\7-Zip
 C:\Program Files\Git\cmd
 C:\Program Files\NASM\2.12.02
