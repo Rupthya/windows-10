@@ -76,18 +76,28 @@ Settings > Update & security > Advanced options
 
 Reboot the system.
 
-## Uninstall Apps
+## Windows Store & Apps
 Uninstall all apps except "App Installer" and "Weather" (optional).
 
 ```
 Settings > Apps
 ```
 
-## Disable Windows Defender (Optional)
-Disable Windows Defender real-time protection.
+Disable Windows Store (optional).
 
 ```
 gpedit.msc > Computer Configuration > Administrative Templates > Windows Components
+
+Store
++ Turn off the Store application: Enabled
+```
+
+## Disable Windows Defender (Optional)
+Disable Windows Defender.
+
+```
+gpedit.msc > Computer Configuration > Administrative Templates > Windows Components
+
 Windows Defender Antivirus
 + Turn off Windows Defender Antivirus: Enabled
 
@@ -127,10 +137,86 @@ Task Manager > Startup
 + Windows Defender notification icon: Disabled
 ```
 
+## Error Reports
+Disable error reports.
+
+```
+gpedit.msc > Computer Configuration > Administrative Templates > Windows Components
+
+Windows Error Reporting
++ Disable Windows Error Reporting: Enabled
+```
+
+## Windows Search
+Configure search.
+
+```
+gpedit.msc > Computer Configuration > Administrative Templates > Windows Components
+
+Search
++ Allow Cortana: Disabled
++ Do not allow web search: Enabled
++ Don't search the web or display web results in Search: Enabled
+```
+
+## Telemetry
+Disable telemetry.
+
+```
+gpedit.msc > Computer Configuration > Administrative Templates > Windows Components
+
+Data Collection and Preview Builds
++ Allow Telemetry: Disabled
+```
+
+Delete the diagnostics services.
+
+```cmd
+sc delete DiagTrack
+sc delete dmwappushservice
+```
+
+Disable the Application Experience tasks.
+
+```
+Task Scheduler > Task Scheduler Library > Microsoft > Windows > Application Experience
++ Microsoft Compatibility Appraiser: Disabled
++ ProgramDataUpdater: Disabled
+```
+
 Reboot the system.
 
-## Updates
-Connect to the Internet and sign in using a Microsoft account (optional).
+## OneDrive
+Uninstall OneDrive.
+
+```cmd
+taskkill /f /im OneDrive.exe
+%SYSTEMROOT%\SysWOW64\OneDriveSetup.exe /uninstall
+rd /q /s "%USERPROFILE%\OneDrive"
+rd /q /s "C:\OneDriveTemp"
+```
+
+Reboot the system.
+
+Prevent OneDrive from being reinstalled.
+
+```cmd
+rd /q /s "%LOCALAPPDATA%\Microsoft\OneDrive"
+rd /q /s "%PROGRAMDATA%\Microsoft OneDrive"
+reg delete "HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f
+reg delete "HKEY_CLASSES_ROOT\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f
+```
+
+Execute the following in a user command prompt.
+
+```cmd
+rd /q /s "%USERPROFILE%\OneDrive"
+```
+
+Reboot the system.
+
+## Network & Updates
+Connect to the Internet and sign in using a Microsoft account (optional, not recommended).
 
 Install missing device drivers and pending updates.
 
@@ -210,66 +296,6 @@ Paid Wi-Fi services: Off
 
 To prevent other users from sharing the password, the SSID must have the suffix "_output".
 
-## Telemetry
-Delete the diagnostics services.
-
-```cmd
-sc delete DiagTrack
-sc delete dmwappushservice
-echo. > "%programdata%\Microsoft\Diagnosis\ETLLogs\AutoLogger\AutoLogger-Diagtrack-Listener.etl"
-cacls "%programdata%\Microsoft\Diagnosis\ETLLogs\AutoLogger\AutoLogger-Diagtrack-Listener.etl" /d SYSTEM
-```
-
-Disable telemetry.
-
-```
-gpedit.msc > Computer Configuration > Administrative Templates > Windows Components > Data Collection and Preview Builds
-+ Allow Telemetry: Disabled
-```
-
-Disable hidden telemetry.
-
-```cmd
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d 0 /f
-```
-
-Disable the Application Experience tasks.
-
-```
-Task Scheduler > Task Scheduler Library > Microsoft > Windows > Application Experience
-+ Microsoft Compatibility Appraiser: Disabled
-+ ProgramDataUpdater: Disabled
-```
-
-Reboot the system.
-
-## OneDrive
-Uninstall OneDrive.
-
-```cmd
-taskkill /f /im OneDrive.exe
-%SYSTEMROOT%\SysWOW64\OneDriveSetup.exe /uninstall
-rd /q /s "%USERPROFILE%\OneDrive"
-rd /q /s "C:\OneDriveTemp"
-shutdown -r -t 0
-```
-
-Prevent OneDrive from being reinstalled.
-
-```cmd
-rd /q /s "%LOCALAPPDATA%\Microsoft\OneDrive"
-rd /q /s "%PROGRAMDATA%\Microsoft OneDrive"
-reg delete "HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f
-reg delete "HKEY_CLASSES_ROOT\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f
-shutdown -r -t 0
-```
-
-Execute the following in a user command prompt.
-
-```cmd
-rd /q /s "%USERPROFILE%\OneDrive"
-```
-
 ## Photos
 Disable automatic photo enhancements and linked duplicates.
 
@@ -348,20 +374,6 @@ Move unwanted Windows libraries.
 
 ## Settings
 Use common sense in **Settings**, **Control Panel**, **Explorer Options** and **Indexing Optinos**.
-
-## Search
-Disable Cortana.
-
-```
-gpedit.msc > Computer Configuration > Administrative Templates > Windows Components > Search
-+ Allow Cortana: Disabled
-```
-
-Disable Bing search results.
-
-```cmd
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCortana" /t REG_DWORD /d 0 /f
-```
 
 ## Windows Features
 Enable or disable Windows features.
