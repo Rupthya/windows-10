@@ -586,6 +586,8 @@ Install third party software.
 ## Optional
 Install optional software.
 
+* [ConEmu](https://conemu.github.io)
+* [WSLtty](https://github.com/mintty/wsltty)
 * [SQL Server Management Studio](https://msdn.microsoft.com/en-us/library/mt238290.aspx)
 * [Remote Server Administration Tools for Windows 10](https://www.microsoft.com/en-us/download/details.aspx?id=45520)
 
