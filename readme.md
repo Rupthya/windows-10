@@ -1,5 +1,8 @@
 # Windows 10
-Download the latest [Windows 10](https://www.microsoft.com/en-us/software-download/windows10ISO) version and create a USB stick.
+Installation and configuration instructions for Windows 10 Creators Update (Version 1703).
+
+## Installation
+Download the latest [Windows 10](https://www.microsoft.com/en-us/software-download/windows10ISO) image and create a USB stick.
 
 Create the file `\sources\ei.cfg` on the USB stick.
 
@@ -19,15 +22,17 @@ Create the file `\sources\pid.txt` on the USB stick.
 Value={windows key}
 ```
 
-## Installation
 1. Physically disconnect the device from all networks.
 2. Select the desired Language, Time and currency format, Keyboard or input method.
 3. Select "Install now", enter the product key and accept the license terms.
 4. Select "Custom: Install Windows only (advanced)".
 5. Partition the drive(s) and manually format the "Primary" partition.
-6. Select "Customise" on the first boot and disable *everything*.
-8. Chose a username without spaces starting with a capital letter.
-9. Skip the "Meet Cortana" setup.
+6. Wait for the installation to complete, remove the installation media and reboot.
+7. Chose a username without spaces starting with a capital letter.
+8. Skip network connection settings.
+9. Disable every available option.
+
+Keep the system disconnected from the network during the following steps.
 
 ## Hostname
 Change your hostname and NetBIOS name.
@@ -55,7 +60,7 @@ Reboot the system.
 Disable automatic driver app installation.
 
 ```
-Control Panel > System > Advanced system settings > Hardware > Device Installation Settings
+Control Panel > "System" > Advanced system settings > Hardware > Device Installation Settings
 (·) No (your device might not work as expected)
 ```
 
@@ -71,6 +76,75 @@ Settings > Update & security > Advanced options
 
 Reboot the system.
 
+## Uninstall Apps
+Uninstall all apps except "App Installer" and "Weather" (optional).
+
+```
+Settings > Apps
+```
+
+## Disable Windows Defender (Optional)
+Disable Windows Defender real-time protection.
+
+```
+gpedit.msc > Computer Configuration > Administrative Templates > Windows Components > Windows Defender > Real-time Protection
++ Turn off real-time protection: Enabled
+```
+
+Disable Windows Defender.
+
+```
+gpedit.msc > Computer Configuration > Administrative Templates > Windows Components > Windows Defender
++ Turn off Windows Defender: Enabled
+```
+
+Disable Windows Defender notification icon.
+
+```
+Task Manager > Startup
++ Windows Defender notification icon: Disabled
+```
+
+## Uninstall Windows Defender (Optional, Dangerous)
+Disable Windows Defender services.
+
+```cmd
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t REG_DWORD /d 1 /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableRoutinelyTakingAction" /t REG_DWORD /d 1 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdBoot" /v "Start" /t REG_DWORD /d 4 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdFilter" /v "Start" /t REG_DWORD /d 4 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdNisDrv" /v "Start" /t REG_DWORD /d 4 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdNisSvc" /v "Start" /t REG_DWORD /d 4 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d 4 /f
+```
+
+Reboot the system.
+
+```cmd
+takeown /a /r /f "C:\Program Files (x86)\Windows Defender"
+takeown /a /r /f "C:\Program Files (x86)\Windows Defender\*.*"
+icacls "C:\Program Files (x86)\Windows Defender" /grant %username%:F
+icacls "C:\Program Files (x86)\Windows Defender\*.*" /grant %username%:F
+rd /q /s "C:\Program Files (x86)\Windows Defender"
+
+takeown /a /r /f "C:\Program Files\Windows Defender"
+takeown /a /r /f "C:\Program Files\Windows Defender\*.*"
+icacls "C:\Program Files\Windows Defender" /grant %username%:F
+icacls "C:\Program Files\Windows Defender\*.*" /grant %username%:F
+rd /q /s "C:\Program Files\Windows Defender"
+
+takeown /a /r /f "C:\ProgramData\Microsoft\Windows Defender"
+takeown /a /r /f "C:\ProgramData\Microsoft\Windows Defender\*.*"
+takeown /a /r /f "C:\ProgramData\Microsoft\Windows Defender\DEFINI~1\Default\*.*"
+icacls "C:\ProgramData\Microsoft\Windows Defender" /grant %username%:F
+icacls "C:\ProgramData\Microsoft\Windows Defender\*.*" /grant %username%:F
+icacls "C:\ProgramData\Microsoft\Windows Defender\DEFINI~1\Default\*.*" /grant %username%:F
+rd /q /s "C:\ProgramData\Microsoft\Windows Defender"
+```
+
+Reboot the system.
+
+## Network
 Connect to the Internet and sign in using a Microsoft account (optional).
 
 Install missing device drivers and pending updates.
@@ -138,75 +212,6 @@ gpedit.msc > Computer Configuration > Administrative Templates > Windows Compone
 
 ## Keymap
 If you need to be able to input German characters on a U.S. keyboard, you can use a custom [keymap](keymap.zip).
-
-## Windows Defender
-Disable Windows Defender cloud-based protection, sample submission and notifications.
-
-```
-Settings > Update & security > Windows Defender
-Cloud-based Protection: Off
-Automatic sample submission: Off
-Enhanced notifications: Off
-```
-
-Disable Windows Defender real-time protection.
-
-```
-gpedit.msc > Computer Configuration > Administrative Templates > Windows Components > Windows Defender > Real-time Protection
-+ Turn off real-time protection: Enabled
-```
-
-Disable Windows Defender.
-
-```
-gpedit.msc > Computer Configuration > Administrative Templates > Windows Components > Windows Defender
-+ Turn off Windows Defender: Enabled
-```
-
-Disable Windows Defender notification icon.
-
-```
-Task Manager > Startup
-+ Windows Defender notification icon: Disabled
-```
-
-Disable Windows Defender services.
-
-```cmd
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t REG_DWORD /d 1 /f
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableRoutinelyTakingAction" /t REG_DWORD /d 1 /f
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdBoot" /v "Start" /t REG_DWORD /d 4 /f
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdFilter" /v "Start" /t REG_DWORD /d 4 /f
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdNisDrv" /v "Start" /t REG_DWORD /d 4 /f
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdNisSvc" /v "Start" /t REG_DWORD /d 4 /f
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d 4 /f
-```
-
-Reboot the system.
-
-```cmd
-takeown /a /r /f "C:\Program Files (x86)\Windows Defender"
-takeown /a /r /f "C:\Program Files (x86)\Windows Defender\*.*"
-icacls "C:\Program Files (x86)\Windows Defender" /grant %username%:F
-icacls "C:\Program Files (x86)\Windows Defender\*.*" /grant %username%:F
-rd /q /s "C:\Program Files (x86)\Windows Defender"
-
-takeown /a /r /f "C:\Program Files\Windows Defender"
-takeown /a /r /f "C:\Program Files\Windows Defender\*.*"
-icacls "C:\Program Files\Windows Defender" /grant %username%:F
-icacls "C:\Program Files\Windows Defender\*.*" /grant %username%:F
-rd /q /s "C:\Program Files\Windows Defender"
-
-takeown /a /r /f "C:\ProgramData\Microsoft\Windows Defender"
-takeown /a /r /f "C:\ProgramData\Microsoft\Windows Defender\*.*"
-takeown /a /r /f "C:\ProgramData\Microsoft\Windows Defender\DEFINI~1\Default\*.*"
-icacls "C:\ProgramData\Microsoft\Windows Defender" /grant %username%:F
-icacls "C:\ProgramData\Microsoft\Windows Defender\*.*" /grant %username%:F
-icacls "C:\ProgramData\Microsoft\Windows Defender\DEFINI~1\Default\*.*" /grant %username%:F
-rd /q /s "C:\ProgramData\Microsoft\Windows Defender"
-```
-
-Reboot the system.
 
 ## Wi-Fi
 Disable Wi-Fi Sense, Hotspot 2.0 networks and Paid Wi-Fi services.
