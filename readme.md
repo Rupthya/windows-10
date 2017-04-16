@@ -35,7 +35,7 @@ Value={windows key}
 Keep the system disconnected from the network during the following steps.
 
 ## Hostname
-Change your hostname and NetBIOS name.
+Change the hostname.
 
 ```
 Settings > System > About > Rename PC
@@ -504,12 +504,10 @@ Individual Components
   [✓] Git for Windows
   [✓] GitHub extension for Visual Studio
   [✓] Static analysis tools
+  [✓] Text Template Transformation
 + Compilers, build tools, and runtimes
   [✓] VC++ 2017 v141 toolset (x86,x64)
-  [✓] Visual C++ compilers and libraries for ARM
-  [✓] Visual C++ runtime for UWP
   [✓] Visual C++ tools for CMake
-  [✓] Windows Universal CRT SDK
 + Debugging and testing
   [✓] C++ profiling tools
   [✓] JavaScript diagnostics
@@ -524,10 +522,9 @@ Individual Components
   [✓] Graphics debugger and GPU profilier for DirectX
   [✓] Image and 3D model editors
 + SDKs, libraries, and frameworks
-  [✓] Java SE Development Kit
   [✓] TypeScript 2.1 SDK
-  [✓] Windows SDK (latest)
-  [✓] Windows Universal C Runtime
+  [✓] Visual C++ ATL support
+  [✓] Windows SDK (10.0.15063.0) for Desktop C++ x86 and x64
 ```
 
 ## Unix Development
