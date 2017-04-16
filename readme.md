@@ -446,11 +446,11 @@ root  ALL=(ALL) ALL
 Install packages.
 
 ```sh
-sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get dist-upgrade
-sudo apt-get autoremove
-sudo apt-get install p7zip-full zip unzip tree htop
+sudo apt update
+sudo apt upgrade
+sudo apt dist-upgrade
+sudo apt autoremove
+sudo apt install p7zip-full zip unzip tree htop
 ```
 
 On WSL 14.04 you need to fix a small compatibility issue for the SSH server to work properly.
