@@ -410,6 +410,113 @@ Disable hibernation (for stationary computers).
 powercfg -h off
 ```
 
+# Development
+Install software useful for Windows and Unix development.
+
+## Visual Studio 2017
+Install [Visual Studio Community 2017](https://www.visualstudio.com/vs/visual-studio-2017-rc).
+
+```
+Individual Components
++ Code tools
+  [✓] Git for Windows
+  [✓] GitHub extension for Visual Studio
+  [✓] Static analysis tools
+  [✓] Text Template Transformation
++ Compilers, build tools, and runtimes
+  [✓] VC++ 2017 v141 toolset (x86,x64)
+  [✓] Visual C++ tools for CMake
++ Debugging and testing
+  [✓] C++ profiling tools
+  [✓] JavaScript diagnostics
+  [✓] Just-In-Time debugger
+  [✓] Profiling tools
+  [✓] Testing tools core features
++ Development activities
+  [✓] JavaScript and TypeScript language support
+  [✓] Node.js support
+  [✓] Visual Studio C++ core features
++ Games and Graphics
+  [✓] Graphics debugger and GPU profilier for DirectX
+  [✓] Image and 3D model editors
++ SDKs, libraries, and frameworks
+  [✓] TypeScript 2.1 SDK
+  [✓] Visual C++ ATL support
+  [✓] Windows SDK (10.0.15063.0) for Desktop C++ x86 and x64
+```
+
+## Fonts
+Install fonts.
+
+* [DejaVu & DejaVu LGC](https://sourceforge.net/projects/dejavu/files/dejavu)
+* [DejaVu Sans Mono from Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)
+* [Iconsolata](http://www.levien.com/type/myfonts/inconsolata.html)
+* [IPA](http://ipafont.ipa.go.jp)
+
+## Third Party
+Install third party software.
+
+* [7-Zip](http://www.7-zip.org)
+* [NASM](http://www.nasm.us)
+* [HxD](https://mh-nexus.de/en/hxd)
+* [CFF Explorer](http://www.ntcore.com/exsuite.php)
+* [Resource Hacker](http://www.angusj.com/resourcehacker)
+* [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx)
+* [TightVNC Viewer](http://www.tightvnc.com)
+* [Affinity Photo](https://affinity.serif.com/photo)
+* [Affinity Designer](https://affinity.serif.com/designer)
+* [Sketchbook Pro](http://www.autodesk.com/products/sketchbook-pro/overview)
+* [Blender](https://www.blender.org)
+* [gVim](http://www.vim.org)
+
+## Optional
+Install optional software.
+
+* [Skype](https://www.skype.com/en)
+* [ConEmu](https://conemu.github.io)
+* [WSLtty](https://github.com/mintty/wsltty)
+* [SQL Server Management Studio](https://msdn.microsoft.com/en-us/library/mt238290.aspx)
+* [Remote Server Administration Tools for Windows 10](https://www.microsoft.com/en-us/download/details.aspx?id=45520)
+* [Google Drive](https://www.google.com/drive/download)
+
+<!--
+### Skype
+Disable ads after installing Skype.
+
+```
+Control Panel
++ Internet Options
+  + Security
+    Restricted sites
+    + [Sites]
+      Add this website to the zone: https://apps.skype.com
+      [Add]
+```
+
+Edit `%APPDATA%\Skype\<username>\config.xml`
+- Set the `<AdvertPlaceholder>` XML element to `0`.
+- Set the file to read-only.
+-->
+
+## Environment
+Add entries to the `Path` environment variable.
+
+```
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Web\External
+C:\Program Files\NASM\2.12.02
+C:\Program Files\7-Zip
+```
+
+Set the `NODE_PATH` environment variable.
+
+```
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Web\External\node_modules
+```
+
+## Start Menu
+![Start Menu](layout.png)
+
 ## Windows Subsystem for Linux
 Execute `bash.exe` in the command prompt.
 
@@ -479,41 +586,6 @@ sudo service ssh start
 sudo service ssh status
 ```
 
-# Development
-Install software useful for Windows and Unix development.
-
-## Visual Studio 2017
-Install [Visual Studio Community 2017](https://www.visualstudio.com/vs/visual-studio-2017-rc).
-
-```
-Individual Components
-+ Code tools
-  [✓] Git for Windows
-  [✓] GitHub extension for Visual Studio
-  [✓] Static analysis tools
-  [✓] Text Template Transformation
-+ Compilers, build tools, and runtimes
-  [✓] VC++ 2017 v141 toolset (x86,x64)
-  [✓] Visual C++ tools for CMake
-+ Debugging and testing
-  [✓] C++ profiling tools
-  [✓] JavaScript diagnostics
-  [✓] Just-In-Time debugger
-  [✓] Profiling tools
-  [✓] Testing tools core features
-+ Development activities
-  [✓] JavaScript and TypeScript language support
-  [✓] Node.js support
-  [✓] Visual Studio C++ core features
-+ Games and Graphics
-  [✓] Graphics debugger and GPU profilier for DirectX
-  [✓] Image and 3D model editors
-+ SDKs, libraries, and frameworks
-  [✓] TypeScript 2.1 SDK
-  [✓] Visual C++ ATL support
-  [✓] Windows SDK (10.0.15063.0) for Desktop C++ x86 and x64
-```
-
 ## Unix Development
 Execute `bash.exe` in the command prompt.
 
@@ -559,140 +631,39 @@ sudo /opt/android/android-ndk-r14b/build/tools/make_standalone_toolchain.py \
   --api 21 --stl libc++ --arch arm64 --install-dir /opt/android/arm64
 ```
 
-## Fonts
-Install fonts.
-
-* [DejaVu & DejaVu LGC](https://sourceforge.net/projects/dejavu/files/dejavu)
-* [DejaVu Sans Mono from Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)
-* [Iconsolata](http://www.levien.com/type/myfonts/inconsolata.html)
-* [IPA](http://ipafont.ipa.go.jp)
-
-## Third Party
-Install third party software.
-
-* [7-Zip](http://www.7-zip.org)
-* [NASM](http://www.nasm.us)
-* [HxD](https://mh-nexus.de/en/hxd)
-* [CFF Explorer](http://www.ntcore.com/exsuite.php)
-* [Resource Hacker](http://www.angusj.com/resourcehacker)
-* [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx) (Process Explorer, Process Monitor, AccessEnum)
-* [TightVNC Viewer](http://www.tightvnc.com)
-* [Affinity Photo](https://affinity.serif.com/photo)
-* [Affinity Designer](https://affinity.serif.com/designer)
-* [Sketchbook Pro](http://www.autodesk.com/products/sketchbook-pro/overview)
-* [Blender](https://www.blender.org)
-* [gVim](http://www.vim.org)
-
-## Optional
-Install optional software.
-
-* [ConEmu](https://conemu.github.io)
-* [WSLtty](https://github.com/mintty/wsltty)
-* [SQL Server Management Studio](https://msdn.microsoft.com/en-us/library/mt238290.aspx)
-* [Remote Server Administration Tools for Windows 10](https://www.microsoft.com/en-us/download/details.aspx?id=45520)
-
-## Environment
-Add entries to the `Path` environment variable (adjust as needed).
-
-```
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Web\External
-C:\Program Files\7-Zip
-C:\Program Files\Git\cmd
-C:\Program Files\NASM\2.12.02
-```
-
-Set the `NODE_PATH` environment variable (adjust as needed).
-
-```
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Web\External\node_modules
-```
-
-## Start Menu
-![Start Menu](layout.png)
-
-<!--
-### LLVM Sources
-Download the LLVM sources.
+### LLVM
+Install LLVM.
 
 ```sh
-# Assign the revision to a variable.
-# svn info http://llvm.org/svn/llvm-project/llvm/trunk | grep Revision
-REVISION=284483
-svn co -r${REVISION} http://llvm.org/svn/llvm-project/llvm/trunk llvm
-svn co -r${REVISION} http://llvm.org/svn/llvm-project/cfe/trunk llvm/tools/clang
-svn co -r${REVISION} http://llvm.org/svn/llvm-project/clang-tools-extra/trunk llvm/tools/clang/tools/extra
-svn co -r${REVISION} http://llvm.org/svn/llvm-project/libcxx/trunk llvm/projects/libcxx
-svn co -r${REVISION} http://llvm.org/svn/llvm-project/libcxxabi/trunk llvm/projects/libcxxabi
-svn co -r${REVISION} http://llvm.org/svn/llvm-project/compiler-rt/trunk llvm/projects/compiler-rt
-```
+src="tags/RELEASE_400/final"
+svn co "http://llvm.org/svn/llvm-project/llvm/${src}" "llvm"
+svn co "http://llvm.org/svn/llvm-project/cfe/${src}" "llvm/tools/clang"
+svn co "http://llvm.org/svn/llvm-project/clang-tools-extra/${src}" "llvm/tools/clang/tools/extra"
+svn co "http://llvm.org/svn/llvm-project/libcxx/${src}" "llvm/projects/libcxx"
+svn co "http://llvm.org/svn/llvm-project/libcxxabi/${src}" "llvm/projects/libcxxabi"
+svn co "http://llvm.org/svn/llvm-project/compiler-rt/${src}" "llvm/projects/compiler-rt"
 
-Patch the linux tool chain if you don't want to specify `-lc++abi -lc++experimental` when using libcxx.
-
-```diff
---- tools/clang/lib/Driver/ToolChains.h.orig	2016-10-19 11:22:49.794908400 +0200
-+++ tools/clang/lib/Driver/ToolChains.h	2016-10-19 11:23:33.514771400 +0200
-@@ -830,6 +830,8 @@ public:
-   void AddClangCXXStdlibIncludeArgs(
-       const llvm::opt::ArgList &DriverArgs,
-       llvm::opt::ArgStringList &CC1Args) const override;
-+  void AddCXXStdlibLibArgs(const llvm::opt::ArgList &Args,
-+                           llvm::opt::ArgStringList &CmdArgs) const override;
-   void AddCudaIncludeArgs(const llvm::opt::ArgList &DriverArgs,
-                           llvm::opt::ArgStringList &CC1Args) const override;
-   void AddIAMCUIncludeArgs(const llvm::opt::ArgList &DriverArgs,
---- tools/clang/lib/Driver/ToolChains.cpp.orig	2016-10-19 11:22:41.196953300 +0200
-+++ tools/clang/lib/Driver/ToolChains.cpp	2016-10-19 13:15:07.480687400 +0200
-@@ -4700,6 +4700,15 @@ void Linux::AddClangCXXStdlibIncludeArgs
-   }
- }
-
-+void Linux::AddCXXStdlibLibArgs(const ArgList &Args,
-+                                ArgStringList &CmdArgs) const {
-+  if (GetCXXStdlibType(Args) == ToolChain::CST_Libcxx) {
-+    CmdArgs.push_back("-lc++");
-+    CmdArgs.push_back("-lc++abi");
-+    CmdArgs.push_back("-lc++experimental");
-+  }
-+}
-+
- void Linux::AddCudaIncludeArgs(const ArgList &DriverArgs,
-                                ArgStringList &CC1Args) const {
-   if (!DriverArgs.hasArg(options::OPT_nobuiltininc)) {
-```
-
-### LLVM Stage 1
-Install LLVM in stage 1 mode (compiled with GCC 6).
-
-```sh
-cd && mkdir -p llvm/build && cd llvm/build && rm -rf *
-CC=gcc-6 CXX=g++-6 \
-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/opt/llvm \
-  -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_INCLUDE_TESTS=OFF -DCLANG_INCLUDE_TESTS=OFF \
-  -DLLVM_TARGETS_TO_BUILD="X86" -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="WebAssembly" \
-  -DLIBCXX_ENABLE_SHARED=OFF -DLIBCXX_INSTALL_EXPERIMENTAL_LIBRARY=ON -DLIBCXX_ENABLE_FILESYSTEM=ON \
-  -DLIBCXX_CXX_ABI=libcxxabi -DLIBCXX_CXX_ABI_INCLUDE_PATHS="../projects/libcxxabi/include" \
-  -DLIBCXX_ENABLE_STATIC_ABI_LIBRARY=ON -DLIBCXXABI_ENABLE_SHARED=OFF -DLIBCXXABI_ENABLE_STATIC=ON \
-  -DCLANG_DEFAULT_CXX_STDLIB="libc++" ..
-cmake --build .
-sudo cmake --build . --target install
-```
-
-### LLVM Stage 2
-Install LLVM in stage 2 mode (compiled with LLVM Stage 1).
-
-```sh
-cd && mkdir -p llvm/build && cd llvm/build && rm -rf *
-CC=clang CXX=clang++ \
-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/opt/llvm \
-  -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_INCLUDE_TESTS=OFF -DCLANG_INCLUDE_TESTS=OFF \
-  -DLLVM_TARGETS_TO_BUILD="X86" -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="WebAssembly" \
-  -DLIBCXX_ENABLE_SHARED=OFF -DLIBCXX_INSTALL_EXPERIMENTAL_LIBRARY=ON -DLIBCXX_ENABLE_FILESYSTEM=ON \
-  -DLIBCXX_CXX_ABI=libcxxabi -DLIBCXX_CXX_ABI_INCLUDE_PATHS="../projects/libcxxabi/include" \
-  -DLIBCXX_ENABLE_STATIC_ABI_LIBRARY=ON -DLIBCXXABI_ENABLE_SHARED=OFF -DLIBCXXABI_ENABLE_STATIC=ON \
-  -DCLANG_DEFAULT_CXX_STDLIB="libc++" ..
-cmake --build .
-sudo mv /opt/llvm /opt/llvm-stage1
+mkdir llvm/build && cd llvm/build
+cmake -GNinja \
+  -DCMAKE_BUILD_TYPE="Release" \
+  -DCMAKE_INSTALL_PREFIX="/opt/llvm" \
+  -DLLVM_TARGETS_TO_BUILD="X86" \
+  -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="WebAssembly" \
+  -DLLVM_INCLUDE_EXAMPLES=OFF \
+  -DLLVM_INCLUDE_TESTS=OFF \
+  -DLLVM_ENABLE_WARNINGS=OFF \
+  -DLLVM_ENABLE_PEDANTIC=OFF \
+  -DCLANG_DEFAULT_CXX_STDLIB="libc++" \
+  -DCLANG_INCLUDE_TESTS=OFF \
+  -DLIBCXX_ENABLE_FILESYSTEM=ON \
+  -DLIBCXX_ENABLE_SHARED=OFF \
+  -DLIBCXX_ENABLE_STATIC=ON \
+  -DLIBCXX_ENABLE_STATIC_ABI_LIBRARY=ON \
+  -DLIBCXX_INSTALL_EXPERIMENTAL_LIBRARY=ON \
+  -DLIBCXXABI_ENABLE_SHARED=OFF \
+  -DLIBCXXABI_ENABLE_STATIC=ON \
+  ..
+time cmake --build .
 sudo cmake --build . --target install
 ```
 
@@ -729,23 +700,3 @@ JAVA = 'java'
 COMPILER_ENGINE = NODE_JS
 JS_ENGINES = [NODE_JS]
 ```
--->
-
-<!--
-## Skype
-Disable ads after installing Skype.
-
-```
-Control Panel
-+ Internet Options
-  + Security
-    Restricted sites
-    + [Sites]
-      Add this website to the zone: https://apps.skype.com
-      [Add]
-```
-
-Edit `%APPDATA%\Skype\<username>\config.xml`
-- Set the `<AdvertPlaceholder>` XML element to `0`.
-- Set the file to read-only.
--->
