@@ -699,7 +699,7 @@ Verify `~/.emscripten`.
 import os
 EMSCRIPTEN_ROOT = os.path.expanduser(os.getenv('EMSCRIPTEN') or '/opt/emsdk') # directory
 LLVM_ROOT = os.path.expanduser(os.getenv('LLVM') or '/opt/llvm/bin') # directory
-BINARYEN_ROOT = os.path.expanduser(os.getenv('BINARYEN') or '/opt/binaryen/bin') # directory
+BINARYEN_ROOT = os.path.expanduser(os.getenv('BINARYEN') or '/opt/binaryen') # directory
 NODE_JS = os.path.expanduser(os.getenv('NODE') or '/usr/bin/nodejs') # executable
 JAVA = 'java'
 TEMP_DIR = '/tmp'
