@@ -518,7 +518,7 @@ C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Web\External\node_
 ![Start Menu](layout.png)
 
 ## Windows Subsystem for Linux
-Execute `bash.exe` in the command prompt.
+Execute `bash.exe` in the command prompt. Verify version with `lsb_release -a`.
 
 ### Setup
 Restore configuration files.
