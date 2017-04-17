@@ -645,7 +645,7 @@ svn co "http://llvm.org/svn/llvm-project/compiler-rt/${src}" "llvm/projects/comp
 
 mkdir llvm/build && cd llvm/build
 cmake -GNinja \
-  -DCMAKE_BUILD_TYPE="Release" \
+  -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_INSTALL_PREFIX="/opt/llvm" \
   -DLLVM_TARGETS_TO_BUILD="X86" \
   -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="WebAssembly" \
@@ -667,6 +667,12 @@ time cmake --build .
 sudo cmake --build . --target install
 ```
 
+<!--
+ESX Xeon E5-2609: 00:30:00
+WSL Core i7-2600: 00:45:00
+WSL Core i7-5500:
+-->
+
 ### Binaryen
 Install Binaryen.
 
@@ -674,7 +680,7 @@ Install Binaryen.
 cd /opt
 sudo git clone https://github.com/WebAssembly/binaryen
 cd binaryen
-sudo cmake -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ .
+sudo cmake -GNinja -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Release .
 sudo cmake --build .
 ```
 
@@ -687,16 +693,16 @@ sudo git clone -b incoming https://github.com/kripken/emscripten emsdk
 em++
 ```
 
-Modify `~/.emscripten`.
+Verify `~/.emscripten`.
 
 ```py
 import os
-TEMP_DIR = '/tmp'
 EMSCRIPTEN_ROOT = os.path.expanduser(os.getenv('EMSCRIPTEN') or '/opt/emsdk') # directory
 LLVM_ROOT = os.path.expanduser(os.getenv('LLVM') or '/opt/llvm/bin') # directory
-BINARYEN_ROOT = os.path.expanduser(os.getenv('BINARYEN') or '/opt/binaryen') # directory
+BINARYEN_ROOT = os.path.expanduser(os.getenv('BINARYEN') or '/opt/binaryen/bin') # directory
 NODE_JS = os.path.expanduser(os.getenv('NODE') or '/usr/bin/nodejs') # executable
 JAVA = 'java'
+TEMP_DIR = '/tmp'
 COMPILER_ENGINE = NODE_JS
 JS_ENGINES = [NODE_JS]
 ```
