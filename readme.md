@@ -590,8 +590,9 @@ sudo service ssh status
 Execute `bash.exe` in the command prompt.
 
 ```sh
-sudo apt-get install git subversion build-essential ninja-build nasm nodejs npm
+sudo apt-get install apt-file git subversion build-essential ninja-build nasm nodejs npm
 sudo ln -s /usr/bin/nodejs /usr/bin/node
+sudo apt-file update
 ```
 
 ### CMake
