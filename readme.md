@@ -635,13 +635,13 @@ sudo /opt/android/android-ndk-r14b/build/tools/make_standalone_toolchain.py \
 Install LLVM.
 
 ```sh
-src="tags/RELEASE_400/final"
-svn co "http://llvm.org/svn/llvm-project/llvm/${src}" "llvm"
-svn co "http://llvm.org/svn/llvm-project/cfe/${src}" "llvm/tools/clang"
-svn co "http://llvm.org/svn/llvm-project/clang-tools-extra/${src}" "llvm/tools/clang/tools/extra"
-svn co "http://llvm.org/svn/llvm-project/libcxx/${src}" "llvm/projects/libcxx"
-svn co "http://llvm.org/svn/llvm-project/libcxxabi/${src}" "llvm/projects/libcxxabi"
-svn co "http://llvm.org/svn/llvm-project/compiler-rt/${src}" "llvm/projects/compiler-rt"
+src=tags/RELEASE_400/final
+svn co http://llvm.org/svn/llvm-project/llvm/$src llvm
+svn co http://llvm.org/svn/llvm-project/cfe/$src llvm/tools/clang
+svn co http://llvm.org/svn/llvm-project/clang-tools-extra/$src llvm/tools/clang/tools/extra
+svn co http://llvm.org/svn/llvm-project/libcxx/$src llvm/projects/libcxx
+svn co http://llvm.org/svn/llvm-project/libcxxabi/$src llvm/projects/libcxxabi
+svn co http://llvm.org/svn/llvm-project/compiler-rt/$src llvm/projects/compiler-rt
 
 mkdir llvm/build && cd llvm/build
 cmake -GNinja \
