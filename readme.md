@@ -470,6 +470,12 @@ Install third party software.
 * [Blender](https://www.blender.org)
 * [gVim](http://www.vim.org)
 
+Initialize Git Large File Storage.
+
+```cmd
+git lfs install
+```
+
 ## Optional
 Install optional software.
 
@@ -597,6 +603,7 @@ wget https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh
 sudo bash script.deb.sh
 sudo apt install git-lfs
 sudo apt-file update
+sudo git lfs install
 ```
 
 ### CMake
