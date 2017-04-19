@@ -462,6 +462,7 @@ Install third party software.
 * [CFF Explorer](http://www.ntcore.com/exsuite.php)
 * [Resource Hacker](http://www.angusj.com/resourcehacker)
 * [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx)
+* [Git Large File Storage](https://git-lfs.github.com)
 * [TightVNC Viewer](http://www.tightvnc.com)
 * [Affinity Photo](https://affinity.serif.com/photo)
 * [Affinity Designer](https://affinity.serif.com/designer)
@@ -590,8 +591,11 @@ sudo service ssh status
 Execute `bash.exe` in the command prompt.
 
 ```sh
-sudo apt-get install apt-file git subversion build-essential ninja-build nasm nodejs npm
+sudo apt install apt-file git subversion build-essential ninja-build nasm nodejs npm
 sudo ln -s /usr/bin/nodejs /usr/bin/node
+wget https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh
+sudo bash script.deb.sh
+sudo apt install git-lfs
 sudo apt-file update
 ```
 
@@ -618,7 +622,7 @@ sudo tar xvzf jdk-8u121-linux-x64.tar.gz -C /opt/java --strip-components 1
 Install Android tools.
 
 ```sh
-sudo apt-get install android-tools-adb
+sudo apt install android-tools-adb
 ```
 
 Install Android NDK.
