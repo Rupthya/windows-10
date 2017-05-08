@@ -56,6 +56,14 @@ $Kernel32::SetComputerName("{hostname}");
 
 Reboot the system.
 
+## User Name
+Change the full user name.
+
+```cmd
+lusrmgr.msc > Users > {user}
++ Full Name: {User Name}
+```
+
 ## Drivers & Windows Updates
 Disable automatic driver app installation.
 
@@ -76,22 +84,6 @@ Settings > Update & security > Advanced options
 
 Reboot the system.
 
-## Windows Store & Apps
-Uninstall all apps except "App Installer" and "Weather" (optional).
-
-```
-Settings > Apps
-```
-
-Disable Windows Store (optional).
-
-```
-gpedit.msc > Computer Configuration > Administrative Templates > Windows Components
-
-Store
-+ Turn off the Store application: Enabled
-```
-
 ## Disable Windows Defender (Optional)
 Disable Windows Defender.
 
@@ -103,17 +95,12 @@ Windows Defender Antivirus
 
 Windows Defender Antivirus > Real-time Protection
 + Turn off real-time protection: Enabled
-+ Turn on behavior monitoring: Disabled
-+ Scan all downloaded files and attachments: Disabled
-+ Monitor file and program activity on your computer: Disabled
-+ Configure monitoring for incoming and outgoing file and program activity: Disabled
 
 Windows Defender Antivirus > MAPS
-+ Configure the 'Block at First Sight' feature: Disabled
 + Join Microsoft MAPS: Disabled
-+ Send file samples when further analysis is required: Disabled
 
 Windows Defender Antivirus > Network Inspection System
++ Turn on definition retirement: Disabled
 + Turn on protocol recognition: Disabled
 
 Windows Defender Antivirus > Signature Updates
@@ -157,6 +144,7 @@ Search
 + Allow Cortana: Disabled
 + Do not allow web search: Enabled
 + Don't search the web or display web results in Search: Enabled
++ Don't search the web or display web results in Search over metered connections: Enabled
 ```
 
 ## Telemetry
@@ -186,6 +174,39 @@ Task Scheduler > Task Scheduler Library > Microsoft > Windows > Application Expe
 
 Reboot the system.
 
+## Network & Updates
+Connect to the Internet and sign in using a Microsoft account (optional, not recommended).
+
+Install missing device drivers and pending updates.
+
+Disable automatic Windows updates.
+
+```
+gpedit.msc > Computer Configuration > Administrative Templates > Windows Components
+
+Windows Update
++ Configure Automatic Updates: Enabled
+  Configure automatic updating: 2 - Notify for download and auto install
+```
+
+## Windows Store & Apps
+Uninstall all apps except "App Installer" and "Weather" (optional).
+
+```
+Settings > Apps
+```
+
+<!--
+Disable Windows Store (optional).
+
+```
+gpedit.msc > Computer Configuration > Administrative Templates > Windows Components
+
+Store
++ Turn off the Store application: Enabled
+```
+-->
+
 ## OneDrive
 Uninstall OneDrive.
 
@@ -214,11 +235,6 @@ rd /q /s "%USERPROFILE%\OneDrive"
 ```
 
 Reboot the system.
-
-## Network & Updates
-Connect to the Internet and sign in using a Microsoft account (optional, not recommended).
-
-Install missing device drivers and pending updates.
 
 ## Microsoft Software
 Configure [Microsoft Edge](https://en.wikipedia.org/wiki/Microsoft_Edge) after visiting <https://www.google.com/ncr>.
@@ -271,17 +287,6 @@ Configure [Visual Studio Code](https://code.visualstudio.com) (optional).
 
 Uninstall unwanted applications in `Settings > System > Apps & features`.<br/>
 Uninstall unwanted optional features in `Settings > System > Apps & features > Manage optional features`.
-
-## Automatic Windows Updates
-Disable automatic Windows updates.
-
-```
-gpedit.msc > Computer Configuration > Administrative Templates > Windows Components
-
-Windows Update
-+ Configure Automatic Updates: Enabled
-  Configure automatic updating: 2 - Notify for download and auto install
-```
 
 ## Keymap
 If you need to be able to input German characters on a U.S. keyboard, you can use a custom [keymap](keymap.zip).
