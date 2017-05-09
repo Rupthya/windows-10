@@ -141,10 +141,7 @@ Configure search.
 gpedit.msc > Computer Configuration > Administrative Templates > Windows Components
 
 Search
-+ Allow Cortana: Disabled
 + Do not allow web search: Enabled
-+ Don't search the web or display web results in Search: Enabled
-+ Don't search the web or display web results in Search over metered connections: Enabled
 ```
 
 ## Telemetry
@@ -183,10 +180,6 @@ Wi-Fi services: Off
 Hotspot 2.0 networks: Off
 ```
 
-Connect to the Internet and sign in using a Microsoft account (optional, not recommended).
-
-Install missing device drivers and pending updates.
-
 Disable automatic Windows updates.
 
 ```
@@ -196,6 +189,10 @@ Windows Update
 + Configure Automatic Updates: Enabled
   Configure automatic updating: 2 - Notify for download and auto install
 ```
+
+Connect to the Internet and sign in using a Microsoft account (optional, not recommended).
+
+Install missing device drivers and pending updates.
 
 ## Windows Store & Apps
 Uninstall all apps except "App Installer" and "Weather" (optional).
@@ -216,31 +213,22 @@ Store
 -->
 
 ## OneDrive
-Uninstall OneDrive.
+Disable OneDrive.
 
-```cmd
-taskkill /f /im OneDrive.exe
-%SYSTEMROOT%\SysWOW64\OneDriveSetup.exe /uninstall
-rd /q /s "%USERPROFILE%\OneDrive"
-rd /q /s "C:\OneDriveTemp"
+```
+gpedit.msc > Computer Configuration > Administrative Templates > Windows Components > OneDrive
++ Prevent the usage of OneDrive for file storage: Enabled
 ```
 
-Reboot the system.
-
-Prevent OneDrive from being reinstalled.
+<!--
+Uninstalling OneDrive has no effect since it will be reinstalled shortly after.
+Uninstalling and preventing Windows from reinstalling OneDrive bricks the start menu.
 
 ```cmd
-rd /q /s "%LOCALAPPDATA%\Microsoft\OneDrive"
-rd /q /s "%PROGRAMDATA%\Microsoft OneDrive"
 reg delete "HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f
 reg delete "HKEY_CLASSES_ROOT\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f
 ```
-
-Execute the following in a user command prompt.
-
-```cmd
-rd /q /s "%USERPROFILE%\OneDrive"
-```
+-->
 
 Reboot the system.
 
@@ -254,8 +242,13 @@ Open Microsoft Edge with: A specific page or pages
 Open Microsoft Edge with: Previous pages
 Open new tabs with: A blank page
 [View advanced settings]
+  Use Adobe Flas Player: Off
   Open sites in apps: Off
   Ask me what to do with each download: Off
+  Have Cortana assist me in Microsoft Edge: Off
+  Show search and site suggestions as I type: Off
+  Let sites save protected media licenses on my device: Off
+  Use page prediction to speed up browsing, …: Off
   [Change search engine]
     Select: Google Search (discovered)
     [Set as default]
