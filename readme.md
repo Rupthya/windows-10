@@ -175,6 +175,14 @@ Task Scheduler > Task Scheduler Library > Microsoft > Windows > Application Expe
 Reboot the system.
 
 ## Network & Updates
+Disable Wi-Fi Services and Hotspot 2.0 networks.
+
+```
+Settings > Network & Internet > Wi-Fi > Manage Wi-Fi settings
+Wi-Fi services: Off
+Hotspot 2.0 networks: Off
+```
+
 Connect to the Internet and sign in using a Microsoft account (optional, not recommended).
 
 Install missing device drivers and pending updates.
@@ -285,23 +293,11 @@ Configure [Visual Studio Code](https://code.visualstudio.com) (optional).
 }
 ```
 
-Uninstall unwanted applications in `Settings > System > Apps & features`.<br/>
-Uninstall unwanted optional features in `Settings > System > Apps & features > Manage optional features`.
+Uninstall unwanted applications in `Settings > Apps`.<br/>
+Uninstall unwanted optional features in `Settings > Apps > Manage optional features`.
 
 ## Keymap
 If you need to be able to input German characters on a U.S. keyboard, you can use a custom [keymap](keymap.zip).
-
-## Wi-Fi
-Disable Wi-Fi Sense, Hotspot 2.0 networks and Paid Wi-Fi services.
-
-```
-Settings > Network & Internet > Wi-Fi > Manage Wi-Fi settings
-Wi-Fi Sense: Off
-Hotspot 2.0 networks: Off
-Paid Wi-Fi services: Off
-```
-
-To prevent other users from sharing the password, the SSID must have the suffix "_output".
 
 ## Photos
 Disable automatic photo enhancements and linked duplicates.
