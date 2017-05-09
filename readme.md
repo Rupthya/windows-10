@@ -297,7 +297,7 @@ Uninstall unwanted applications in `Settings > Apps`.<br/>
 Uninstall unwanted optional features in `Settings > Apps > Manage optional features`.
 
 ## Keymap
-If you need to be able to input German characters on a U.S. keyboard, you can use a custom [keymap](keymap.zip).
+You can use this custom [keymap](keymap.zip) to input German characters on a U.S. keyboard.
 
 ## Photos
 Disable automatic photo enhancements and linked duplicates.
@@ -313,13 +313,21 @@ Disable unwanted services. Skip entries when required.
 
 ```
 services.msc
-+ Certificate Propagation: Disabled
-+ Geolocation Service: Disabled
 + Microsoft (R) Diagnostics Hub Standard Collector Service: Disabled
 + Superfetch: Disabled
+```
+
+<!--
+Weird things will happen to the Start Menu if you disable some of the following services:
+
+```
+services.msc
++ Certificate Propagation: Disabled
++ Geolocation Service: Disabled
 + Windows Biometric Service: Disabled
 + Xbox Live …: Disabled
 ```
+-->
 
 ## Notifications (Optional)
 Disable notifications and Action Center.
