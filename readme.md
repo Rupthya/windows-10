@@ -371,6 +371,9 @@ rules for inbound and outbound IPv4 and IPv6 Echo Requests and select "Any IP ad
 To enable the WSL SSH Server, you need to replace the "SSH Server Proxy Service" inbound rule
 with a new inbound rule for port 22.
 
+## Settings
+Use common sense in **Settings**, **Control Panel**, **Explorer Options** and **Indexing Optinos**.
+
 ## Windows Libraries
 Move unwanted Windows libraries.
 
@@ -381,9 +384,6 @@ Move unwanted Windows libraries.
 5. Select the `Location` tab and enter a new location e.g. `%AppData%\Saved Pictures`.
 
 Repeat the process for `%UserProfile%\Videos\Captures`.
-
-## Settings
-Use common sense in **Settings**, **Control Panel**, **Explorer Options** and **Indexing Optinos**.
 
 ## Windows Features
 Enable or disable Windows features.
