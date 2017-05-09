@@ -329,8 +329,15 @@ services.msc
 ```
 -->
 
-## Notifications (Optional)
-Disable notifications and Action Center.
+## Notifications
+Disable unwanted notifications.
+
+```
+Control Panel > System and Security > Security and Maintenance
+  [Turn off all messages about …]
+```
+
+Disable Notifications and Action Center (optional, not recommended).
 
 ```
 gpedit.msc > User Configuration > Administrative Templates > Start Menu and Taskbar
@@ -347,13 +354,15 @@ wf.msc
   + Core Networking - …
   + Delivery Optimization (…)
   + Hyper-V …
-  + Remomte Desktop - …
-  + SSH Server Proxy Service
+  + Network Discovery (…)
 + Outbound Rules
   + Connect
   + Core Networking - …
   + Hyper-V …
+  + Network Discovery (…)
 ```
+
+Enable inbound rules for "Remomte Desktop - …" if necessary.
 
 Enable inbound rules for "File and Printer Sharing (Echo Request …)". Modify "Private,Public"
 rules for inbound and outbound IPv4 and IPv6 Echo Requests and select "Any IP address" under
@@ -361,14 +370,6 @@ rules for inbound and outbound IPv4 and IPv6 Echo Requests and select "Any IP ad
 
 To enable the WSL SSH Server, you need to replace the "SSH Server Proxy Service" inbound rule
 with a new inbound rule for port 22.
-
-## Notifications
-Disable unwanted notifications.
-
-```
-Control Panel > System and Security > Security and Maintenance
-  [Turn off all messages about …]
-```
 
 ## Windows Libraries
 Move unwanted Windows libraries.
