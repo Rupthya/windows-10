@@ -1,6 +1,12 @@
 # Windows 10
 Installation and configuration instructions for Windows 10 Creators Update (Version 1703).
 
+<!--
+Use commented out instructions on systems where the start menu stops working and the layout resets on logout.
+-->
+
+<!-- 17:10 -->
+
 ## Installation
 Download the latest [Windows 10](https://www.microsoft.com/en-us/software-download/windows10ISO) image and create a USB stick.
 
@@ -22,17 +28,15 @@ Create the file `\sources\pid.txt` on the USB stick.
 Value={windows key}
 ```
 
-1. Physically disconnect the device from all networks.
-2. Select the desired Language, Time and currency format, Keyboard or input method.
-3. Select "Install now", enter the product key and accept the license terms.
-4. Select "Custom: Install Windows only (advanced)".
-5. Partition the drive(s) and manually format the "Primary" partition.
-6. Wait for the installation to complete, remove the installation media and reboot.
-7. Chose a username without spaces starting with a capital letter.
-8. Skip network connection settings.
-9. Disable every available option.
-
 Keep the system disconnected from the network during the following steps.
+
+<!--
+1. Create temporary user account.
+2. Enable the administrator account in `lusrmgr.msc`.
+3. Delete temporary user account.
+-->
+
+<!-- 17:20 -->
 
 ## Hostname
 Change the hostname.
@@ -56,15 +60,111 @@ $Kernel32::SetComputerName("{hostname}");
 
 Reboot the system.
 
-## User Name
-Change the full user name.
+<!-- 17:25 -->
 
-```cmd
-lusrmgr.msc > Users > {user}
-+ Full Name: {User Name}
+## Group Policy
+Configure group policies (skip unwanted steps).
+
+```
+gpedit.msc > Computer Configuration > Administrative Templates > Windows Components
+
+Data Collection and Preview Builds
++ Allow Telemetry: Disabled
+
+OneDrive
++ Prevent the usage of OneDrive for file storage: Enabled
+
+Search
++ Do not allow web search: Enabled
+
+Store
++ Turn off the Store application: Enabled
+
+Windows Defender Antivirus
++ Turn off Windows Defender Antivirus: Enabled
+
+Windows Defender Antivirus > MAPS
++ Join Microsoft MAPS: Disabled
+
+Windows Defender Antivirus > Network Inspection System
++ Turn on definition retirement: Disabled
++ Turn on protocol recognition: Disabled
+
+Windows Defender Antivirus > Real-time Protection
++ Turn off real-time protection: Enabled
+
+Windows Defender Antivirus > Signature Updates
++ Allow definition updates from Microsoft Update: Disabled
+
+Windows Defender Application Guard
++ Turn On/Off Windows Defender Application Guard (WDAG): Disabled
+
+Windows Defender SmartScreen > Explorer
++ Configure App Install Control: Disabled
++ Configure Windows Defender SmartScreen: Disabled
+
+Windows Defender SmartScreen > Microsoft Edge
++ Configure Windows Defender SmartScreen: Disabled
+
+Windows Error Reporting
++ Disable Windows Error Reporting: Enabled
+
+Windows Update
++ Configure Automatic Updates: Enabled
+  Configure automatic updating: 2 - Notify for download and auto install
 ```
 
-## Drivers & Windows Updates
+## Disk Optimizations
+Verify that TRIM support is enabled. The following command should return `NTFS DisableDeleteNotify = 0`.
+
+```cmd
+fsutil behavior query disabledeletenotify
+```
+
+Disable disk defragmentation.
+
+```
+dfrgui > Change Settings
+[ ] Run no a schedule (recommended)
+```
+
+Disable hibernation (not recommended for mobile computers).
+
+```cmd
+powercfg -h off
+```
+
+## Services
+Delete diagnostics services.
+
+```cmd
+sc delete diagtrack
+sc delete dmwappushservice
+```
+
+Disable unwanted services.
+
+```
+services.msc
++ Certificate Propagation: Manual -> Disabled
++ Geolocation Service: Manual -> Disabled
++ Microsoft (R) Diagnostics Hub Standard Collector Service: Manual -> Disabled
++ Superfetch: Automatic -> Disabled
++ Windows Biometric Service: Manual -> Disabled
++ Xbox Accessory Management Service: Manual -> Disabled
++ Xbox Live …: Manual -> Disabled
+```
+
+## Tasks
+Disable Application Experience tasks.
+
+```
+Task Scheduler > Task Scheduler Library > Microsoft > Windows > Application Experience
++ Microsoft Compatibility Appraiser: Disabled
++ ProgramDataUpdater: Disabled
+```
+
+## Drivers & Updates
 Disable automatic driver app installation.
 
 ```
@@ -84,39 +184,41 @@ Settings > Update & security > Advanced options
 
 Reboot the system.
 
-## Disable Windows Defender (Optional)
-Disable Windows Defender.
+<!-- 17:35 -->
 
-```
-gpedit.msc > Computer Configuration > Administrative Templates > Windows Components
+Connect to the Internet.
 
-Windows Defender Antivirus
-+ Turn off Windows Defender Antivirus: Enabled
+Wait until the CPU/Network activity stops and there are no more entries under `Device Manager > Other devices`.
 
-Windows Defender Antivirus > Real-time Protection
-+ Turn off real-time protection: Enabled
+Reboot the system.
 
-Windows Defender Antivirus > MAPS
-+ Join Microsoft MAPS: Disabled
+<!-- 17:45 -->
 
-Windows Defender Antivirus > Network Inspection System
-+ Turn on definition retirement: Disabled
-+ Turn on protocol recognition: Disabled
+Install Windows updates.
 
-Windows Defender Antivirus > Signature Updates
-+ Allow definition updates from Microsoft Update: Disabled
+Reboot the system.
 
-Windows Defender Application Guard
-+ Turn On/Off Windows Defender Application Guard (WDAG): Disabled
+<!-- 18:00 -->
 
-Windows Defender SmartScreen > Explorer
-+ Configure App Install Control: Disabled
-+ Configure Windows Defender SmartScreen: Disabled
+<!--
+1. Create user account.
+2. Disable administrator account.
+-->
 
-Windows Defender SmartScreen > Microsoft Edge
-+ Configure Windows Defender SmartScreen: Disabled
+## User Name
+Change the full user name.
+
+```cmd
+lusrmgr.msc > Users > {user}
++ Full Name: {User Name}
 ```
 
+## Settings
+Use common sense in **Settings**, **Explorer Options** and **Indexing Optinos**.
+
+Uninstall unwanted apps except "App Installer" and "OneDrive".
+
+## Startup
 Disable Windows Defender notification icon.
 
 ```
@@ -124,113 +226,55 @@ Task Manager > Startup
 + Windows Defender notification icon: Disabled
 ```
 
-## Error Reports
-Disable error reports.
+## Notifications
+Disable unwanted notifications.
 
 ```
-gpedit.msc > Computer Configuration > Administrative Templates > Windows Components
-
-Windows Error Reporting
-+ Disable Windows Error Reporting: Enabled
+Control Panel > System and Security > Security and Maintenance
+  [Turn off all messages about …]
 ```
 
-## Windows Search
-Configure search.
+## Windows Libraries
+Move unwanted Windows libraries.
+
+1. Go to `%UserProfile%\Pictures`.
+2. Right click on `Camera Roll` and select `Properties`.
+3. Select the `Location` tab and enter a new location e.g. `%AppData%\Camera Roll`.
+4. Right click on `Saved Pictures` and select `Properties`.
+5. Select the `Location` tab and enter a new location e.g. `%AppData%\Saved Pictures`.
+
+Repeat the process for `%UserProfile%\Videos\Captures`.
+
+## Firewall
+Disable all rules in Windows Firewall keeping the following entries.
 
 ```
-gpedit.msc > Computer Configuration > Administrative Templates > Windows Components
-
-Search
-+ Do not allow web search: Enabled
+wf.msc
++ Inbound Rules
+  + Connect
+  + Core Networking - …
+  + Delivery Optimization (…)
+  + Hyper-V …
+  + Network Discovery (…)
+  + Remote Desktop - …
++ Outbound Rules
+  + Connect
+  + Core Networking - …
+  + Hyper-V …
+  + Network Discovery (…)
 ```
 
-## Telemetry
-Disable telemetry.
+Enable inbound rules for "Remomte Desktop - …" if necessary.
 
-```
-gpedit.msc > Computer Configuration > Administrative Templates > Windows Components
+Enable inbound rules for "File and Printer Sharing (Echo Request …)". Modify "Private,Public"
+rules for inbound and outbound IPv4 and IPv6 Echo Requests and select "Any IP address" under
+"Remote IP address" in the "Scope" tab.
 
-Data Collection and Preview Builds
-+ Allow Telemetry: Disabled
-```
+To enable the WSL SSH Server, you need to replace the "SSH Server Proxy Service" inbound rule
+with a new inbound rule for port 22.
 
-Delete the diagnostics services.
-
-```cmd
-sc delete DiagTrack
-sc delete dmwappushservice
-```
-
-Disable the Application Experience tasks.
-
-```
-Task Scheduler > Task Scheduler Library > Microsoft > Windows > Application Experience
-+ Microsoft Compatibility Appraiser: Disabled
-+ ProgramDataUpdater: Disabled
-```
-
-Reboot the system.
-
-## Network & Updates
-Disable Wi-Fi Services and Hotspot 2.0 networks.
-
-```
-Settings > Network & Internet > Wi-Fi > Manage Wi-Fi settings
-Wi-Fi services: Off
-Hotspot 2.0 networks: Off
-```
-
-Disable automatic Windows updates.
-
-```
-gpedit.msc > Computer Configuration > Administrative Templates > Windows Components
-
-Windows Update
-+ Configure Automatic Updates: Enabled
-  Configure automatic updating: 2 - Notify for download and auto install
-```
-
-Connect to the Internet and sign in using a Microsoft account (optional, not recommended).
-
-Install missing device drivers and pending updates.
-
-## Windows Store & Apps
-Uninstall all apps except "App Installer" and "Weather" (optional).
-
-```
-Settings > Apps
-```
-
-<!--
-Disable Windows Store (optional).
-
-```
-gpedit.msc > Computer Configuration > Administrative Templates > Windows Components
-
-Store
-+ Turn off the Store application: Enabled
-```
--->
-
-## OneDrive
-Disable OneDrive.
-
-```
-gpedit.msc > Computer Configuration > Administrative Templates > Windows Components > OneDrive
-+ Prevent the usage of OneDrive for file storage: Enabled
-```
-
-<!--
-Uninstalling OneDrive has no effect since it will be reinstalled shortly after.
-Uninstalling and preventing Windows from reinstalling OneDrive bricks the start menu.
-
-```cmd
-reg delete "HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f
-reg delete "HKEY_CLASSES_ROOT\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f
-```
--->
-
-Reboot the system.
+## Keymap
+Use this [keymap](keymap.zip) to input German characters on a U.S. keyboard.
 
 ## Microsoft Software
 Configure [Microsoft Edge](https://en.wikipedia.org/wiki/Microsoft_Edge) after visiting <https://www.google.com/ncr>.
@@ -289,94 +333,13 @@ Configure [Visual Studio Code](https://code.visualstudio.com) (optional).
 Uninstall unwanted applications in `Settings > Apps`.<br/>
 Uninstall unwanted optional features in `Settings > Apps > Manage optional features`.
 
-## Keymap
-You can use this custom [keymap](keymap.zip) to input German characters on a U.S. keyboard.
-
-## Photos
-Disable automatic photo enhancements and linked duplicates.
+Configure the Photos app (recommended).
 
 ```
 Photos > Settings
 Automatically enhance my photos: Off
 Linked duplicates: Off
 ```
-
-## Services
-Disable unwanted services. Skip entries when required.
-
-```
-services.msc
-+ Microsoft (R) Diagnostics Hub Standard Collector Service: Disabled
-+ Superfetch: Disabled
-```
-
-<!--
-Weird things will happen to the Start Menu if you disable some of the following services:
-
-```
-services.msc
-+ Certificate Propagation: Disabled
-+ Geolocation Service: Disabled
-+ Windows Biometric Service: Disabled
-+ Xbox Live …: Disabled
-```
--->
-
-## Notifications
-Disable unwanted notifications.
-
-```
-Control Panel > System and Security > Security and Maintenance
-  [Turn off all messages about …]
-```
-
-Disable Notifications and Action Center (optional, not recommended).
-
-```
-gpedit.msc > User Configuration > Administrative Templates > Start Menu and Taskbar
-+ Remove Notifications and Action Center: Enabled
-```
-
-## Firewall
-Disable all rules in Windows Firewall keeping the following entries.
-
-```
-wf.msc
-+ Inbound Rules
-  + Connect
-  + Core Networking - …
-  + Delivery Optimization (…)
-  + Hyper-V …
-  + Network Discovery (…)
-+ Outbound Rules
-  + Connect
-  + Core Networking - …
-  + Hyper-V …
-  + Network Discovery (…)
-```
-
-Enable inbound rules for "Remomte Desktop - …" if necessary.
-
-Enable inbound rules for "File and Printer Sharing (Echo Request …)". Modify "Private,Public"
-rules for inbound and outbound IPv4 and IPv6 Echo Requests and select "Any IP address" under
-"Remote IP address" in the "Scope" tab.
-
-To enable the WSL SSH Server, you need to replace the "SSH Server Proxy Service" inbound rule
-with a new inbound rule for port 22.
-
-## Settings
-Use common sense in **Settings**, **Control Panel**, **Explorer Options** and **Indexing Optinos**.
-
-## Windows Libraries
-Move unwanted Windows libraries.
-
-1. Go to `%UserProfile%\Pictures`.
-2. Right click on `Camera Roll` and select `Properties`.
-3. Select the `Location` tab and enter a new location e.g. `%AppData%\Camera Roll`.
-4. Right click on `Saved Pictures` and select `Properties`.
-5. Select the `Location` tab and enter a new location e.g. `%AppData%\Saved Pictures`.
-
-Repeat the process for `%UserProfile%\Videos\Captures`.
 
 ## Windows Features
 Enable or disable Windows features.
@@ -392,26 +355,6 @@ Control Panel > Programs > Turn Windows features on or off
 
 ## Disk Cleanup
 Delete Windows Update backups and other unwanted files by performing a Disk Cleanup.
-
-## Disk Optimizations
-Verify that TRIM support is enabled. The following command should return `NTFS DisableDeleteNotify = 0`.
-
-```cmd
-fsutil behavior query disabledeletenotify
-```
-
-Disable disk defragmentation.
-
-```
-dfrgui > Change Settings
-[ ] Run no a schedule (recommended)
-```
-
-Disable hibernation (for stationary computers).
-
-```cmd
-powercfg -h off
-```
 
 # Development
 Install software useful for Windows and Unix development.
