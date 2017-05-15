@@ -1,7 +1,7 @@
 ﻿# Windows 10
 Installation and configuration instructions for Windows 10 Creators Update (Version 1703).
 
-Set the BIOS date two days in the past before installing and correct it after changing the time.
+Set the BIOS date two days in the past before installing and correct it after time and time zone selection.
 
 ## Installation
 Download the latest [Windows 10](https://www.microsoft.com/en-us/software-download/windows10ISO) image and create a USB stick.
