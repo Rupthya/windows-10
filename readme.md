@@ -1,11 +1,7 @@
-# Windows 10
+﻿# Windows 10
 Installation and configuration instructions for Windows 10 Creators Update (Version 1703).
 
-<!--
-Use commented out instructions on systems where the start menu stops working and the layout resets on logout.
--->
-
-<!-- 17:10 -->
+Set the BIOS date two days in the past before installing and correct it after changing the time.
 
 ## Installation
 Download the latest [Windows 10](https://www.microsoft.com/en-us/software-download/windows10ISO) image and create a USB stick.
@@ -30,14 +26,6 @@ Value={windows key}
 
 Keep the system disconnected from the network during the following steps.
 
-<!--
-1. Create temporary user account.
-2. Enable the administrator account in `lusrmgr.msc`.
-3. Delete temporary user account.
--->
-
-<!-- 17:20 -->
-
 ## Hostname
 Change the hostname.
 
@@ -60,7 +48,8 @@ $Kernel32::SetComputerName("{hostname}");
 
 Reboot the system.
 
-<!-- 17:25 -->
+## Cortana
+Configure Cortana using the search box in the taskbar.
 
 ## Group Policy
 Configure group policies (skip unwanted steps).
@@ -184,26 +173,15 @@ Settings > Update & security > Advanced options
 
 Reboot the system.
 
-<!-- 17:35 -->
-
 Connect to the Internet.
 
 Wait until the CPU/Network activity stops and there are no more entries under `Device Manager > Other devices`.
 
 Reboot the system.
 
-<!-- 17:45 -->
-
 Install Windows updates.
 
 Reboot the system.
-
-<!-- 18:00 -->
-
-<!--
-1. Create user account.
-2. Disable administrator account.
--->
 
 ## User Name
 Change the full user name.
@@ -219,10 +197,11 @@ Use common sense in **Settings**, **Explorer Options** and **Indexing Optinos**.
 Uninstall unwanted apps except "App Installer" and "OneDrive".
 
 ## Startup
-Disable Windows Defender notification icon.
+Disable automatically started applications.
 
 ```
 Task Manager > Startup
++ Microsoft OneDrive: Disabled
 + Windows Defender notification icon: Disabled
 ```
 
@@ -237,13 +216,12 @@ Control Panel > System and Security > Security and Maintenance
 ## Windows Libraries
 Move unwanted Windows libraries.
 
-1. Go to `%UserProfile%\Pictures`.
-2. Right click on `Camera Roll` and select `Properties`.
-3. Select the `Location` tab and enter a new location e.g. `%AppData%\Camera Roll`.
-4. Right click on `Saved Pictures` and select `Properties`.
-5. Select the `Location` tab and enter a new location e.g. `%AppData%\Saved Pictures`.
-
-Repeat the process for `%UserProfile%\Videos\Captures`.
+1. Right click on `%UserProfile%\Pictures\Camera Roll` and select `Properties`.
+2. Select the `Location` tab and enter a new location e.g. `%AppData%\Camera Roll`.
+3. Right click on `%UserProfile%\Pictures\Saved Pictures` and select `Properties`.
+4. Select the `Location` tab and enter a new location e.g. `%AppData%\Saved Pictures`.
+5. Right click on `%UserProfile%\Videos\Captures` and select `Properties`.
+6. Select the `Location` tab and enter a new location e.g. `%AppData%\Captures`.
 
 ## Firewall
 Disable all rules in Windows Firewall keeping the following entries.
@@ -310,7 +288,7 @@ Configure [Visual Studio Code](https://code.visualstudio.com) (optional).
 
 ```json
 {
-  "editor.fontFamily": "DejaVu Sans Mono, Consolas, monospace",
+  "editor.fontFamily": "DejaVu LGC Sans Mono, Consolas, monospace",
   "editor.fontSize": 12,
   "editor.tabSize": 2,
   "editor.detectIndentation": false,
@@ -322,6 +300,8 @@ Configure [Visual Studio Code](https://code.visualstudio.com) (optional).
   "editor.renderLineHighlight": "none",
   "editor.codeLens": false,
   "editor.folding": false,
+  "editor.minimap.enabled": true,
+  "editor.minimap.renderCharacters": true,
   "explorer.openEditors.visible": 0,
   "window.openFilesInNewWindow": "off",
   "files.trimTrailingWhitespace": true,
@@ -346,49 +326,12 @@ Enable or disable Windows features.
 
 ```
 Control Panel > Programs > Turn Windows features on or off
+[■] .NET Framework 3.5 (includes .NET 2.0 and 3.0)
 [ ] Media Features
 [ ] SMB 1.0/CIFS File Sharing Support
 [✓] Windows Subsystem for Linux
 [ ] XPS Services
 [ ] XPS Viewer
-```
-
-## Disk Cleanup
-Delete Windows Update backups and other unwanted files by performing a Disk Cleanup.
-
-# Development
-Install software useful for Windows and Unix development.
-
-## Visual Studio 2017
-Install [Visual Studio Community 2017](https://www.visualstudio.com/vs/visual-studio-2017-rc).
-
-```
-Individual Components
-+ Code tools
-  [✓] Git for Windows
-  [✓] GitHub extension for Visual Studio
-  [✓] Static analysis tools
-  [✓] Text Template Transformation
-+ Compilers, build tools, and runtimes
-  [✓] VC++ 2017 v141 toolset (x86,x64)
-  [✓] Visual C++ tools for CMake
-+ Debugging and testing
-  [✓] C++ profiling tools
-  [✓] JavaScript diagnostics
-  [✓] Just-In-Time debugger
-  [✓] Profiling tools
-  [✓] Testing tools core features
-+ Development activities
-  [✓] JavaScript and TypeScript language support
-  [✓] Node.js support
-  [✓] Visual Studio C++ core features
-+ Games and Graphics
-  [✓] Graphics debugger and GPU profilier for DirectX
-  [✓] Image and 3D model editors
-+ SDKs, libraries, and frameworks
-  [✓] TypeScript 2.1 SDK
-  [✓] Visual C++ ATL support
-  [✓] Windows SDK (10.0.15063.0) for Desktop C++ x86 and x64
 ```
 
 ## Fonts
@@ -408,19 +351,12 @@ Install third party software.
 * [CFF Explorer](http://www.ntcore.com/exsuite.php)
 * [Resource Hacker](http://www.angusj.com/resourcehacker)
 * [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx)
-* [Git Large File Storage](https://git-lfs.github.com)
 * [TightVNC Viewer](http://www.tightvnc.com)
 * [Affinity Photo](https://affinity.serif.com/photo)
 * [Affinity Designer](https://affinity.serif.com/designer)
 * [Sketchbook Pro](http://www.autodesk.com/products/sketchbook-pro/overview)
 * [Blender](https://www.blender.org)
 * [gVim](http://www.vim.org)
-
-Initialize Git Large File Storage.
-
-```cmd
-git lfs install
-```
 
 ## Optional
 Install optional software.
@@ -432,61 +368,61 @@ Install optional software.
 * [Remote Server Administration Tools for Windows 10](https://www.microsoft.com/en-us/download/details.aspx?id=45520)
 * [Google Drive](https://www.google.com/drive/download)
 
+Configure WinRM client.
+
+```cmd
+Get-NetConnectionProfile
+Set-NetConnectionProfile -InterfaceIndex {Idx} -NetworkCategory Private
+Set-Item WSMan:\localhost\Client\TrustedHosts -Value "*" -Force
+```
+
+## Control Panel
+Add Control Panel shortcuts to the Windows start menu. Use icons from `C:\Windows\System32\shell32.dll`.
+
+### Network Connections
+Create a shortcut to `control.exe ncpa.cpl` and save it as<br/>
+`%AppData%\Microsoft\Windows\Start Menu\Programs\Network Connections`.
+
 <!--
-### Skype
-Disable ads after installing Skype.
+Configure WinRM server.
 
-```
-Control Panel
-+ Internet Options
-  + Security
-    Restricted sites
-    + [Sites]
-      Add this website to the zone: https://apps.skype.com
-      [Add]
+```ps
+Enable-PSRemoting -SkipNetworkProfileCheck -Force
+Set-NetFirewallRule -Name "WINRM-HTTP-In-TCP-PUBLIC" -RemoteAddress Any
+Set-Item WSMan:\localhost\Client\TrustedHosts -Value "*" -Force
 ```
 
-Edit `%APPDATA%\Skype\<username>\config.xml`
-- Set the `<AdvertPlaceholder>` XML element to `0`.
-- Set the file to read-only.
+Configure WinRM server to accept HTTPS connections.
+
+```ps
+winrm enumerate winrm/config/listener
+New-SelfSignedCertificate -DnsName "{DomainName}" -CertStoreLocation Cert:\LocalMachine\My
+cmd /C 'winrm create winrm/config/Listener?Address=*+Transport=HTTPS @{Hostname="{DomainName}"; CertificateThumbprint="{Thumbprint}"}'
+netsh advfirewall firewall add rule name="Windows Remote Management (HTTPS-In)" dir=in action=allow protocol=TCP localport=5986
+```
+
+Connect over HTTP.
+
+```ps
+Enter-PSSession -ComputerName dc.la.xdsnet.de -Port 5985 -Credential administrator@la.xdsnet.de
+```
+
+Connect over HTTPS.
+
+```ps
+$soptions = New-PSSessionOption -SkipCACheck
+Enter-PSSession -ComputerName dc.la.xdsnet.de -Port 5986 -Credential administrator@la.xdsnet.de -SessionOption $soptions -UseSSL
+```
 -->
 
-## Environment
-Add entries to the `Path` environment variable.
+## Configuration Files
+Restore configuration files.
 
-```
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Web\External
-C:\Program Files\NASM\2.12.02
-C:\Program Files\7-Zip
-```
-
-Set the `NODE_PATH` environment variable.
-
-```
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Web\External\node_modules
-```
-
-## Start Menu
-![Start Menu](layout.png)
+* [C:\Users\{User}\vimfiles](configs/.vim/)
+* [C:\Users\{User}\.gitconfig](configs/.gitconfig)
 
 ## Windows Subsystem for Linux
 Execute `bash.exe` in the command prompt. Verify version with `lsb_release -a`.
-
-### Setup
-Restore configuration files.
-
-* [~/.ssh/](configs/.ssh/)
-* [~/.vim/](configs/.vim/)
-* [~/.bashrc](configs/.bashrc)
-* [~/.gitconfig](configs/.gitconfig)
-* [~/.minttyrc](configs/.minttyrc)
-* [~/.profile](configs/.profile)
-* [~/.tmux.conf](configs/.tmux.conf)
-
-Move `.vim` to `%USERPROFILE%\vimfiles` and create a symlink to `~/.vim`.<br/>
-Move `.gitconfig` to `%USERPROFILE%\.gitconfig` and create a symlink to `~/.gitconfig`.<br/>
-Repplace `{name}`, `{email}` and `{username}` in `.gitconfig`.
 
 Change **sudo** settings by executing `sudo EDITOR=vim visudo`.
 
@@ -512,17 +448,34 @@ sudo apt update
 sudo apt upgrade
 sudo apt dist-upgrade
 sudo apt autoremove
-sudo apt install p7zip-full zip unzip tree htop
+sudo apt install p7zip-full p7zip-rar zip unzip tree htop shautils
 ```
 
-### SSH Server
-Modify the following lines in `/etc/ssh/sshd_config` replacing `{username}` with your WSL username.
+Install [neovim](https://neovim.io).
 
 ```sh
+sudo add-apt-repository ppa:neovim-ppa/stable
+sudo apt update
+sudo apt upgrade
+sudo apt install neovim
+```
+
+Modify the following lines in `/etc/pam.d/login`.
+
+```sh
+#session    optional    pam_motd.so motd=/run/motd.dynamic
+#session    optional    pam_motd.so noupdate
+```
+
+Modify the following lines in `/etc/ssh/sshd_config` (replace `{username}` with your WSL username).
+
+```sh
+Protocol 2
 HostKey /etc/ssh/ssh_host_rsa_key
 #HostKey /etc/ssh/ssh_host_dsa_key
 #HostKey /etc/ssh/ssh_host_ecdsa_key
 #HostKey /etc/ssh/ssh_host_ed25519_key
+UsePrivilegeSeparation yes
 AllowUsers {username}
 ```
 
@@ -530,6 +483,7 @@ Create a new RSA key.
 
 ```sh
 sudo ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key
+sudo chmod 600 /etc/ssh/ssh_host_rsa_key
 ```
 
 Start the server.
@@ -539,128 +493,64 @@ sudo service ssh start
 sudo service ssh status
 ```
 
-## Unix Development
-Execute `bash.exe` in the command prompt.
+Restore configuration files.
+
+* [~/.ssh/](configs/.ssh/)
+* [~/.bashrc](configs/.bashrc)
+* [~/.profile](configs/.profile)
+* [~/.tmux.conf](configs/.tmux.conf)
+* [~/.gitconfig](configs/.gitconfig)
+
+Repplace `{name}`, `{email}` and `{username}` in `.gitconfig`.
+
+Create symlinks to Windows configuration files.
 
 ```sh
-sudo apt install apt-file git subversion build-essential ninja-build nasm nodejs npm
-sudo ln -s /usr/bin/nodejs /usr/bin/node
-wget https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh
-sudo bash script.deb.sh
-sudo apt install git-lfs
-sudo apt-file update
-sudo git lfs install
-```
+ln -s /mnt/c/Users/{User}/.gitconfig .gitconfig
+ln -s /mnt/c/Users/{User}/.ssh .ssh
 
-### CMake
-Install CMake.
+mkdir -p .config; chmod 755 .config
+ln -s /mnt/c/Users/{User}/vimfiles .config/nvim
+ln -s .config/nvim .vim
 
-```sh
-wget https://cmake.org/files/v3.8/cmake-3.8.0-Linux-x86_64.tar.gz
-sudo mkdir /opt/cmake
-sudo tar xvzf cmake-3.8.0-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
-```
-
-### Java
-Install Java.
-
-```sh
-wget --no-check-certificate --no-cookies - --header "Cookie: oraclelicense=accept-securebackup-cookie" \
-  http://download.oracle.com/otn-pub/java/jdk/8u121-b13/e9e7ea248e2c4826b92b3f075a80e441/jdk-8u121-linux-x64.tar.gz
-sudo mkdir /opt/java
-sudo tar xvzf jdk-8u121-linux-x64.tar.gz -C /opt/java --strip-components 1
-```
-
-### Android
-Install Android tools.
-
-```sh
-sudo apt install android-tools-adb
-```
-
-Install Android NDK.
-
-```sh
-wget https://dl.google.com/android/repository/android-ndk-r14b-linux-x86_64.zip
-sudo unzip android-ndk-r14b-linux-x86_64.zip -d /opt/android
-sudo /opt/android/android-ndk-r14b/build/tools/make_standalone_toolchain.py \
-  --api 21 --stl libc++ --arch arm --install-dir /opt/android/arm
-sudo /opt/android/android-ndk-r14b/build/tools/make_standalone_toolchain.py \
-  --api 21 --stl libc++ --arch arm64 --install-dir /opt/android/arm64
-```
-
-### LLVM
-Install LLVM.
-
-```sh
-src=tags/RELEASE_400/final
-svn co http://llvm.org/svn/llvm-project/llvm/$src llvm
-svn co http://llvm.org/svn/llvm-project/cfe/$src llvm/tools/clang
-svn co http://llvm.org/svn/llvm-project/clang-tools-extra/$src llvm/tools/clang/tools/extra
-svn co http://llvm.org/svn/llvm-project/libcxx/$src llvm/projects/libcxx
-svn co http://llvm.org/svn/llvm-project/libcxxabi/$src llvm/projects/libcxxabi
-svn co http://llvm.org/svn/llvm-project/compiler-rt/$src llvm/projects/compiler-rt
-
-mkdir llvm/build && cd llvm/build
-cmake -GNinja \
-  -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_INSTALL_PREFIX="/opt/llvm" \
-  -DLLVM_TARGETS_TO_BUILD="X86" \
-  -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="WebAssembly" \
-  -DLLVM_INCLUDE_EXAMPLES=OFF \
-  -DLLVM_INCLUDE_TESTS=OFF \
-  -DLLVM_ENABLE_WARNINGS=OFF \
-  -DLLVM_ENABLE_PEDANTIC=OFF \
-  -DCLANG_DEFAULT_CXX_STDLIB="libc++" \
-  -DCLANG_INCLUDE_TESTS=OFF \
-  -DLIBCXX_ENABLE_FILESYSTEM=ON \
-  -DLIBCXX_ENABLE_SHARED=OFF \
-  -DLIBCXX_ENABLE_STATIC=ON \
-  -DLIBCXX_ENABLE_STATIC_ABI_LIBRARY=ON \
-  -DLIBCXX_INSTALL_EXPERIMENTAL_LIBRARY=ON \
-  -DLIBCXXABI_ENABLE_SHARED=OFF \
-  -DLIBCXXABI_ENABLE_STATIC=ON \
-  ..
-time cmake --build .
-sudo cmake --build . --target install
+mkdir -p .ssh; chmod 700 .ssh
+cp /mnt/c/Users/{User}/.ssh/config .ssh/config
+cp /mnt/c/Users/{User}/.ssh/id_rsa .ssh/id_rsa
+cp /mnt/c/Users/{User}/.ssh/id_rsa.pub .ssh/id_rsa.pub
+ln -s /mnt/c/Users/{User}/.ssh/known_hosts .ssh/known_hosts
+chmod 600 .ssh/*
 ```
 
 <!--
-ESX Xeon E5-2609: 00:30:00
-WSL Core i7-2600: 00:45:00
-WSL Core i7-5500:
+### SSH Proxy
+Forward `localhost:8089` to `core:3389` over `gate`.
+
+```sh
+ssh gate -L 8089:core:3389 -N
+```
 -->
 
-### Binaryen
-Install Binaryen.
+## Disk Cleanup
+Delete Windows Update backups and other unwanted files by performing a Disk Cleanup.
 
-```sh
-cd /opt
-sudo git clone https://github.com/WebAssembly/binaryen
-cd binaryen
-sudo cmake -GNinja -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Release .
-sudo cmake --build .
+<!--
+### Skype
+Disable ads after installing Skype.
+
+```
+Control Panel
++ Internet Options
+  + Security
+    Restricted sites
+    + [Sites]
+      Add this website to the zone: https://apps.skype.com
+      [Add]
 ```
 
-### Emscripten
-Install and configure emscripten.
+Edit `%APPDATA%\Skype\<username>\config.xml`
+- Set the `<AdvertPlaceholder>` XML element to `0`.
+- Set the file to read-only.
+-->
 
-```sh
-cd /opt
-sudo git clone -b incoming https://github.com/kripken/emscripten emsdk
-em++
-```
-
-Verify `~/.emscripten`.
-
-```py
-import os
-EMSCRIPTEN_ROOT = os.path.expanduser(os.getenv('EMSCRIPTEN') or '/opt/emsdk') # directory
-LLVM_ROOT = os.path.expanduser(os.getenv('LLVM') or '/opt/llvm/bin') # directory
-BINARYEN_ROOT = os.path.expanduser(os.getenv('BINARYEN') or '/opt/binaryen') # directory
-NODE_JS = os.path.expanduser(os.getenv('NODE') or '/usr/bin/nodejs') # executable
-JAVA = 'java'
-TEMP_DIR = '/tmp'
-COMPILER_ENGINE = NODE_JS
-JS_ENGINES = [NODE_JS]
-```
+## Start Menu
+![Start Menu](layout.png)
