@@ -191,6 +191,12 @@ lusrmgr.msc > Users > {user}
 + Full Name: {User Name}
 ```
 
+<!--
+
+https://www.lifewire.com/command-line-commands-for-control-panel-applets-2626060
+
+-->
+
 ## Settings
 Use common sense in **Settings**, **Explorer Options** and **Indexing Optinos**.
 
