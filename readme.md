@@ -457,6 +457,12 @@ sudo apt autoremove
 sudo apt install p7zip-full p7zip-rar zip unzip tree htop shautils
 ```
 
+Install optional packages.
+
+```sh
+sudo apt install imagemagick pdftk
+```
+
 Install [neovim](https://neovim.io).
 
 ```sh
