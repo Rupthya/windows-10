@@ -489,6 +489,8 @@ HostKey /etc/ssh/ssh_host_rsa_key
 #HostKey /etc/ssh/ssh_host_ed25519_key
 UsePrivilegeSeparation yes
 AllowUsers {username}
+GSSAPIAuthentication no
+UseDNS no
 ```
 
 Create a new RSA key.
