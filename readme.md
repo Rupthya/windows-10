@@ -138,6 +138,7 @@ services.msc
 + Certificate Propagation: Manual -> Disabled
 + Geolocation Service: Manual -> Disabled
 + Microsoft (R) Diagnostics Hub Standard Collector Service: Manual -> Disabled
++ Microsoft Office Click-to-Run Service: Automatic -> Disabled
 + Superfetch: Automatic -> Disabled
 + Windows Biometric Service: Manual -> Disabled
 + Xbox Accessory Management Service: Manual -> Disabled
