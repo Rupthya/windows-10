@@ -431,6 +431,14 @@ Restore configuration files.
 ## Windows Subsystem for Linux
 Execute `bash.exe` in the command prompt. Verify version with `lsb_release -a`.
 
+Fix `/etc/localtime` symlink.
+
+```sh
+rm /etc/localtime
+ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
+echo Europe/Berlin > /etc/timezone
+```
+
 Change **sudo** settings by executing `sudo EDITOR=vim visudo`.
 
 ```sh
