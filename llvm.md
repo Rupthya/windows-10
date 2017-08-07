@@ -17,9 +17,9 @@ sudo apt install binutils-dev zlib1g-dev libpng-dev libfreetype6-dev libssl-dev 
 Install CMake.
 
 ```sh
-wget https://cmake.org/files/v3.8/cmake-3.8.2-Linux-x86_64.tar.gz
-sudo mkdir /opt/cmake
-sudo tar xvzf cmake-3.8.2-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
+wget https://cmake.org/files/v3.9/cmake-3.9.0-Linux-x86_64.tar.gz
+mkdir /opt/cmake
+tar xvzf cmake-3.9.0-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
 ```
 
 ### LLVM

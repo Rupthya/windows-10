@@ -353,6 +353,7 @@ Install fonts.
 Install third party software.
 
 * [7-Zip](http://www.7-zip.org)
+* [CMake](https://cmake.org)
 * [NASM](http://www.nasm.us)
 * [HxD](https://mh-nexus.de/en/hxd)
 * [CFF Explorer](http://www.ntcore.com/exsuite.php)
