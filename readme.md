@@ -312,8 +312,9 @@ Configure [Visual Studio Code](https://code.visualstudio.com) (optional).
   "explorer.openEditors.visible": 0,
   "window.openFilesInNewWindow": "off",
   "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
   "files.hotExit": "off",
-  "files.eol": "\n"
+  "files.eol": "\r\n"
 }
 ```
 
