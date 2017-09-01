@@ -367,6 +367,10 @@ Install third party software.
 * [Blender](https://www.blender.org)
 * [gVim](http://www.vim.org)
 
+Optional alternatives for `dd(1)`.
+* [Win32 Disk Imager](https://sourceforge.net/projects/win32diskimager/)
+* [ImageUSB](https://www.osforensics.com/tools/write-usb-images.html)
+
 ## Optional
 Install optional software.
 
