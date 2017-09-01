@@ -367,10 +367,6 @@ Install third party software.
 * [Blender](https://www.blender.org)
 * [gVim](http://www.vim.org)
 
-Optional alternatives for `dd(1)`.
-* [Win32 Disk Imager](https://sourceforge.net/projects/win32diskimager/)
-* [ImageUSB](https://www.osforensics.com/tools/write-usb-images.html)
-
 ## Optional
 Install optional software.
 
@@ -380,6 +376,8 @@ Install optional software.
 * [SQL Server Management Studio](https://msdn.microsoft.com/en-us/library/mt238290.aspx)
 * [Remote Server Administration Tools for Windows 10](https://www.microsoft.com/en-us/download/details.aspx?id=45520)
 * [Google Drive](https://www.google.com/drive/download)
+* [Win32 Disk Imager](https://sourceforge.net/projects/win32diskimager/)
+* [ImageUSB](https://www.osforensics.com/tools/write-usb-images.html)
 
 Configure WinRM client.
 
