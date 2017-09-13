@@ -460,6 +460,12 @@ root  ALL=(ALL) ALL
 #includedir /etc/sudoers.d
 ```
 
+Add the following line to `/etc/mdadm/mdadm.conf`.
+
+```sh
+ARRAY <ignore> devices=/dev/sda
+```
+
 Install packages.
 
 ```sh

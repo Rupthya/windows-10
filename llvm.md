@@ -17,16 +17,16 @@ sudo apt install binutils-dev zlib1g-dev libpng-dev libfreetype6-dev libssl-dev 
 Install CMake.
 
 ```sh
-wget https://cmake.org/files/v3.9/cmake-3.9.0-Linux-x86_64.tar.gz
-mkdir /opt/cmake
-tar xvzf cmake-3.9.0-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
+wget https://cmake.org/files/v3.9/cmake-3.9.2-Linux-x86_64.tar.gz
+rm -rf /opt/cmake; mkdir /opt/cmake
+tar xvzf cmake-3.9.2-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
 ```
 
 ### LLVM
 Install LLVM.
 
 ```sh
-src=tags/RELEASE_400/final
+src=tags/RELEASE_500/final
 svn co http://llvm.org/svn/llvm-project/llvm/$src llvm
 svn co http://llvm.org/svn/llvm-project/cfe/$src llvm/tools/clang
 svn co http://llvm.org/svn/llvm-project/clang-tools-extra/$src llvm/tools/clang/tools/extra
@@ -38,7 +38,7 @@ mkdir llvm/build && cd llvm/build
 cmake -GNinja \
   -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_INSTALL_PREFIX="/opt/llvm" \
-  -DLLVM_TARGETS_TO_BUILD="X86" \
+  -DLLVM_TARGETS_TO_BUILD="AArch64;ARM;X86" \
   -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="WebAssembly" \
   -DLLVM_INCLUDE_EXAMPLES=OFF \
   -DLLVM_INCLUDE_TESTS=OFF \
