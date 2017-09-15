@@ -349,7 +349,7 @@ Configure [Sublime Text 3 MarkdownEditing GFM Settings](https://packagecontrol.i
 }
 ```
 
-Restore `%AppData%\Sublime Text 3\Installed Packages`.
+Restore `%AppData%\Sublime Text 3\Installed Packages\Visual Studio Dark 2.sublime-package`.
 
 Uninstall unwanted applications in `Settings > Apps`.<br/>
 Uninstall unwanted optional features in `Settings > Apps > Manage optional features`.
