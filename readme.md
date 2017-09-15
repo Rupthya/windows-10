@@ -193,9 +193,7 @@ lusrmgr.msc > Users > {user}
 ```
 
 <!--
-
 https://www.lifewire.com/command-line-commands-for-control-panel-applets-2626060
-
 -->
 
 ## Settings
@@ -317,6 +315,41 @@ Configure [Visual Studio Code](https://code.visualstudio.com) (optional).
   "files.eol": "\r\n"
 }
 ```
+
+Configure [Sublime Text 3](https://www.sublimetext.com/) (optional).
+
+```json
+{
+  "color_scheme": "Packages/Visual Studio Dark 2/Visual Studio Dark 2/Visual Studio Dark 2.tmTheme",
+  "ensure_newline_at_eof_on_save": true,
+  "font_face": "DejaVu LGC Sans Mono",
+  "font_size": 9,
+  "hot_exit": false,
+  "ignored_packages": [ "Vintage" ],
+  "open_files_in_new_window": false,
+  "rulers": [ 120 ],
+  "show_definitions": false,
+  "tab_size": 2,
+  "theme": "Default.sublime-theme",
+  "translate_tabs_to_spaces": true
+}
+```
+
+Configure [Sublime Text 3 MarkdownEditing GFM Settings](https://packagecontrol.io/packages/MarkdownEditing) (optional).
+
+```json
+{
+  "color_scheme": "Packages/Visual Studio Dark 2/Visual Studio Dark 2/Visual Studio Dark 2.tmTheme",
+  "trim_trailing_white_space_on_save": true,
+  "draw_centered": false,
+  "line_numbers": true,
+  "word_wrap": false,
+  "rulers": [ 120 ],
+  "tab_size": 2
+}
+```
+
+Restore `%AppData%\Sublime Text 3\Installed Packages`.
 
 Uninstall unwanted applications in `Settings > Apps`.<br/>
 Uninstall unwanted optional features in `Settings > Apps > Manage optional features`.
