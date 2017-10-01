@@ -447,8 +447,7 @@ Add Control Panel shortcuts to the Windows start menu (use icons from `C:\Window
 [Control Panel Command Line Commands](https://www.lifewire.com/command-line-commands-for-control-panel-applets-2626060)
 
 ## Windows Subsystem for Linux
-Execute `bash.exe` in a user command prompt. Verify version with `lsb_release -a`.<br/>
-Install [WSLtty](https://github.com/mintty/wsltty) for better terminal support.
+Execute `bash.exe` in a user command prompt. Verify version with `lsb_release -a`. Install [WSLtty](https://github.com/mintty/wsltty).
 
 Fix `/etc/localtime` symlink.
 
