@@ -494,7 +494,8 @@ sudo apt update
 sudo apt upgrade
 sudo apt dist-upgrade
 sudo apt autoremove
-sudo apt install p7zip-full p7zip-rar zip unzip tree htop imagemagick librsvg2-bin
+sudo apt install apt-file p7zip-full p7zip-rar zip unzip tree htop imagemagick librsvg2-bin
+sudo apt-file update
 ```
 
 Modify the following lines in `/etc/ssh/sshd_config` (replace `{username}` with your WSL username).
