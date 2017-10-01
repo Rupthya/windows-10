@@ -6,11 +6,13 @@
   username = {username}
 
 [core]
-  autocrlf = true
-  safecrlf = false
-  whitespace = cr-at-eol
+  autocrlf = false
   filemode = false
+  whitespace = blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
   compression = 9
+
+[apply]
+  whitespace = fix
 
 [alias]
   br = branch

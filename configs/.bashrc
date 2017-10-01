@@ -1,6 +1,13 @@
+# System
+OS="$(uname -s)"
+
 # Path
-PATH="/opt/cmake/bin:/opt/llvm/bin:/opt/emsdk:/opt/binaryen/bin:/opt/java/bin"
-PATH="${PATH}:/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin"
+PATH="/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin"
+for i in /opt/cmake/bin /opt/llvm/bin /opt/emsdk /opt/binaryen/bin; do
+  if [ -d "$i" ]; then
+    PATH="${i}:${PATH}"
+  fi
+done
 export PATH
 
 # Limits
@@ -20,7 +27,8 @@ export LC_ALL=
 
 # Applications
 export NODE_PATH="/usr/local/lib/node_modules"
-export EDITOR="$(which vim vi 2>/dev/null | head -1)"
+export P7ZIP="$(which 7z 7zr 7za 2>/dev/null | head -1)"
+export EDITOR="$(which nvim vim vi 2>/dev/null | head -1)"
 export PAGER="less"
 
 # Colors
@@ -31,7 +39,7 @@ export LS_COLORS="di=1;34:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:
 # Aliases
 alias ..="cd .."
 
-if [ "$(uname -s)" = "Darwin" ]; then
+if [ "${OS}" = "Darwin" ]; then
   alias ls="ls -FG"
   alias ll="ls -lh"
 else
@@ -42,10 +50,12 @@ fi
 alias lsa="ls -a"
 alias lla="ll -a"
 
+alias 7z="${P7ZIP}"
 alias vim="${EDITOR} -p"
 alias vimdiff="${EDITOR} -d"
 alias grep="grep --color=auto"
 alias sudo="sudo "
+alias gdb="gdb -q"
 
 alias tm="tmux -2"
 alias ta="tm attach -t"
@@ -75,3 +85,21 @@ PS1="${PS1} \[\e[34m\]\w\[\e[0m\] "
 export PS1
 
 set -o emacs
+
+# WSL
+if [ "${OS}" = "Linux" ] && [[ "$(uname -r)" =~ "Microsoft" ]]; then
+  if [ "$(pwd | cut -d/ -f1-4)" = "/mnt/c/Workspace" ]; then
+    cd "${HOME}/workspace/$(pwd | cut -d/ -f5-)"
+  elif [ "$(pwd | cut -d/ -f1-6)" = "/mnt/c/Users/Qis/Documents" ]; then
+    cd "${HOME}/documents/$(pwd | cut -d/ -f7-)"
+  fi
+fi
+
+# OSX
+if [ "${OS}" = "Darwin" ]; then
+  export CC="/usr/local/opt/llvm/bin/clang"
+  export CXX="/usr/local/opt/llvm/bin/clang++"
+  export PATH="/usr/local/opt/llvm/bin:${PATH}"
+  export CPPFLAGS="-I/usr/local/opt/llvm/include"
+  export LDFLAGS="-L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib"
+fi
