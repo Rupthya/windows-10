@@ -498,6 +498,23 @@ sudo apt install apt-file p7zip-full p7zip-rar zip unzip tree htop imagemagick l
 sudo apt-file update
 ```
 
+Install development packages.
+
+```sh
+sudo apt install build-essential ninja-build nasm git subversion nodejs npm swig
+sudo apt install binutils-dev zlib1g-dev libpng-dev libfreetype6-dev libssl-dev libcurl4-openssl-dev
+sudo apt install python3-dev libpython3-dev libxml2-dev libncurses-dev libcableswig-dev
+sudo ln -s /usr/bin/nodejs /usr/bin/node
+```
+
+Install CMake.
+
+```sh
+rm -rf /opt/cmake; mkdir /opt/cmake
+wget https://cmake.org/files/v3.9/cmake-3.9.3-Linux-x86_64.tar.gz
+tar xvzf cmake-3.9.3-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
+```
+
 Modify the following lines in `/etc/ssh/sshd_config` (replace `{username}` with your WSL username).
 
 ```sh
