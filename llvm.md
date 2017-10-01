@@ -3,10 +3,10 @@ Get the LLVM source code.
 
 ```sh
 ver=5.0.0
-for i in llvm cfe clang-tools-extra libcxx libcxxabi compiler-rt libunwind lldb lld; do
-  wget http://releases.llvm.org/$ver/$i-$ver.src.tar.xz
+for name in llvm cfe clang-tools-extra libcxx libcxxabi compiler-rt libunwind lld; do
+  wget http://releases.llvm.org/$ver/$name-$ver.src.tar.xz
 done
-mkdir -p llvm/tools/clang/tools/extra llvm/projects/{libcxx,libcxxabi,compiler-rt,libunwind,lldb,lld}
+mkdir -p llvm/tools/clang/tools/extra llvm/projects/{libcxx,libcxxabi,compiler-rt,libunwind,lld}
 tar xf llvm-$ver.src.tar.xz -C llvm --strip-components 1
 tar xf cfe-$ver.src.tar.xz -C llvm/tools/clang --strip-components 1
 tar xf clang-tools-extra-$ver.src.tar.xz -C llvm/tools/clang/tools/extra --strip-components 1
@@ -14,7 +14,6 @@ tar xf libcxx-$ver.src.tar.xz -C llvm/projects/libcxx --strip-components 1
 tar xf libcxxabi-$ver.src.tar.xz -C llvm/projects/libcxxabi --strip-components 1
 tar xf compiler-rt-$ver.src.tar.xz -C llvm/projects/compiler-rt --strip-components 1
 tar xf libunwind-$ver.src.tar.xz -C llvm/projects/libunwind --strip-components 1
-tar xf lldb-$ver.src.tar.xz -C llvm/projects/lldb --strip-components 1
 tar xf lld-$ver.src.tar.xz -C llvm/projects/lld --strip-components 1
 ```
 
@@ -28,7 +27,6 @@ svn co https://llvm.org/svn/llvm-project/libcxx/$src llvm/projects/libcxx
 svn co https://llvm.org/svn/llvm-project/libcxxabi/$src llvm/projects/libcxxabi
 svn co https://llvm.org/svn/llvm-project/compiler-rt/$src llvm/projects/compiler-rt
 svn co https://llvm.org/svn/llvm-project/libunwind/$src llvm/projects/libunwind
-svn co https://llvm.org/svn/llvm-project/lldb/$src llvm/projects/lldb
 svn co https://llvm.org/svn/llvm-project/lld/$src llvm/projects/lld
 ```
 -->
@@ -96,17 +94,16 @@ JS_ENGINES = [NODE_JS]
 
 <!--
 ### Android
-Install Android tools.
-
-```sh
-sudo apt install android-tools-adb
-```
-
 Install Android NDK.
 
 ```sh
 wget https://dl.google.com/android/repository/android-ndk-r14b-linux-x86_64.zip
 sudo unzip android-ndk-r14b-linux-x86_64.zip -d /opt/android
+```
+
+Create standalone toolchains.
+
+```sh
 sudo /opt/android/android-ndk-r14b/build/tools/make_standalone_toolchain.py \
   --api 21 --stl libc++ --arch arm --install-dir /opt/android/arm
 sudo /opt/android/android-ndk-r14b/build/tools/make_standalone_toolchain.py \
