@@ -56,14 +56,24 @@ cmake -GNinja \
   ..
 cmake --build .
 cmake --build . --target install
+find /opt/llvm -type d -exec chmod 0755 '{}' ';'
+```
+
+Configure shared libraries path.
+
+```sh
+echo /opt/llvm/lib > /etc/ld.so.conf.d/llvm.conf
+echo /opt/llvm/lib/clang/5.0.0/lib/linux >> /etc/ld.so.conf.d/llvm.conf
+ldconfig
 ```
 
 ### Binaryen
 Install Binaryen.
 
 ```sh
-cd /opt
-git clone https://github.com/WebAssembly/binaryen
+rm -rf /opt/binaryen; mkdir /opt/binaryen
+wget https://github.com/WebAssembly/binaryen/archive/1.37.20.tar.gz
+tar xvf 1.37.20.tar.gz -C /opt/binaryen --strip-components 1
 cd binaryen
 cmake -GNinja -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Release .
 cmake --build .
@@ -73,8 +83,9 @@ cmake --build .
 Install and configure emscripten.
 
 ```sh
-cd /opt
-git clone -b incoming https://github.com/kripken/emscripten emsdk
+wget https://github.com/kripken/emscripten/archive/1.37.20.tar.gz
+rm -rf /opt/emsdk; mkdir /opt/emsdk
+tar xvf 1.37.20.tar.gz -C /opt/emsdk --strip-components 1
 em++
 ```
 
