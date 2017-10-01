@@ -347,17 +347,18 @@ Install useful fonts.
 Install third party software.
 
 * [7-Zip](http://www.7-zip.org)
+* [ConEmu](https://conemu.github.io)
+* [Affinity Photo](https://affinity.serif.com/photo)
+* [Affinity Designer](https://affinity.serif.com/designer)
+* [Sketchbook Pro](http://www.autodesk.com/products/sketchbook-pro/overview)
+* [Sublime Text 3](https://www.sublimetext.com/)
+* [gVim](http://www.vim.org)
 * [CMake](https://cmake.org)
 * [NASM](http://www.nasm.us)
 * [HxD](https://mh-nexus.de/en/hxd)
 * [CFF Explorer](http://www.ntcore.com/exsuite.php)
 * [Resource Hacker](http://www.angusj.com/resourcehacker)
 * [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx)
-* [Affinity Photo](https://affinity.serif.com/photo)
-* [Affinity Designer](https://affinity.serif.com/designer)
-* [Sketchbook Pro](http://www.autodesk.com/products/sketchbook-pro/overview)
-* [Sublime Text 3](https://www.sublimetext.com/)
-* [gVim](http://www.vim.org)
 
 Configure Sublime Text 3 after installing the [Visual Studio Dark](https://packagecontrol.io/packages/Visual%20Studio%20Dark) theme.
 
@@ -392,15 +393,13 @@ Configure [Sublime Text 3 MarkdownEditing GFM Settings](https://packagecontrol.i
 }
 ```
 
-## Optional
-Install optional software.
+## Server
+Install software for Windows Server administration.
 
-* [ConEmu](https://conemu.github.io)
-* [WSLtty](https://github.com/mintty/wsltty)
 * [SQL Server Management Studio](https://msdn.microsoft.com/en-us/library/mt238290.aspx)
 * [Remote Server Administration Tools for Windows 10](https://www.microsoft.com/en-us/download/details.aspx?id=45520)
 
-Configure WinRM client.
+Configure the WinRM client.
 
 ```cmd
 Get-NetConnectionProfile
@@ -408,8 +407,10 @@ Set-NetConnectionProfile -InterfaceIndex {Idx} -NetworkCategory Private
 Set-Item WSMan:\localhost\Client\TrustedHosts -Value "*" -Force
 ```
 
+*See comments in this readme file for Windows Server configuration.*
+
 <!--
-Configure WinRM server.
+Configure the WinRM server.
 
 ```ps
 Enable-PSRemoting -SkipNetworkProfileCheck -Force
@@ -417,7 +418,7 @@ Set-NetFirewallRule -Name "WINRM-HTTP-In-TCP-PUBLIC" -RemoteAddress Any
 Set-Item WSMan:\localhost\Client\TrustedHosts -Value "*" -Force
 ```
 
-Configure WinRM server to accept HTTPS connections.
+Configure the WinRM server to accept HTTPS connections.
 
 ```ps
 winrm enumerate winrm/config/listener
@@ -429,14 +430,14 @@ netsh advfirewall firewall add rule name="Windows Remote Management (HTTPS-In)" 
 Connect over HTTP.
 
 ```ps
-Enter-PSSession -ComputerName dc.la.xdsnet.de -Port 5985 -Credential administrator@la.xdsnet.de
+Enter-PSSession -ComputerName host.domain -Port 5985 -Credential administrator@domain
 ```
 
 Connect over HTTPS.
 
 ```ps
 $soptions = New-PSSessionOption -SkipCACheck
-Enter-PSSession -ComputerName dc.la.xdsnet.de -Port 5986 -Credential administrator@la.xdsnet.de -SessionOption $soptions -UseSSL
+Enter-PSSession -ComputerName host.domain -Port 5986 -Credential administrator@domain -SessionOption $soptions -UseSSL
 ```
 -->
 
@@ -446,7 +447,8 @@ Add Control Panel shortcuts to the Windows start menu (use icons from `C:\Window
 [Control Panel Command Line Commands](https://www.lifewire.com/command-line-commands-for-control-panel-applets-2626060)
 
 ## Windows Subsystem for Linux
-Execute `bash.exe` in a user command prompt. Verify version with `lsb_release -a`.
+Execute `bash.exe` in a user command prompt. Verify version with `lsb_release -a`.<br/>
+Install [WSLtty](https://github.com/mintty/wsltty) for better terminal support.
 
 Fix `/etc/localtime` symlink.
 
