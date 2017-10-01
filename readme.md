@@ -174,14 +174,11 @@ Settings > Update & security > Advanced options
 
 Reboot the system.
 
-Connect to the Internet.
+Connect to the Internet.<br/>
+Wait until the CPU/Network activity stops and there are no more entries under `Device Manager > Other devices`.<br/>
+Reboot the system.<br/>
 
-Wait until the CPU/Network activity stops and there are no more entries under `Device Manager > Other devices`.
-
-Reboot the system.
-
-Install Windows updates.
-
+Install Windows updates.<br/>
 Reboot the system.
 
 ## User Name
@@ -217,11 +214,11 @@ Control Panel > System and Security > Security and Maintenance
 ## Windows Libraries
 Move unwanted Windows libraries.
 
-1. Right click on `%UserProfile%\Pictures\Camera Roll` and select `Properties`.
+1. Right click on `%UserProfile%\Pictures\Camera Roll` and select `Properties`.<br/>
    Select the `Location` tab and set it to `%AppData%\Camera Roll`.
-2. Right click on `%UserProfile%\Pictures\Saved Pictures` and select `Properties`.
+2. Right click on `%UserProfile%\Pictures\Saved Pictures` and select `Properties`.<br/>
    Select the `Location` tab and set it to `%AppData%\Saved Pictures`.
-3. Right click on `%UserProfile%\Videos\Captures` and select `Properties`.
+3. Right click on `%UserProfile%\Videos\Captures` and select `Properties`.<br/>
    Select the `Location` tab and set it to `%AppData%\Captures`.
 
 Hide unwanted "This PC" links to libraries.
@@ -284,6 +281,9 @@ with a new inbound rule for port 22.
 Use this [keymap](keymap.zip) to input German characters on a U.S. keyboard.
 
 ## Microsoft Software
+Uninstall unwanted applications in `Settings > Apps`.<br/>
+Uninstall unwanted optional features in `Settings > Apps > Manage optional features`.
+
 Configure [Microsoft Edge](https://en.wikipedia.org/wiki/Microsoft_Edge) after visiting <https://www.google.com/ncr>.
 
 ```
@@ -313,9 +313,6 @@ Home page: about:blank
 Startup: Start with tabs from the last session
 ```
 
-Uninstall unwanted applications in `Settings > Apps`.<br/>
-Uninstall unwanted optional features in `Settings > Apps > Manage optional features`.
-
 Configure the Photos app.
 
 ```
@@ -339,7 +336,7 @@ Control Panel > Programs > Turn Windows features on or off
 ```
 
 ## Fonts
-Install fonts.
+Install useful fonts.
 
 * [DejaVu & DejaVu LGC](https://sourceforge.net/projects/dejavu/files/dejavu)
 * [DejaVu Sans Mono from Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)
@@ -362,7 +359,7 @@ Install third party software.
 * [Sublime Text 3](https://www.sublimetext.com/)
 * [gVim](http://www.vim.org)
 
-Configure Sublime Text 3.
+Configure Sublime Text 3 after installing the [Visual Studio Dark](https://packagecontrol.io/packages/Visual%20Studio%20Dark) theme.
 
 ```json
 {
@@ -449,7 +446,7 @@ Add Control Panel shortcuts to the Windows start menu (use icons from `C:\Window
 [Control Panel Command Line Commands](https://www.lifewire.com/command-line-commands-for-control-panel-applets-2626060)
 
 ## Windows Subsystem for Linux
-Execute `bash.exe` in the command prompt. Verify version with `lsb_release -a`.
+Execute `bash.exe` in a user command prompt. Verify version with `lsb_release -a`.
 
 Fix `/etc/localtime` symlink.
 
@@ -459,13 +456,13 @@ ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 echo Europe/Berlin > /etc/timezone
 ```
 
-Add the following line to `/etc/mdadm/mdadm.conf` to fix some `apt` warnings.
+Add the following line to `/etc/mdadm/mdadm.conf` (fixes some `apt` warnings).
 
 ```sh
 ARRAY <ignore> devices=/dev/sda
 ```
 
-Modify the following lines in `/etc/pam.d/login` to disable MOTD messages.
+Modify the following lines in `/etc/pam.d/login` (disables message of the day).
 
 ```sh
 #session    optional    pam_motd.so motd=/run/motd.dynamic
