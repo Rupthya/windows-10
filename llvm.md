@@ -74,7 +74,7 @@ Install Binaryen.
 rm -rf /opt/binaryen; mkdir /opt/binaryen
 wget https://github.com/WebAssembly/binaryen/archive/1.37.20.tar.gz
 tar xvf 1.37.20.tar.gz -C /opt/binaryen --strip-components 1
-cd binaryen
+cd /opt/binaryen
 cmake -GNinja -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Release .
 cmake --build .
 ```
