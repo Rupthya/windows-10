@@ -366,17 +366,21 @@ Configure Sublime Text 3 after installing the [Visual Studio Dark](https://packa
 ```json
 {
   "color_scheme": "Packages/Visual Studio Dark/Visual Studio Dark.tmTheme",
+  "close_windows_when_empty": true,
   "ensure_newline_at_eof_on_save": true,
   "font_face": "DejaVu LGC Sans Mono",
   "font_size": 9,
   "hot_exit": false,
-  "ignored_packages": [ "Vintage" ],
+  "ignored_packages": [ "Markdown", "Vintage" ],
   "open_files_in_new_window": false,
   "rulers": [ 120 ],
   "show_definitions": false,
   "tab_size": 2,
   "theme": "Default.sublime-theme",
-  "translate_tabs_to_spaces": true
+  "translate_tabs_to_spaces": true,
+  "caret_extra_bottom": 1,
+  "caret_extra_top": 1,
+  "caret_extra_width": 1
 }
 ```
 
