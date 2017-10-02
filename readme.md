@@ -545,3 +545,9 @@ sudo service ssh status
 
 ## Start Menu
 ![Start Menu](layout.png)
+
+Possible fix for a broken Start Menu: Enable and log in with the built-in Administrator account.
+
+```cmd
+rd /Q /S C:\Users\{Name}\AppData\Local\Packages\Microsoft.Windows.Cortana_cw5n1h2txyewy
+```
