@@ -221,7 +221,7 @@ Move unwanted Windows libraries.
 3. Right click on `%UserProfile%\Videos\Captures` and select `Properties`.<br/>
    Select the `Location` tab and set it to `%AppData%\Captures`.
 
-Hide unwanted "This PC" links to libraries.
+Hide unwanted "This PC" links.
 
 ```cmd
 rem Documents
@@ -243,9 +243,10 @@ rem Desktop
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Hide" /f
 ```
 
-Remove the "OneDrive" directory from File Explorer.
+Hide unwanted "Explorer" links.
 
 ```cmd
+rem OneDrive
 reg add "HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /v "System.IsPinnedToNameSpaceTree" /t REG_DWORD /d 0 /f
 ```
 
