@@ -1,4 +1,4 @@
-﻿# Windows 10
+# Windows 10
 Installation and configuration instructions for Windows 10 Creators Update (Version 1703).
 
 Set the BIOS date two days in the past before installing and correct it after time and time zone selection.
@@ -447,7 +447,8 @@ Add Control Panel shortcuts to the Windows start menu (use icons from `C:\Window
 [Control Panel Command Line Commands](https://www.lifewire.com/command-line-commands-for-control-panel-applets-2626060)
 
 ## Windows Subsystem for Linux
-Execute `bash.exe` in a user command prompt. Verify version with `lsb_release -a`. Install [WSLtty](https://github.com/mintty/wsltty).
+Install [WSLtty](https://github.com/mintty/wsltty) for better terminal support.<br/>
+Install [VcXsrv](https://github.com/ArcticaProject/vcxsrv/releases) for Xorg application support.
 
 Fix `/etc/localtime` symlink.
 
