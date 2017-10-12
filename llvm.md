@@ -67,6 +67,21 @@ echo /opt/llvm/lib/clang/5.0.0/lib/linux >> /etc/ld.so.conf.d/llvm.conf
 ldconfig
 ```
 
+### Libraries
+Install development libraries.
+
+```sh
+apt install libbz2-dev libjpeg-turbo8-dev libgtest-dev
+```
+
+Build GTest.
+
+```sh
+mkdir cd /usr/src/gtest/build && cd /usr/src/gtest/build
+CC=clang CXX=clang++ cmake -GNinja .. && cmake --build .
+mv libg* /usr/lib/
+```
+
 ### Binaryen
 Install Binaryen.
 

@@ -517,8 +517,8 @@ Install CMake.
 
 ```sh
 rm -rf /opt/cmake; mkdir /opt/cmake
-wget https://cmake.org/files/v3.9/cmake-3.9.3-Linux-x86_64.tar.gz
-tar xvzf cmake-3.9.3-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
+wget https://cmake.org/files/v3.9/cmake-3.9.4-Linux-x86_64.tar.gz
+tar xvzf cmake-3.9.4-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
 ```
 
 Modify the following lines in `/etc/ssh/sshd_config` (replace `{username}` with your WSL username).
