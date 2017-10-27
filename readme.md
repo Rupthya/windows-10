@@ -510,6 +510,7 @@ Install development packages.
 sudo apt install build-essential ninja-build nasm git subversion nodejs npm swig openjdk-9-jdk-headless
 sudo apt install binutils-dev zlib1g-dev libpng-dev libfreetype6-dev libssl-dev libcurl4-openssl-dev
 sudo apt install python3-dev libpython3-dev libxml2-dev libncurses-dev libcableswig-dev libgtest-dev
+sudo apt install libbz2-dev libjpeg-turbo8-dev
 sudo ln -s /usr/bin/nodejs /usr/bin/node
 ```
 
@@ -521,10 +522,21 @@ wget https://cmake.org/files/v3.9/cmake-3.9.4-Linux-x86_64.tar.gz
 tar xvzf cmake-3.9.4-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
 ```
 
-Build GTest libraries.
+Follow the [llvm](llvm.md) guide and make sure that `clang` and `clang++` are in `PATH`.
+
+Build and install [GTest](https://github.com/google/googletest).
 
 ```sh
 mkdir gtest && cd gtest && CC=clang CXX=clang++ cmake /usr/src/gtest && make && sudo cp *.a /usr/lib/
+```
+
+Build and install [{fmt}](https://github.com/fmtlib/fmt).
+
+```sh
+wget https://github.com/fmtlib/fmt/archive/4.0.0.tar.gz
+tar xvzf 4.0.0.tar.gz && mkdir fmt-4.0.0/build && cd fmt-4.0.0/build
+CC=clang CXX=clang++ cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
+make && sudo make install
 ```
 
 Modify the following lines in `/etc/ssh/sshd_config` (replace `{username}` with your WSL username).
