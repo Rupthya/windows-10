@@ -500,7 +500,7 @@ sudo apt update
 sudo apt upgrade
 sudo apt dist-upgrade
 sudo apt autoremove
-sudo apt install apt-file p7zip-full p7zip-rar zip unzip tree htop imagemagick librsvg2-bin
+sudo apt install apt-file p7zip-full p7zip-rar zip unzip tree htop imagemagick librsvg2-bin wrk
 sudo apt-file update
 ```
 
@@ -509,7 +509,7 @@ Install development packages.
 ```sh
 sudo apt install build-essential ninja-build nasm git subversion nodejs npm swig openjdk-9-jdk-headless
 sudo apt install binutils-dev zlib1g-dev libpng-dev libfreetype6-dev libssl-dev libcurl4-openssl-dev
-sudo apt install python3-dev libpython3-dev libxml2-dev libncurses-dev libcableswig-dev wrk htdig
+sudo apt install python3-dev libpython3-dev libxml2-dev libncurses-dev libcableswig-dev libgtest-dev
 sudo ln -s /usr/bin/nodejs /usr/bin/node
 ```
 
