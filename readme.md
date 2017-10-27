@@ -521,6 +521,12 @@ wget https://cmake.org/files/v3.9/cmake-3.9.4-Linux-x86_64.tar.gz
 tar xvzf cmake-3.9.4-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
 ```
 
+Build GTest libraries.
+
+```sh
+mkdir gtest && cd gtest && CC=clang CXX=clang++ cmake /usr/src/gtest && make && sudo cp *.a /usr/lib/
+```
+
 Modify the following lines in `/etc/ssh/sshd_config` (replace `{username}` with your WSL username).
 
 ```sh
