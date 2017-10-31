@@ -510,7 +510,7 @@ Install development packages.
 sudo apt install build-essential ninja-build nasm git subversion nodejs npm swig openjdk-9-jdk-headless
 sudo apt install binutils-dev zlib1g-dev libpng-dev libfreetype6-dev libssl-dev libcurl4-openssl-dev
 sudo apt install python3-dev libpython3-dev libxml2-dev libncurses-dev libcableswig-dev libgtest-dev
-sudo apt install libbz2-dev libjpeg-turbo8-dev
+sudo apt install libbz2-dev libjpeg-turbo8-dev libevent-dev
 sudo ln -s /usr/bin/nodejs /usr/bin/node
 ```
 
