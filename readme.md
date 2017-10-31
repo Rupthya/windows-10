@@ -535,7 +535,8 @@ Build and install [{fmt}](https://github.com/fmtlib/fmt).
 ```sh
 wget https://github.com/fmtlib/fmt/archive/4.0.0.tar.gz
 tar xvzf 4.0.0.tar.gz && mkdir fmt-4.0.0/build && cd fmt-4.0.0/build
-CC=clang CXX=clang++ cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
+CC=clang CXX=clang++ cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr \
+  -DFMT_DOC:BOOL=OFF -DFMT_TEST:BOOL=OFF ..
 make && sudo make install
 ```
 
