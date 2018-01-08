@@ -518,8 +518,8 @@ Install CMake.
 
 ```sh
 rm -rf /opt/cmake; mkdir /opt/cmake
-wget https://cmake.org/files/v3.9/cmake-3.9.4-Linux-x86_64.tar.gz
-tar xvzf cmake-3.9.4-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
+wget https://cmake.org/files/v3.10/cmake-3.10.1-Linux-x86_64.tar.gz
+tar xvzf cmake-3.10.1-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
 ```
 
 Follow the [llvm](llvm.md) guide and make sure that `clang` and `clang++` are in `PATH`.
