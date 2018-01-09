@@ -578,3 +578,25 @@ Possible fix for a broken Start Menu: Enable and log in with the built-in Admini
 ```cmd
 rd /Q /S C:\Users\{Name}\AppData\Local\Packages\Microsoft.Windows.Cortana_cw5n1h2txyewy
 ```
+
+<!--
+## Anti-Virus
+Suggested anti-virus exclusion lists.
+
+```
+Excluded Processes
+
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\devenv.exe
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\PerfWatson2.exe
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\VcxprojReader.exe
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Tools\MSVC\14.12.25827\bin\HostX86\x64\CL.exe
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Tools\MSVC\14.12.25827\bin\HostX86\x64\link.exe
+
+Excluded Directories
+
+C:\Program Files (x86)\Microsoft Visual Studio\
+C:\Users\Qis\AppData\Local\lxss\
+C:\Workspace\
+```
+
+-->
