@@ -49,7 +49,11 @@ $Kernel32::SetComputerName("{hostname}");
 Reboot the system.
 
 ## Cortana
-Configure Cortana using the search box in the taskbar.
+Configure Cortana using the search box in the taskbar, then disable her.
+
+```cmd
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCortana" /t REG_DWORD /d 1 /f
+```
 
 ## Group Policy
 Configure group policies (skip unwanted steps).
@@ -64,6 +68,7 @@ OneDrive
 + Prevent the usage of OneDrive for file storage: Enabled
 
 Search
++ Allow Cortana: Disabled
 + Do not allow web search: Enabled
 
 Store
