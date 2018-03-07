@@ -229,14 +229,14 @@ Move unwanted Windows libraries.
 Hide unwanted "This PC" links.
 
 ```cmd
+rem 3D Objects
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Hide" /f
+
+rem Desktop
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Hide" /f
+
 rem Documents
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{f42ee2d3-909f-4907-8871-4c22fc0bf756}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Hide" /f
-
-rem Pictures
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{0ddd015d-b06c-45d5-8c4c-f59713854639}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Hide" /f
-
-rem Videos
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{35286a68-3c57-41a1-bbb1-0eae73d76c95}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Hide" /f
 
 rem Downloads
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{7d83ee9b-2244-4e70-b1f5-5393042af1e4}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Hide" /f
@@ -244,8 +244,11 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\F
 rem Music
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{a0c69a99-21c8-4671-8703-7934162fcf1d}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Hide" /f
 
-rem Desktop
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Hide" /f
+rem Pictures
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{0ddd015d-b06c-45d5-8c4c-f59713854639}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Hide" /f
+
+rem Videos
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{35286a68-3c57-41a1-bbb1-0eae73d76c95}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Hide" /f
 ```
 
 Hide unwanted "Explorer" links.
@@ -515,7 +518,7 @@ Install development packages.
 sudo apt install build-essential ninja-build nasm git subversion nodejs npm swig openjdk-9-jdk-headless
 sudo apt install binutils-dev zlib1g-dev libpng-dev libfreetype6-dev libssl-dev libcurl4-openssl-dev
 sudo apt install python3-dev libpython3-dev libxml2-dev libncurses-dev libcableswig-dev libgtest-dev
-sudo apt install libbz2-dev libjpeg-turbo8-dev libevent-dev
+sudo apt install libbz2-dev libjpeg-turbo8-dev libssh2-1-dev
 sudo ln -s /usr/bin/nodejs /usr/bin/node
 ```
 
@@ -523,8 +526,9 @@ Install CMake.
 
 ```sh
 rm -rf /opt/cmake; mkdir /opt/cmake
-wget https://cmake.org/files/v3.9/cmake-3.9.4-Linux-x86_64.tar.gz
-tar xvzf cmake-3.9.4-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
+wget https://cmake.org/files/v3.10/cmake-3.10.2-Linux-x86_64.tar.gz
+tar xvzf cmake-3.10.2-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
+find /opt/cmake -type d -exec chmod 0755 '{}' ';'
 ```
 
 Follow the [llvm](llvm.md) guide and make sure that `clang` and `clang++` are in `PATH`.
@@ -580,3 +584,25 @@ Possible fix for a broken Start Menu: Enable and log in with the built-in Admini
 ```cmd
 rd /Q /S C:\Users\{Name}\AppData\Local\Packages\Microsoft.Windows.Cortana_cw5n1h2txyewy
 ```
+
+<!--
+## Anti-Virus
+Suggested anti-virus exclusion lists.
+
+```
+Excluded Processes
+
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\devenv.exe
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\PerfWatson2.exe
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\VcxprojReader.exe
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Tools\MSVC\14.12.25827\bin\HostX86\x64\CL.exe
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Tools\MSVC\14.12.25827\bin\HostX86\x64\link.exe
+
+Excluded Directories
+
+C:\Program Files (x86)\Microsoft Visual Studio\
+C:\Users\Qis\AppData\Local\lxss\
+C:\Workspace\
+```
+
+-->

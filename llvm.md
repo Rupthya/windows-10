@@ -2,7 +2,7 @@
 Get the LLVM source code.
 
 ```sh
-ver=5.0.0
+ver=5.0.1
 for name in llvm cfe clang-tools-extra libcxx libcxxabi compiler-rt libunwind lld; do
   wget http://releases.llvm.org/$ver/$name-$ver.src.tar.xz
 done
@@ -19,7 +19,7 @@ tar xf lld-$ver.src.tar.xz -C llvm/projects/lld --strip-components 1
 
 <!--
 ```sh
-src=tags/RELEASE_500/final
+src=tags/RELEASE_501/final
 svn co https://llvm.org/svn/llvm-project/llvm/$src llvm
 svn co https://llvm.org/svn/llvm-project/cfe/$src llvm/tools/clang
 svn co https://llvm.org/svn/llvm-project/clang-tools-extra/$src llvm/tools/clang/tools/extra
@@ -59,19 +59,19 @@ cmake --build . --target install
 find /opt/llvm -type d -exec chmod 0755 '{}' ';'
 ```
 
-Configure shared libraries path.
+Configure shared libraries path (if `-DLIBCXX_ENABLE_SHARED` was changed to `ON`).
 
 ```sh
 echo /opt/llvm/lib > /etc/ld.so.conf.d/llvm.conf
-echo /opt/llvm/lib/clang/5.0.0/lib/linux >> /etc/ld.so.conf.d/llvm.conf
+echo /opt/llvm/lib/clang/5.0.1/lib/linux >> /etc/ld.so.conf.d/llvm.conf
 ldconfig
 ```
 
-### Libraries
-Install development libraries.
+### Google Test
+Install GTest.
 
 ```sh
-apt install libbz2-dev libjpeg-turbo8-dev libgtest-dev
+apt install libgtest-dev
 ```
 
 Build GTest.
