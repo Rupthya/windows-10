@@ -67,6 +67,19 @@ echo /opt/llvm/lib/clang/5.0.1/lib/linux >> /etc/ld.so.conf.d/llvm.conf
 ldconfig
 ```
 
+### Google Benchmark
+Install Google Benchmark.
+
+```sh
+git clone https://github.com/google/benchmark
+mkdir benchmark/build && cd benchmark/build
+export CC=$(which clang-devel || which clang)
+export CXX=$(which clang++-devel || which clang++)
+cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr/local ..
+cmake --build .
+sudo cmake --build . --target install
+```
+
 ### Google Test
 Install GTest.
 
