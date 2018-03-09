@@ -75,7 +75,7 @@ git clone https://github.com/google/benchmark
 mkdir benchmark/build && cd benchmark/build
 export CC=$(which clang-devel || which clang)
 export CXX=$(which clang++-devel || which clang++)
-cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr/local ..
+cmake -GNinja -DBENCHMARK_ENABLE_GTEST_TESTS=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr/local ..
 cmake --build .
 sudo cmake --build . --target install
 ```
@@ -94,6 +94,19 @@ mkdir cd /usr/src/gtest/build && cd /usr/src/gtest/build
 CC=clang CXX=clang++ cmake -GNinja .. && cmake --build .
 mv libg* /usr/lib/
 ```
+
+<!--
+### FMT
+Install `{fmt}`.
+
+```sh
+wget https://github.com/fmtlib/fmt/archive/4.1.0.tar.gz && tar xvzf 4.1.0.tar.gz
+mkdir fmt-4.1.0/build && cd fmt-4.1.0/build
+cmake -GNinja -DFMT_DOC=OFF -DFMT_TEST=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr/local ..
+cmake --build .
+sudo cmake --build . --target install
+```
+-->
 
 ### Binaryen
 Install Binaryen.
