@@ -115,13 +115,6 @@ Verify that TRIM support is enabled. The following command should return `NTFS D
 fsutil behavior query disabledeletenotify
 ```
 
-Disable disk defragmentation.
-
-```
-dfrgui > Change Settings
-[ ] Run no a schedule (recommended)
-```
-
 Disable hibernation (not recommended for mobile computers).
 
 ```cmd
