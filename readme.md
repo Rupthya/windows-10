@@ -508,10 +508,7 @@ sudo apt-file update
 Install development packages.
 
 ```sh
-sudo apt install build-essential ninja-build nasm git subversion nodejs npm swig openjdk-9-jdk-headless
-sudo apt install binutils-dev zlib1g-dev libpng-dev libfreetype6-dev libssl-dev libcurl4-openssl-dev
-sudo apt install python3-dev libpython3-dev libxml2-dev libncurses-dev libcableswig-dev libgtest-dev
-sudo apt install libbz2-dev libjpeg-turbo8-dev libssh2-1-dev
+sudo apt install build-essential binutils-dev ninja-build nasm git subversion nodejs npm swig openjdk-9-jdk-headless
 sudo ln -s /usr/bin/nodejs /usr/bin/node
 ```
 
@@ -519,27 +516,9 @@ Install CMake.
 
 ```sh
 rm -rf /opt/cmake; mkdir /opt/cmake
-wget https://cmake.org/files/v3.10/cmake-3.10.2-Linux-x86_64.tar.gz
-tar xvzf cmake-3.10.2-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
+wget https://cmake.org/files/v3.11/cmake-3.11.0-Linux-x86_64.tar.gz
+tar xvzf cmake-3.11.0-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
 find /opt/cmake -type d -exec chmod 0755 '{}' ';'
-```
-
-Follow the [llvm](llvm.md) guide and make sure that `clang` and `clang++` are in `PATH`.
-
-Build and install [GTest](https://github.com/google/googletest).
-
-```sh
-mkdir gtest && cd gtest && CC=clang CXX=clang++ cmake /usr/src/gtest && make && sudo cp *.a /usr/lib/
-```
-
-Build and install [{fmt}](https://github.com/fmtlib/fmt).
-
-```sh
-wget https://github.com/fmtlib/fmt/archive/4.0.0.tar.gz
-tar xvzf 4.0.0.tar.gz && mkdir fmt-4.0.0/build && cd fmt-4.0.0/build
-CC=clang CXX=clang++ cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr \
-  -DFMT_DOC:BOOL=OFF -DFMT_TEST:BOOL=OFF ..
-make && sudo make install
 ```
 
 Modify the following lines in `/etc/ssh/sshd_config` (replace `{username}` with your WSL username).
@@ -569,6 +548,8 @@ sudo service ssh start
 sudo service ssh status
 ```
 
+Consider using the [llvm](llvm.md) and [vcpkg](vcpkg.md) guides.
+
 ## Start Menu
 ![Start Menu](layout.png)
 
@@ -597,5 +578,4 @@ C:\Program Files (x86)\Microsoft Visual Studio\
 C:\Users\Qis\AppData\Local\lxss\
 C:\Workspace\
 ```
-
 -->

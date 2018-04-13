@@ -2,7 +2,7 @@
 Get the LLVM source code.
 
 ```sh
-ver=5.0.1
+ver=6.0.0
 for name in llvm cfe clang-tools-extra libcxx libcxxabi compiler-rt libunwind lld; do
   wget http://releases.llvm.org/$ver/$name-$ver.src.tar.xz
 done
@@ -63,58 +63,17 @@ Configure shared libraries path (if `-DLIBCXX_ENABLE_SHARED` was changed to `ON`
 
 ```sh
 echo /opt/llvm/lib > /etc/ld.so.conf.d/llvm.conf
-echo /opt/llvm/lib/clang/5.0.1/lib/linux >> /etc/ld.so.conf.d/llvm.conf
+echo /opt/llvm/lib/clang/6.0.0/lib/linux >> /etc/ld.so.conf.d/llvm.conf
 ldconfig
 ```
-
-### Google Benchmark
-Install Google Benchmark.
-
-```sh
-git clone https://github.com/google/benchmark
-mkdir benchmark/build && cd benchmark/build
-export CC=$(which clang-devel || which clang)
-export CXX=$(which clang++-devel || which clang++)
-cmake -GNinja -DBENCHMARK_ENABLE_GTEST_TESTS=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr/local ..
-cmake --build .
-sudo cmake --build . --target install
-```
-
-### Google Test
-Install GTest.
-
-```sh
-apt install libgtest-dev
-```
-
-Build GTest.
-
-```sh
-mkdir cd /usr/src/gtest/build && cd /usr/src/gtest/build
-CC=clang CXX=clang++ cmake -GNinja .. && cmake --build .
-mv libg* /usr/lib/
-```
-
-<!--
-### FMT
-Install `{fmt}`.
-
-```sh
-wget https://github.com/fmtlib/fmt/archive/4.1.0.tar.gz && tar xvzf 4.1.0.tar.gz
-mkdir fmt-4.1.0/build && cd fmt-4.1.0/build
-cmake -GNinja -DFMT_DOC=OFF -DFMT_TEST=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr/local ..
-cmake --build .
-sudo cmake --build . --target install
-```
--->
 
 ### Binaryen
 Install Binaryen.
 
 ```sh
 rm -rf /opt/binaryen; mkdir /opt/binaryen
-wget https://github.com/WebAssembly/binaryen/archive/1.37.20.tar.gz
-tar xvf 1.37.20.tar.gz -C /opt/binaryen --strip-components 1
+wget https://github.com/WebAssembly/binaryen/archive/1.37.36.tar.gz
+tar xvf 1.37.36.tar.gz -C /opt/binaryen --strip-components 1
 cd /opt/binaryen
 cmake -GNinja -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Release .
 cmake --build .
@@ -124,9 +83,9 @@ cmake --build .
 Install and configure emscripten.
 
 ```sh
-wget https://github.com/kripken/emscripten/archive/1.37.20.tar.gz
+wget https://github.com/kripken/emscripten/archive/1.37.36.tar.gz
 rm -rf /opt/emsdk; mkdir /opt/emsdk
-tar xvf 1.37.20.tar.gz -C /opt/emsdk --strip-components 1
+tar xvf 1.37.36.tar.gz -C /opt/emsdk --strip-components 1
 em++
 ```
 
@@ -149,16 +108,16 @@ JS_ENGINES = [NODE_JS]
 Install Android NDK.
 
 ```sh
-wget https://dl.google.com/android/repository/android-ndk-r14b-linux-x86_64.zip
-sudo unzip android-ndk-r14b-linux-x86_64.zip -d /opt/android
+wget https://dl.google.com/android/repository/android-ndk-r16b-linux-x86_64.zip
+sudo unzip android-ndk-r16b-linux-x86_64.zip -d /opt/android
 ```
 
 Create standalone toolchains.
 
 ```sh
-sudo /opt/android/android-ndk-r14b/build/tools/make_standalone_toolchain.py \
+sudo /opt/android/android-ndk-r16b/build/tools/make_standalone_toolchain.py \
   --api 21 --stl libc++ --arch arm --install-dir /opt/android/arm
-sudo /opt/android/android-ndk-r14b/build/tools/make_standalone_toolchain.py \
+sudo /opt/android/android-ndk-r16b/build/tools/make_standalone_toolchain.py \
   --api 21 --stl libc++ --arch arm64 --install-dir /opt/android/arm64
 ```
 -->
