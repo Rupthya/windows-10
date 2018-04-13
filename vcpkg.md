@@ -5,10 +5,10 @@ Project description.
 * [LLVM](https://llvm.org/) and [libcxx](https://libcxx.llvm.org/) version 6.0.0 on Linux and FreeBSD
 * [Visual Studio](https://www.visualstudio.com/downloads/) version 15.7 on Windows
 * [CMake](https://cmake.org/download/) version 3.10
-* [VCPKG](https://github.com/Microsoft/vcpkg)
+* [vcpkg](https://github.com/Microsoft/vcpkg)
 
 ## Dependencies
-Install VCPKG using the following instructions. Adjust the commands as necessary or desired.
+Install vcpkg using the following instructions. Adjust the commands as necessary or desired.
 
 ### Windows
 Set the `VCPKG_DEFAULT_TRIPLET` environment variable to `x64-windows`.<br/>
@@ -89,7 +89,7 @@ sed -i '' 's/SHA512 2.*/SHA512 4bb5119fe6c0558e5a8b39486169ffcbf24e877ec7f28636d
 ```
 
 ### Ports
-Install VCPKG ports.
+Install vcpkg ports.
 
 ```
 vcpkg install asio benchmark bzip2 curl date fmt freetype gtest libjpeg-turbo libpng libssh libssh2 openssl zlib
