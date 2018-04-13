@@ -2,12 +2,13 @@
 Project description.
 
 ## Requirements
-* [Visual Studio 2017][vs] on Windows.
-* [LLVM][llvm] with [libcxx][libcxx] version 5.0.0 or newer on Linux and FreeBSD.
-* [vcpkg][vcpkg] on all systems.
+* [LLVM](https://llvm.org/) and [libcxx](https://libcxx.llvm.org/) version 6.0.0 on Linux and FreeBSD
+* [Visual Studio](https://www.visualstudio.com/downloads/) version 15.7 on Windows
+* [CMake](https://cmake.org/download/) version 3.10
+* [VCPKG](https://github.com/Microsoft/vcpkg)
 
 ## Dependencies
-Install [vcpkg][vcpkg] using the following instructions. Adjust the commands as necessary or desired.
+Install VCPKG using the following instructions. Adjust the commands as necessary or desired.
 
 ### Windows
 Set the `VCPKG_DEFAULT_TRIPLET` environment variable to `x64-windows`.<br/>
@@ -88,24 +89,18 @@ sed -i '' 's/SHA512 2.*/SHA512 4bb5119fe6c0558e5a8b39486169ffcbf24e877ec7f28636d
 ```
 
 ### Ports
-Install [vcpkg][vcpkg] ports.
+Install VCPKG ports.
 
 ```
 vcpkg install asio benchmark bzip2 curl date fmt freetype gtest libjpeg-turbo libpng libssh libssh2 openssl zlib
 ```
 
 **NOTE**: Do not execute `vcpkg` in `cmd.exe` and `bash.exe` at the same time!<br/>
-**NOTE**: Make sure [perl][perl] is available before installing the OpenSSL port.
+**NOTE**: Make sure [perl](http://strawberryperl.com) is available before installing the OpenSSL port.
 
 ## Build
 Execute [solution.cmd](solution.cmd) to configure the project with cmake and open it in Visual Studio.<br/>
 Execute `make run`, `make test` or `make benchmark` in the project directory on Unix systems.
-
-[llvm]: https://llvm.org
-[libcxx]: https://libcxx.llvm.org
-[vcpkg]: https://github.com/Microsoft/vcpkg
-[vs]: https://www.visualstudio.com/downloads
-[perl]: http://strawberryperl.com
 
 <!--
 ## Usage
