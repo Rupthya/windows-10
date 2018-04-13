@@ -2,9 +2,9 @@
 Project description.
 
 ## Requirements
+* [CMake](https://cmake.org/download/) version 3.10
 * [LLVM](https://llvm.org/) and [libcxx](https://libcxx.llvm.org/) version 6.0.0 on Linux and FreeBSD
 * [Visual Studio](https://www.visualstudio.com/downloads/) version 15.7 on Windows
-* [CMake](https://cmake.org/download/) version 3.10
 * [Vcpkg](https://github.com/Microsoft/vcpkg)
 
 ## Dependencies
