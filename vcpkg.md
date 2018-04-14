@@ -11,7 +11,7 @@ Project description.
 Install Vcpkg using the following instructions. Adjust the commands as necessary or desired.
 
 ### Windows
-Set the `VCPKG_DEFAULT_TRIPLET` environment variable to `x64-windows-static`.<br/>
+Set the `VCPKG_DEFAULT_TRIPLET` environment variable to `x64-windows-static-md`.<br/>
 Set the `VCPKG` environment variable to `C:/Libraries/vcpkg/scripts/buildsystems/vcpkg.cmake`.<br/>
 Add `C:\Libraries\vcpkg\installed\%VCPKG_DEFAULT_TRIPLET%\bin` to the `PATH` environment variable.<br/>
 Add `C:\Libraries\vcpkg` to the `PATH` environment variable.
