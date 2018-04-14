@@ -18,6 +18,17 @@ Add `C:\Libraries\vcpkg` to the `PATH` environment variable.
 
 ```cmd
 git clone https://github.com/Microsoft/vcpkg C:\Libraries\vcpkg
+```
+
+Create a new triplet in `C:\Libraries\vcpkg\triplets\x64-windows-static-md.cmake`.
+
+```cmake
+set(VCPKG_TARGET_ARCHITECTURE x64)
+set(VCPKG_CRT_LINKAGE dynamic)
+set(VCPKG_LIBRARY_LINKAGE static)
+```
+
+```cmd
 cd C:\Libraries\vcpkg && bootstrap-vcpkg.bat && vcpkg integrate install
 ```
 
