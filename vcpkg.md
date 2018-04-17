@@ -64,12 +64,10 @@ set(HAVE_STD_REGEX ON)
 EOF
 sed -i -E 's/unofficial(-|::)?//g' ../ports/date/{CMakeLists.txt,portfile.cmake}
 sed -i -E 's|red.libssh.org/attachments/download/218|git.libssh.org/projects/libssh.git/snapshot|g' ../ports/libssh/portfile.cmake
+sed -i 's/SHA512 .*/SHA512 aca60e9ba800eeb0ff65cb5855123bc195ef752533af62d8f7cfd26296828e0db4b6dd538a1d452b62175e2269fe94dd7fe84fcce99665f970ee72c75fb7d1e4/g' ../ports/libssh/portfile.cmake
 sed -i 's/\.tar\.xz/.tar.bz2/g' ../ports/libssh/portfile.cmake
-sed -i 's/SHA512 .*/SHA512 aca60e9ba800eeb0ff65cb5855123bc195ef752533af62d8f7cfd26296828e0db4b6dd538a1d452b62175e2269fe94dd7fe84fcce99665f970ee72c75fb7d1e4/g' \
-  ../ports/libssh/portfile.cmake
+sed -i 's/SHA512 .*/SHA512 4bb5119fe6c0558e5a8b39486169ffcbf24e877ec7f28636dfab1692936b77334f76d28bda2cdada18e5070579da7a5bf0617bfbb6a09848f0b071df8e694d76/g' ../ports/benchmark/portfile.cmake
 sed -i 's/1\.3\.0/1.4.0/g' ../ports/benchmark/{CONTROL,portfile.cmake}
-sed -i 's/SHA512 .*/SHA512 4bb5119fe6c0558e5a8b39486169ffcbf24e877ec7f28636dfab1692936b77334f76d28bda2cdada18e5070579da7a5bf0617bfbb6a09848f0b071df8e694d76/g' \
-  ../ports/benchmark/portfile.cmake
 ```
 
 ### FreeBSD
@@ -100,9 +98,11 @@ set(CMAKE_CXX_COMPILER `which clang++-devel | which clang++` CACHE STRING "")
 set(CMAKE_CXX_FLAGS "\${CMAKE_CXX_FLAGS} -stdlib=libc++")
 EOF
 sed -i '' -E 's/unofficial(-|::)?//g' ../ports/date/{CMakeLists.txt,portfile.cmake}
-sed -i '' 's/1\.3\.0/1.4.0/' ../ports/benchmark/{CONTROL,portfile.cmake}
-sed -i '' 's/SHA512 2.*/SHA512 4bb5119fe6c0558e5a8b39486169ffcbf24e877ec7f28636dfab1692936b77334f76d28bda2cdada18e5070579da7a5bf0617bfbb6a09848f0b071df8e694d76/' \
-  ../ports/benchmark/portfile.cmake
+sed -i '' -E 's|red.libssh.org/attachments/download/218|git.libssh.org/projects/libssh.git/snapshot|g' ../ports/libssh/portfile.cmake
+sed -i '' 's/SHA512 .*/SHA512 aca60e9ba800eeb0ff65cb5855123bc195ef752533af62d8f7cfd26296828e0db4b6dd538a1d452b62175e2269fe94dd7fe84fcce99665f970ee72c75fb7d1e4/g' ../ports/libssh/portfile.cmake
+sed -i '' 's/\.tar\.xz/.tar.bz2/g' ../ports/libssh/portfile.cmake
+sed -i '' 's/SHA512 .*/SHA512 4bb5119fe6c0558e5a8b39486169ffcbf24e877ec7f28636dfab1692936b77334f76d28bda2cdada18e5070579da7a5bf0617bfbb6a09848f0b071df8e694d76/g' ../ports/benchmark/portfile.cmake
+sed -i '' 's/1\.3\.0/1.4.0/g' ../ports/benchmark/{CONTROL,portfile.cmake}
 ```
 
 ### Ports
