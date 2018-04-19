@@ -95,8 +95,7 @@ vcpkg install benchmark --head
 vcpkg install asio bzip2 curl date fmt freetype gtest libjpeg-turbo libpng libssh libssh2 openssl zlib
 ```
 
-**NOTE**: Do not execute `vcpkg` in `cmd.exe` and `bash.exe` at the same time!<br/>
-**NOTE**: Make sure [perl](http://strawberryperl.com) is available before installing the OpenSSL port.
+**NOTE**: Do not execute `vcpkg` in `cmd.exe` and `bash.exe` at the same time!
 
 ## Build
 Execute [solution.cmd](solution.cmd) to configure the project with cmake and open it in Visual Studio.<br/>
