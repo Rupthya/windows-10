@@ -94,7 +94,7 @@ Install Vcpkg ports.
 
 ```
 vcpkg install benchmark --head
-vcpkg install asio bzip2 curl date fmt freetype gtest libjpeg-turbo libpng libssh libssh2 openssl zlib
+vcpkg install asio bzip2 curl date fmt freetype gtest libjpeg-turbo libpng libssh libssh2 openssl utfcpp zlib
 ```
 
 **NOTE**: Do not execute `vcpkg` in `cmd.exe` and `bash.exe` at the same time!
