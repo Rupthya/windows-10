@@ -1,4 +1,5 @@
 # VCPKG
+<!--
 Project description.
 
 ## Requirements
@@ -8,6 +9,7 @@ Project description.
 * [Vcpkg](https://github.com/Microsoft/vcpkg)
 
 ## Dependencies
+-->
 Install Vcpkg using the following instructions. Adjust the commands as necessary or desired.
 
 ### Windows
@@ -97,11 +99,11 @@ vcpkg install asio bzip2 curl date fmt freetype gtest libjpeg-turbo libpng libss
 
 **NOTE**: Do not execute `vcpkg` in `cmd.exe` and `bash.exe` at the same time!
 
+<!--
 ## Build
 Execute [solution.cmd](solution.cmd) to configure the project with cmake and open it in Visual Studio.<br/>
 Execute `make run`, `make test` or `make benchmark` in the project directory on Unix systems.
 
-<!--
 ## Usage
 ```cmake
 find_package(benchmark REQUIRED)
