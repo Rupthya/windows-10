@@ -18,23 +18,10 @@ Add `C:\Libraries\vcpkg` to the `PATH` environment variable.
 
 ```cmd
 git clone https://github.com/Microsoft/vcpkg C:\Libraries\vcpkg
-```
-
-Create a new triplet in `C:\Libraries\vcpkg\triplets\x64-windows-static-md.cmake`.
-
-```cmake
-set(VCPKG_TARGET_ARCHITECTURE x64)
-set(VCPKG_CRT_LINKAGE dynamic)
-set(VCPKG_LIBRARY_LINKAGE static)
-```
-
-Build and integrate vcpkg.
-
-```cmd
 cd C:\Libraries\vcpkg && bootstrap-vcpkg.bat && vcpkg integrate install
 ```
 
-### Linux
+### WSL
 Set the `VCPKG_DEFAULT_TRIPLET` environment variable to `x64-linux`.<br/>
 Set the `VCPKG` environment variable to `/mnt/c/Libraries/vcpkg/scripts/buildsystems/vcpkg.cmake`.<br/>
 Add `/mnt/c/Libraries/vcpkg/bin` to the `PATH` environment variable.
@@ -45,6 +32,11 @@ cmake -GNinja -DCMAKE_BUILD_TYPE=Release ../toolsrc \
   -DCMAKE_C_COMPILER=`which clang-devel | which clang` \
   -DCMAKE_CXX_COMPILER=`which clang++-devel | which clang++`
 cmake --build .
+cat > ../triplets/x64-windows-static-md.cmake <<EOF
+set(VCPKG_TARGET_ARCHITECTURE x64)
+set(VCPKG_CRT_LINKAGE dynamic)
+set(VCPKG_LIBRARY_LINKAGE static)
+EOF
 cat > ../triplets/x64-linux.cmake <<EOF
 set(VCPKG_TARGET_ARCHITECTURE x64)
 set(VCPKG_CRT_LINKAGE dynamic)
@@ -62,7 +54,7 @@ set(CMAKE_CXX_FLAGS "\${CMAKE_CXX_FLAGS} -stdlib=libc++")
 set(HAVE_STEADY_CLOCK ON)
 set(HAVE_STD_REGEX ON)
 EOF
-sed -i -E 's/unofficial(-|::)?//g' ../ports/date/{CMakeLists.txt,portfile.cmake}
+find ../ports -type f -exec sed -i -E 's/unofficial(-|::)?//g' '{}' ';'
 ```
 
 ### FreeBSD
@@ -92,14 +84,15 @@ set(CMAKE_C_COMPILER `which clang-devel | which clang` CACHE STRING "")
 set(CMAKE_CXX_COMPILER `which clang++-devel | which clang++` CACHE STRING "")
 set(CMAKE_CXX_FLAGS "\${CMAKE_CXX_FLAGS} -stdlib=libc++")
 EOF
-sed -i '' -E 's/unofficial(-|::)?//g' ../ports/date/{CMakeLists.txt,portfile.cmake}
+find ../ports -type f -exec sed -i '' -E 's/unofficial(-|::)?//g' '{}' ';'
 ```
 
 ### Ports
 Install Vcpkg ports.
 
 ```
-vcpkg install asio benchmark bzip2 curl date fmt freetype gtest libjpeg-turbo libpng libssh libssh2 openssl zlib
+vcpkg install benchmark --head
+vcpkg install asio bzip2 curl date fmt freetype gtest libjpeg-turbo libpng libssh libssh2 openssl zlib
 ```
 
 **NOTE**: Do not execute `vcpkg` in `cmd.exe` and `bash.exe` at the same time!<br/>
