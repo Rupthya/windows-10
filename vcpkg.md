@@ -21,6 +21,9 @@ Add `C:\Libraries\vcpkg` to the `PATH` environment variable.
 ```cmd
 git clone https://github.com/Microsoft/vcpkg C:\Libraries\vcpkg
 cd C:\Libraries\vcpkg && bootstrap-vcpkg.bat && vcpkg integrate install
+@echo set(VCPKG_TARGET_ARCHITECTURE x64)> triplets\x64-windows-static-md.cmake
+@echo set(VCPKG_CRT_LINKAGE dynamic)>>    triplets\x64-windows-static-md.cmake
+@echo set(VCPKG_LIBRARY_LINKAGE static)>> triplets\x64-windows-static-md.cmake
 ```
 
 ### WSL
@@ -34,11 +37,6 @@ cmake -GNinja -DCMAKE_BUILD_TYPE=Release ../toolsrc \
   -DCMAKE_C_COMPILER=`which clang-devel | which clang` \
   -DCMAKE_CXX_COMPILER=`which clang++-devel | which clang++`
 cmake --build .
-cat > ../triplets/x64-windows-static-md.cmake <<EOF
-set(VCPKG_TARGET_ARCHITECTURE x64)
-set(VCPKG_CRT_LINKAGE dynamic)
-set(VCPKG_LIBRARY_LINKAGE static)
-EOF
 cat > ../triplets/x64-linux.cmake <<EOF
 set(VCPKG_TARGET_ARCHITECTURE x64)
 set(VCPKG_CRT_LINKAGE dynamic)
