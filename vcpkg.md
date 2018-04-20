@@ -90,72 +90,48 @@ find ../ports -type f -exec sed -i '' -E 's/unofficial(-|::)?//g' '{}' ';'
 ```
 
 ### Ports
-Install WTL on Windows.
+Install Vcpkg ports.
 
-```
-vcpkg install wtl
-```
-
-Install Vcpkg ports on all platforms.
-
-```
+```sh
+# Benchmark
 vcpkg install benchmark --head
-vcpkg install bzip2 date fmt freetype gtest jsoncpp libjpeg-turbo libpng libssh2 openssl podofo utfcpp zlib
+
+# C++ (skip wtl on unix systems)
+vcpkg install date fmt gtest jsoncpp utfcpp wtl
+
+# Compression
+vcpkg install bzip2 liblzma zlib
+
+# Networking
+vcpkg install asio cpr curl libssh2 openssl
+
+# Images and Fonts
+vcpkg install freetype harfbuzz libjpeg-turbo libpng
+
+# Misc
+vcpkg install podofo
 ```
 
 **NOTE**: Do not execute `vcpkg` in `cmd.exe` and `bash.exe` at the same time!
 
 <!--
-## Misc
-Install Vcpkg ports that might be useful for some projects.
-
-```
-vcpkg install asio cpr curl libssh
-```
-
 ## Build
 Execute [solution.cmd](solution.cmd) to configure the project with cmake and open it in Visual Studio.<br/>
 Execute `make run`, `make test` or `make benchmark` in the project directory on Unix systems.
 
 ## Usage
 ```cmake
+### Benchmark
 find_package(benchmark REQUIRED)
 target_link_libraries(main PRIVATE benchmark::benchmark)
 
-find_package(BZip2 REQUIRED)
-target_link_libraries(main PRIVATE BZip2::BZip2)
-
-find_package(CURL REQUIRED)
-target_link_libraries(main PRIVATE ${CURL_LIBRARIES})
-target_include_directories(main PRIVATE ${CURL_INCLUDE_DIRS})
-
+# C++
 find_package(date REQUIRED)
 target_link_libraries(main PRIVATE date::tz date::date)
 
 find_package(fmt REQUIRED)
 target_link_libraries(main PRIVATE fmt::fmt fmt::fmt-header-only)
 
-find_package(Freetype REQUIRED)
-target_link_libraries(main PRIVATE Freetype::Freetype)
-
-find_package(JPEG REQUIRED)
-target_link_libraries(main PRIVATE ${JPEG_LIBRARIES})
-target_include_directories(main PRIVATE ${JPEG_INCLUDE_DIR})
-
-find_package(libssh2 REQUIRED)
-target_link_libraries(main PRIVATE Libssh2::libssh2)
-
-find_package(OpenSSL REQUIRED)
-target_link_libraries(main PRIVATE OpenSSL::SSL OpenSSL::Crypto)
-
-find_package(PNG REQUIRED)
-target_link_libraries(main PRIVATE PNG::PNG)
-
-find_package(ZLIB REQUIRED)
-target_link_libraries(main PRIVATE ZLIB::ZLIB)
-```
-
-```cmake
 find_package(GTest)
 option(BUILD_TESTING "Build tests." ${GTEST_FOUND})
 if(BUILD_TESTING)
@@ -168,106 +144,41 @@ if(BUILD_TESTING)
   target_link_libraries(tests PRIVATE GTest::GTest GTest::Main)
   gtest_add_tests(TARGET tests WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 endif()
-```
 
-## cmake/FindLibSSH.cmake
-```cmake
-find_path(LIBSSH_INCLUDE_DIR libssh.h PATH_SUFFIXES libssh)
-find_library(LIBSSH_LIBRARY NAMES ssh libssh)
+find_package(jsoncpp REQUIRED)
+target_link_libraries(main PRIVATE jsoncpp_lib_static)
 
-if(LIBSSH_INCLUDE_DIR)
-  file(STRINGS "${LIBSSH_INCLUDE_DIR}/libssh.h" libssh_version_str REGEX
-    "^#define[\t ]+LIBSSH_VERSION_(MAJOR|MINOR|MICRO)[\t ]+.*")
+# Compression
+find_package(BZip2 REQUIRED)
+target_link_libraries(main PRIVATE BZip2::BZip2)
 
-  string(REGEX REPLACE "^.*LIBSSH_VERSION_MAJOR[\t ]+([0-9]+).*$" "\\1" LIBSSH_VERSION_MAJOR "${libssh_version_str}")
-  string(REGEX REPLACE "^.*LIBSSH_VERSION_MINOR[\t ]+([0-9]+).*$" "\\1" LIBSSH_VERSION_MINOR "${libssh_version_str}")
-  string(REGEX REPLACE "^.*LIBSSH_VERSION_MICRO[\t ]+([0-9]+).*$" "\\1" LIBSSH_VERSION_PATCH "${libssh_version_str}")
+find_package(LibLZMA REQUIRED)
+target_include_directories(main PRIVATE ${LIBLZMA_INCLUDE_DIRS})
+target_link_libraries(main PRIVATE ${LIBLZMA_LIBRARIES})
 
-  string(REGEX REPLACE "^0(.+)" "\\1" LIBSSH_VERSION_MAJOR "${LIBSSH_VERSION_MAJOR}")
-  string(REGEX REPLACE "^0(.+)" "\\1" LIBSSH_VERSION_MINOR "${LIBSSH_VERSION_MINOR}")
-  string(REGEX REPLACE "^0(.+)" "\\1" LIBSSH_VERSION_PATCH "${LIBSSH_VERSION_PATCH}")
+find_package(ZLIB REQUIRED)
+target_link_libraries(main PRIVATE ZLIB::ZLIB)
 
-  set(LIBSSH_VERSION "${LIBSSH_VERSION_MAJOR}.${LIBSSH_VERSION_MINOR}.${LIBSSH_VERSION_PATCH}")
-endif()
+# Networking
+find_package(CURL REQUIRED)
+target_link_libraries(main PRIVATE ${CURL_LIBRARIES})
+target_include_directories(main PRIVATE ${CURL_INCLUDE_DIRS})
 
-include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(LibSSH DEFAULT_MSG LIBSSH_INCLUDE_DIR LIBSSH_LIBRARY)
+find_package(libssh2 REQUIRED)
+target_link_libraries(main PRIVATE Libssh2::libssh2)
 
-mark_as_advanced(
-  LIBSSH_INCLUDE_DIR
-  LIBSSH_LIBRARY
-  LIBSSH_VERSION_MAJOR
-  LIBSSH_VERSION_MINOR
-  LIBSSH_VERSION_PATCH
-  LIBSSH_VERSION)
+find_package(OpenSSL REQUIRED)
+target_link_libraries(main PRIVATE OpenSSL::SSL OpenSSL::Crypto)
 
-if(LIBSSH_FOUND)
-  find_package(ZLIB REQUIRED)
-  find_package(OpenSSL REQUIRED)
-  add_library(LibSSH::LibSSH UNKNOWN IMPORTED)
-  set_target_properties(LibSSH::LibSSH PROPERTIES
-    INTERFACE_INCLUDE_DIRECTORIES "${LIBSSH_INCLUDE_DIR}"
-    IMPORTED_LOCATION "${LIBSSH_LIBRARY}"
-    IMPORTED_LINK_INTERFACE_LIBRARIES "ZLIB::ZLIB;OpenSSL::SSL;OpenSSL::Crypto"
-    IMPORTED_LINK_INTERFACE_LANGUAGES "C")
-endif()
-```
+# Images and Fonts
+find_package(Freetype REQUIRED)
+target_link_libraries(main PRIVATE Freetype::Freetype)
 
-```cmake
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
-find_package(LibSSH REQUIRED)
-target_link_libraries(${PROJECT_NAME} PUBLIC LibSSH::LibSSH)
-```
+find_package(JPEG REQUIRED)
+target_link_libraries(main PRIVATE ${JPEG_LIBRARIES})
+target_include_directories(main PRIVATE ${JPEG_INCLUDE_DIR})
 
-## cmake/FindLibSSH2.cmake
-```cmake
-find_path(LIBSSH2_INCLUDE_DIR libssh2.h)
-find_library(LIBSSH2_LIBRARY NAMES ssh2 libssh2)
-
-if(LIBSSH2_INCLUDE_DIR)
-  file(STRINGS "${LIBSSH2_INCLUDE_DIR}/libssh2.h" libssh2_version_str REGEX
-    "^#define[\t ]+LIBSSH2_VERSION_NUM[\t ]+0x[0-9][0-9][0-9][0-9][0-9][0-9].*")
-
-  string(REGEX REPLACE "^.*LIBSSH2_VERSION_NUM[\t ]+0x([0-9][0-9]).*$" "\\1"
-    LIBSSH2_VERSION_MAJOR "${libssh2_version_str}")
-  string(REGEX REPLACE "^.*LIBSSH2_VERSION_NUM[\t ]+0x[0-9][0-9]([0-9][0-9]).*$" "\\1"
-    LIBSSH2_VERSION_MINOR  "${libssh2_version_str}")
-  string(REGEX REPLACE "^.*LIBSSH2_VERSION_NUM[\t ]+0x[0-9][0-9][0-9][0-9]([0-9][0-9]).*$" "\\1"
-    LIBSSH2_VERSION_PATCH "${libssh2_version_str}")
-
-  string(REGEX REPLACE "^0(.+)" "\\1" LIBSSH2_VERSION_MAJOR "${LIBSSH2_VERSION_MAJOR}")
-  string(REGEX REPLACE "^0(.+)" "\\1" LIBSSH2_VERSION_MINOR "${LIBSSH2_VERSION_MINOR}")
-  string(REGEX REPLACE "^0(.+)" "\\1" LIBSSH2_VERSION_PATCH "${LIBSSH2_VERSION_PATCH}")
-
-  set(LIBSSH2_VERSION "${LIBSSH2_VERSION_MAJOR}.${LIBSSH2_VERSION_MINOR}.${LIBSSH2_VERSION_PATCH}")
-endif()
-
-include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(LibSSH2 DEFAULT_MSG LIBSSH2_INCLUDE_DIR LIBSSH2_LIBRARY)
-
-mark_as_advanced(
-  LIBSSH2_INCLUDE_DIR
-  LIBSSH2_LIBRARY
-  LIBSSH2_VERSION_MAJOR
-  LIBSSH2_VERSION_MINOR
-  LIBSSH2_VERSION_PATCH
-  LIBSSH2_VERSION)
-
-if(LIBSSH2_FOUND)
-  find_package(ZLIB REQUIRED)
-  find_package(OpenSSL REQUIRED)
-  add_library(LibSSH2::LibSSH2 UNKNOWN IMPORTED)
-  set_target_properties(LibSSH2::LibSSH2 PROPERTIES
-    INTERFACE_INCLUDE_DIRECTORIES "${LIBSSH2_INCLUDE_DIR}"
-    IMPORTED_LOCATION "${LIBSSH2_LIBRARY}"
-    IMPORTED_LINK_INTERFACE_LIBRARIES "ZLIB::ZLIB;OpenSSL::SSL;OpenSSL::Crypto"
-    IMPORTED_LINK_INTERFACE_LANGUAGES "C")
-endif()
-```
-
-```cmake
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
-find_package(LibSSH2 REQUIRED)
-target_link_libraries(${PROJECT_NAME} PUBLIC LibSSH2::LibSSH2)
+find_package(PNG REQUIRED)
+target_link_libraries(main PRIVATE PNG::PNG)
 ```
 -->
