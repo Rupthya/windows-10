@@ -90,16 +90,29 @@ find ../ports -type f -exec sed -i '' -E 's/unofficial(-|::)?//g' '{}' ';'
 ```
 
 ### Ports
-Install Vcpkg ports.
+Install WTL on Windows.
+
+```
+vcpkg install wtl
+```
+
+Install Vcpkg ports on all platforms.
 
 ```
 vcpkg install benchmark --head
-vcpkg install asio bzip2 curl date fmt freetype gtest libjpeg-turbo libpng libssh libssh2 openssl utfcpp zlib
+vcpkg install bzip2 date fmt freetype gtest jsoncpp libjpeg-turbo libpng libssh2 openssl podofo utfcpp zlib
 ```
 
 **NOTE**: Do not execute `vcpkg` in `cmd.exe` and `bash.exe` at the same time!
 
 <!--
+## Misc
+Install Vcpkg ports that might be useful for some projects.
+
+```
+vcpkg install asio cpr curl libssh
+```
+
 ## Build
 Execute [solution.cmd](solution.cmd) to configure the project with cmake and open it in Visual Studio.<br/>
 Execute `make run`, `make test` or `make benchmark` in the project directory on Unix systems.
