@@ -97,7 +97,7 @@ Install Vcpkg ports.
 vcpkg install benchmark --head
 
 # C++ (skip wtl on unix systems)
-vcpkg install date fmt gtest jsoncpp utfcpp wtl
+vcpkg install date fmt gtest jsoncpp utfcpp utfz wtl
 
 # Compression
 vcpkg install bzip2 liblzma zlib
