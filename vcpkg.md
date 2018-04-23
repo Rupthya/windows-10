@@ -91,8 +91,8 @@ find ../ports -type f -exec sed -i '' -E 's/unofficial(-|::)?//g' '{}' ';'
 Install Vcpkg ports.
 
 ```sh
-# Benchmark
-vcpkg install benchmark --head
+# Head
+vcpkg install asio benchmark --head
 
 # C++ (skip wtl on unix systems)
 vcpkg install date fmt gtest jsoncpp utfcpp utfz wtl
@@ -101,7 +101,7 @@ vcpkg install date fmt gtest jsoncpp utfcpp utfz wtl
 vcpkg install bzip2 liblzma zlib
 
 # Networking
-vcpkg install asio cpr curl libssh2 openssl
+vcpkg install cpr curl libssh2 openssl
 
 # Images and Fonts
 vcpkg install freetype harfbuzz libjpeg-turbo libpng
