@@ -3,9 +3,9 @@
 Project description.
 
 ## Requirements
-* [CMake](https://cmake.org/download/) version 3.10
-* [LLVM](https://llvm.org/) and [libcxx](https://libcxx.llvm.org/) version 6.0.0 on Linux and FreeBSD
-* [Visual Studio](https://www.visualstudio.com/downloads/) version 15.7 on Windows
+* [CMake](https://cmake.org/download/) version 3.10 on all platforms
+* [LLVM](https://llvm.org/) and [libcxx](https://libcxx.llvm.org/) version 6.0.0 on FreeBSD and Linux
+* [Visual Studio](https://www.visualstudio.com/downloads/) version 15.7.0 Preview 5.0 on Windows
 * [Vcpkg](https://github.com/Microsoft/vcpkg)
 
 ## Dependencies
@@ -27,7 +27,7 @@ cd C:\Libraries\vcpkg && bootstrap-vcpkg.bat && vcpkg integrate install
 ```
 
 ### WSL
-Set the `VCPKG_DEFAULT_TRIPLET` environment variable to `x64-linux`.<br/>
+Set the `VCPKG_DEFAULT_TRIPLET` environment variable to `x64-linux-clang`.<br/>
 Set the `VCPKG` environment variable to `/mnt/c/Libraries/vcpkg/scripts/buildsystems/vcpkg.cmake`.<br/>
 Add `/mnt/c/Libraries/vcpkg/bin` to the `PATH` environment variable.
 
@@ -37,7 +37,7 @@ cmake -GNinja -DCMAKE_BUILD_TYPE=Release ../toolsrc \
   -DCMAKE_C_COMPILER=`which clang-devel | which clang` \
   -DCMAKE_CXX_COMPILER=`which clang++-devel | which clang++`
 cmake --build .
-cat > ../triplets/x64-linux.cmake <<EOF
+cat > ../triplets/x64-linux-clang.cmake <<EOF
 set(VCPKG_TARGET_ARCHITECTURE x64)
 set(VCPKG_CRT_LINKAGE dynamic)
 set(VCPKG_LIBRARY_LINKAGE static)
