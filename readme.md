@@ -509,24 +509,31 @@ sudo apt update
 sudo apt upgrade
 sudo apt dist-upgrade
 sudo apt autoremove
-sudo apt install apt-file p7zip-full p7zip-rar zip unzip tree htop imagemagick librsvg2-bin wrk
+sudo apt install apt-file p7zip-full p7zip-rar zip unzip tree htop imagemagick librsvg2-bin pngcrush wrk
 sudo apt-file update
 ```
 
 Install development packages.
 
 ```sh
-sudo apt install build-essential binutils-dev ninja-build nasm git subversion nodejs npm swig openjdk-9-jdk-headless
-sudo ln -s /usr/bin/nodejs /usr/bin/node
+sudo apt install build-essential binutils-dev ninja-build nasm git subversion swig openjdk-9-jdk-headless
 ```
 
 Install CMake.
 
 ```sh
 rm -rf /opt/cmake; mkdir /opt/cmake
-wget https://cmake.org/files/v3.11/cmake-3.11.0-Linux-x86_64.tar.gz
-tar xvzf cmake-3.11.0-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
+wget https://cmake.org/files/v3.11/cmake-3.11.1-Linux-x86_64.tar.gz
+tar xvf cmake-3.11.1-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
 find /opt/cmake -type d -exec chmod 0755 '{}' ';'
+```
+
+Install NodeJS.
+
+```sh
+rm -rf /opt/node; mkdir /opt/node
+wget https://nodejs.org/dist/v10.0.0/node-v10.0.0-linux-x64.tar.xz
+tar xvf node-v10.0.0-linux-x64.tar.xz -C /opt/node --strip-components 1
 ```
 
 Modify the following lines in `/etc/ssh/sshd_config` (replace `{username}` with your WSL username).
