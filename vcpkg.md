@@ -56,6 +56,7 @@ set(CMAKE_CXX_FLAGS "\${CMAKE_CXX_FLAGS} -stdlib=libc++")
 set(HAVE_STEADY_CLOCK ON)
 set(HAVE_STD_REGEX ON)
 EOF
+perl -pi -e 's/CMAKE_CXX_STANDARD 11/CMAKE_CXX_STANDARD 17/' ${VCPKG}/ports/date/CMakeLists.txt
 ```
 
 Optional: Fix unofficial namespace names.
