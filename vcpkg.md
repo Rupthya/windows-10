@@ -62,8 +62,8 @@ Optional: Fix unofficial namespace names.
 
 ```sh
 test `uname -s` = "FreeBSD" && \
-  find ${VCPKG}/ports -type f -exec sed -i '' -E 's/(-|::)?unofficial//g' '{}' ';' || \
-  find ${VCPKG}/ports -type f -exec sed -i    -E 's/(-|::)?unofficial//g' '{}' ';'
+  find ${VCPKG}/ports -type f -exec sed -i '' -E 's/unofficial(-|::)?//g' '{}' ';' || \
+  find ${VCPKG}/ports -type f -exec sed -i    -E 's/unofficial(-|::)?//g' '{}' ';'
 ```
 
 ## Ports
