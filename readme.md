@@ -48,36 +48,105 @@ $Kernel32::SetComputerName("{hostname}");
 
 Reboot the system.
 
-## Cortana
-Configure Cortana using the search box in the taskbar, then disable her.
+## Settings
+Use common sense in **Settings**, **Explorer Options** and **Indexing Optinos**.
+
+Disable Windows 10 full screen "Updates are available" notification.
 
 ```cmd
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCortana" /t REG_DWORD /d 1 /f
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "BingSearchEnabled" /t REG_DWORD /d 0 /f
-reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "BingSearchEnabled" /t REG_DWORD /d 0 /f
+cd /d "%windir%\System32"
+takeown /F MusNotification.exe
+icacls MusNotification.exe /deny Everyone:(X)
+takeown /F MusNotificationUx.exe
+icacls MusNotificationUx.exe /deny Everyone:(X)
+```
+
+## Apps
+Disable Cortana and Consumer Apps.
+
+```cmd
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCortana" /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsConsumerFeatures" /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "BingSearchEnabled" /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "BingSearchEnabled" /t REG_DWORD /d 0 /f
 ```
 
 Repeat as a normal user.
+Configure Cortana using the search box in the taskbar, then disable her
 
 ```cmd
-reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "BingSearchEnabled" /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "BingSearchEnabled" /t REG_DWORD /d 0 /f
 ```
+
+Uninstall unwanted apps in PowerShell.
+
+```ps
+get-appxpackage *onenote* | remove-appxpackage
+get-appxpackage *3dbuilder* | remove-appxpackage
+get-appxpackage *officehub* | remove-appxpackage
+get-appxpackage *skypeapp* | remove-appxpackage
+get-appxpackage *getstarted* | remove-appxpackage
+get-appxpackage *bingnews* | remove-appxpackage
+get-appxpackage *bingfinance* | remove-appxpackage
+get-appxpackage *bingsports* | remove-appxpackage
+get-appxpackage *windowscamera* | remove-appxpackage
+get-appxpackage *windowsmaps* | remove-appxpackage
+get-appxpackage *windowsphone* | remove-appxpackage
+get-appxpackage *windowsalarms* | remove-appxpackage
+get-appxpackage *zunemusic* | remove-appxpackage
+get-appxpackage *zunevideo* | remove-appxpackage
+get-appxpackage *xboxapp* | remove-appxpackage
+get-appxpackage *people* | remove-appxpackage
+get-appxpackage *soundrecorder* | remove-appxpackage
+get-appxpackage *solitairecollection* | remove-appxpackage
+get-appxpackage *Microsoft.XboxIdentityProvider* | remove-appxpackage
+get-appxpackage *Microsoft.XboxSpeechToTextOverlay* | remove-appxpackage
+get-appxpackage *Microsoft.Xbox* | remove-appxpackage
+get-appxpackage *Microsoft.MicrosoftStickyNotes* | remove-appxpackage
+get-appxpackage *Microsoft.Microsoft3DViewer* | remove-appxpackage
+get-appxpackage *Microsoft.GetHelp* | remove-appxpackage
+get-appxpackage *Microsoft.Messaging* | remove-appxpackage
+```
+
+List apps.
+
+```ps
+get-appxpackage | select Name,PackageFullName | sort Name
+```
+
+See also: <https://github.com/stefansundin/dotfiles/blob/master/setup-windows.md>
 
 ## Group Policy
 Configure group policies (skip unwanted steps).
 
 ```
+gpedit.msc > Computer Configuration > Administrative Templates > Control Panel
+
+Personalization
++ Do not display the lock screen: Enabled
+
 gpedit.msc > Computer Configuration > Administrative Templates > Windows Components
+
+Cloud Content
++ Turn off Microsoft consumer experiences: Enabled
 
 Data Collection and Preview Builds
 + Allow Telemetry: Disabled
++ Do not show feedback notifications: Enabled
 
 OneDrive
++ Save documents to OneDrive by default: Disabled
 + Prevent the usage of OneDrive for file storage: Enabled
++ Prevent the usage of OneDrive for file storage on Windows 8.1: Enabled
 
 Search
 + Allow Cortana: Disabled
++ Allow Cortana above lock screen: Disabled
 + Do not allow web search: Enabled
++ Don't search the web or display web results in Search: Enabled
+
+Speech
++ Allow Automatic Update of Speech Data: Disabled
 
 Store
 + Turn off the Store application: Enabled
@@ -98,11 +167,7 @@ Windows Defender Antivirus > Real-time Protection
 Windows Defender Antivirus > Signature Updates
 + Allow definition updates from Microsoft Update: Disabled
 
-Windows Defender Application Guard
-+ Turn On/Off Windows Defender Application Guard (WDAG): Disabled
-
 Windows Defender SmartScreen > Explorer
-+ Configure App Install Control: Disabled
 + Configure Windows Defender SmartScreen: Disabled
 
 Windows Defender SmartScreen > Microsoft Edge
@@ -114,6 +179,7 @@ Windows Error Reporting
 Windows Update
 + Configure Automatic Updates: Enabled
   Configure automatic updating: 2 - Notify for download and auto install
+  [✓] Install updates for other Microsoft products
 ```
 
 ## Disk Optimizations
@@ -142,7 +208,6 @@ Disable unwanted services.
 ```
 services.msc
 + Certificate Propagation: Manual -> Disabled
-+ Geolocation Service: Manual -> Disabled
 + Microsoft (R) Diagnostics Hub Standard Collector Service: Manual -> Disabled
 + Microsoft Office Click-to-Run Service: Automatic -> Disabled
 + Superfetch: Automatic -> Disabled
@@ -168,25 +233,6 @@ Control Panel > "System" > Advanced system settings > Hardware > Device Installa
 (·) No (your device might not work as expected)
 ```
 
-Configure Windows Update options and sources.
-
-```
-Settings > Update & security > Advanced options
-[✓] Give me updates for other Microsoft products when I update Windows.
-[✓] Use my sign in info to automatically finish setting up my device after an update.
-    <Chose how updates are delivered>
-      Updates from more than one place: Off
-```
-
-Reboot the system.
-
-Connect to the Internet.<br/>
-Wait until the CPU/Network activity stops and there are no more entries under `Device Manager > Other devices`.<br/>
-Reboot the system.<br/>
-
-Install Windows updates.<br/>
-Reboot the system.
-
 ## User Name
 Change the full user name.
 
@@ -195,10 +241,12 @@ lusrmgr.msc > Users > {user}
 + Full Name: {User Name}
 ```
 
-## Settings
-Use common sense in **Settings**, **Explorer Options** and **Indexing Optinos**.
+Reboot the system.
 
-Uninstall unwanted apps except "App Installer" and "OneDrive".
+## Updates
+Connect to the Internet and install Windows updates.
+
+Reboot the system.
 
 ## Startup
 Disable automatically started applications.
@@ -231,32 +279,59 @@ Hide unwanted "This PC" links.
 
 ```cmd
 rem 3D Objects
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Hide" /f
+reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" /f
+reg delete "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" /f
 
 rem Desktop
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Hide" /f
+reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}" /f
+reg delete "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}" /f
 
 rem Documents
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{f42ee2d3-909f-4907-8871-4c22fc0bf756}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Hide" /f
+reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{A8CDFF1C-4878-43be-B5FD-F8091C1C60D0}" /f
+reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{d3162b92-9365-467a-956b-92703aca08af}" /f
+reg delete "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{A8CDFF1C-4878-43be-B5FD-F8091C1C60D0}" /f
+reg delete "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{d3162b92-9365-467a-956b-92703aca08af}" /f
 
 rem Downloads
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{7d83ee9b-2244-4e70-b1f5-5393042af1e4}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Hide" /f
+reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{374DE290-123F-4565-9164-39C4925E467B}" /f
+reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{088e3905-0323-4b02-9826-5d99428e115f}" /f
+reg delete "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{374DE290-123F-4565-9164-39C4925E467B}" /f
+reg delete "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{088e3905-0323-4b02-9826-5d99428e115f}" /f
 
 rem Music
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{a0c69a99-21c8-4671-8703-7934162fcf1d}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Hide" /f
+reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{1CF1260C-4DD0-4ebb-811F-33C572699FDE}" /f
+reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3dfdf296-dbec-4fb4-81d1-6a3438bcf4de}" /f
+reg delete "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{1CF1260C-4DD0-4ebb-811F-33C572699FDE}" /f
+reg delete "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3dfdf296-dbec-4fb4-81d1-6a3438bcf4de}" /f
 
 rem Pictures
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{0ddd015d-b06c-45d5-8c4c-f59713854639}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Hide" /f
+reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3ADD1653-EB32-4cb0-BBD7-DFA0ABB5ACCA}" /f
+reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{24ad3ad4-a569-4530-98e1-ab02f9417aa8}" /f
+reg delete "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3ADD1653-EB32-4cb0-BBD7-DFA0ABB5ACCA}" /f
+reg delete "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{24ad3ad4-a569-4530-98e1-ab02f9417aa8}" /f
 
 rem Videos
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{35286a68-3c57-41a1-bbb1-0eae73d76c95}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Hide" /f
+reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{A0953C92-50DC-43bf-BE83-3742FED03C9C}" /f
+reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a}" /f
+reg delete "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{A0953C92-50DC-43bf-BE83-3742FED03C9C}" /f
+reg delete "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a}" /f
+```
+
+Remove "Edit with Paint 3D" on right click.
+
+```cmd
+reg delete "HKLM\SOFTWARE\Classes\SystemFileAssociations\.jpg\Shell\3D Edit" /f
+reg delete "HKLM\SOFTWARE\Classes\SystemFileAssociations\.jpeg\Shell\3D Edit" /f
+reg delete "HKLM\SOFTWARE\Classes\SystemFileAssociations\.png\Shell\3D Edit" /f
+reg delete "HKLM\SOFTWARE\Classes\SystemFileAssociations\.gif\Shell\3D Edit" /f
+reg delete "HKLM\SOFTWARE\Classes\SystemFileAssociations\.bmp\Shell\3D Edit" /f
 ```
 
 Hide unwanted "Explorer" links.
 
 ```cmd
 rem OneDrive
-reg add "HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /v "System.IsPinnedToNameSpaceTree" /t REG_DWORD /d 0 /f
+reg add "HKCR\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /v "System.IsPinnedToNameSpaceTree" /t REG_DWORD /d 0 /f
 ```
 
 ## Firewall
@@ -339,11 +414,12 @@ Enable or disable Windows features.
 Control Panel > Programs > Turn Windows features on or off
 [■] .NET Framework 3.5 (includes .NET 2.0 and 3.0)
 [ ] Media Features
-[ ] SMB 1.0/CIFS File Sharing Support
 [✓] Windows Subsystem for Linux
-[ ] XPS Services
-[ ] XPS Viewer
 ```
+
+Reboot the system.
+
+Install a WSL distro from <https://aka.ms/wslstore>.
 
 ## Fonts
 Install useful fonts.
@@ -485,6 +561,14 @@ Modify the following lines in `/etc/pam.d/login` (disables message of the day).
 #session    optional    pam_motd.so noupdate
 ```
 
+Create `/etc/wsl.conf`.
+
+```sh
+[automount]
+enabled=true
+options=metadata,uid=1000,gid=1000,umask=022
+```
+
 Configure [sudo(8)](http://manpages.ubuntu.com/manpages/xenial/man8/sudo.8.html) with `sudo EDITOR=vim visudo`.
 
 ```sh
@@ -509,22 +593,28 @@ sudo apt update
 sudo apt upgrade
 sudo apt dist-upgrade
 sudo apt autoremove
-sudo apt install apt-file p7zip-full p7zip-rar zip unzip tree htop imagemagick librsvg2-bin pngcrush wrk
+sudo apt install apt-file p7zip p7zip-rar zip unzip tree htop pngcrush wrk
 sudo apt-file update
+```
+
+Take ownership of `/opt`.
+
+```sh
+USER=`id -un` GROUP=`id -gn` sudo chown $USER:$GROUP /opt
 ```
 
 Install development packages.
 
 ```sh
-sudo apt install build-essential binutils-dev ninja-build nasm git subversion swig openjdk-9-jdk-headless
+sudo apt install build-essential binutils-dev libedit-dev ninja-build nasm git subversion swig
 ```
 
 Install CMake.
 
 ```sh
 rm -rf /opt/cmake; mkdir /opt/cmake
-wget https://cmake.org/files/v3.11/cmake-3.11.1-Linux-x86_64.tar.gz
-tar xvf cmake-3.11.1-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
+wget https://cmake.org/files/v3.11/cmake-3.11.2-Linux-x86_64.tar.gz
+tar xvf cmake-3.11.2-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
 find /opt/cmake -type d -exec chmod 0755 '{}' ';'
 ```
 
@@ -532,35 +622,9 @@ Install NodeJS.
 
 ```sh
 rm -rf /opt/node; mkdir /opt/node
-wget https://nodejs.org/dist/v10.0.0/node-v10.0.0-linux-x64.tar.xz
-tar xvf node-v10.0.0-linux-x64.tar.xz -C /opt/node --strip-components 1
-```
-
-Modify the following lines in `/etc/ssh/sshd_config` (replace `{username}` with your WSL username).
-
-```sh
-Protocol 2
-HostKey /etc/ssh/ssh_host_rsa_key
-#HostKey /etc/ssh/ssh_host_dsa_key
-#HostKey /etc/ssh/ssh_host_ecdsa_key
-#HostKey /etc/ssh/ssh_host_ed25519_key
-UsePrivilegeSeparation yes
-AllowUsers {username}
-UseDNS no
-```
-
-Create a new RSA key.
-
-```sh
-sudo ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key
-sudo chmod 600 /etc/ssh/ssh_host_rsa_key
-```
-
-Start the server.
-
-```sh
-sudo service ssh start
-sudo service ssh status
+wget https://nodejs.org/dist/v10.2.0/node-v10.2.0-linux-x64.tar.xz
+tar xvf node-v10.2.0-linux-x64.tar.xz -C /opt/node --strip-components 1
+find /opt/node -type d -exec chmod 0755 '{}' ';'
 ```
 
 Consider using the [llvm](llvm.md) and [vcpkg](vcpkg.md) guides.
