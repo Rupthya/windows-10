@@ -127,7 +127,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE Boost::system)
 # =============================================================================
 
 include(res/cotire.cmake)
-set_target_properties(${PROJECT_NAME} PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 set_target_properties(${PROJECT_NAME} PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "src/common.h")
 set_target_properties(${PROJECT_NAME} PROPERTIES COTIRE_ADD_UNITY_BUILD OFF)
 cotire(${PROJECT_NAME})
