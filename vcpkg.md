@@ -2,9 +2,9 @@
 Vcpkg installation instructions.
 
 ## Requirements
-* [CMake](https://cmake.org/download/) version 3.11.2 on all platforms
+* [CMake](https://cmake.org/download/) version 3.11.3 on all platforms
 * [LLVM](https://llvm.org/) and [libcxx](https://libcxx.llvm.org/) version 7.0 on Linux and FreeBSD
-* [Visual Studio](https://www.visualstudio.com/downloads/) version 15.7 on Windows
+* [Visual Studio 2017](https://www.visualstudio.com/downloads/) version 15.7 on Windows
 * [Vcpkg](https://github.com/Microsoft/vcpkg)
 
 ## Dependencies
@@ -22,10 +22,13 @@ Add `%VCPKG%` to the `PATH` environment variable.
 
 ```cmd
 git clone https://github.com/Microsoft/vcpkg %VCPKG%
+git clone https://github.com/qis/ice %VCPKG%\ports\ice
 cd %VCPKG% && bootstrap-vcpkg.bat && vcpkg integrate install
 @echo set(VCPKG_TARGET_ARCHITECTURE x64)> %VCPKG%\triplets\%VCPKG_DEFAULT_TRIPLET%.cmake
 @echo set(VCPKG_CRT_LINKAGE dynamic)>>    %VCPKG%\triplets\%VCPKG_DEFAULT_TRIPLET%.cmake
 @echo set(VCPKG_LIBRARY_LINKAGE static)>> %VCPKG%\triplets\%VCPKG_DEFAULT_TRIPLET%.cmake
+cd %UserProfile% && rd /q /s "%VCPKG%/toolsrc/Release" "%VCPKG%/toolsrc/vcpkg/Release" ^
+  "%VCPKG%/toolsrc/vcpkglib/Release" "%VCPKG%/toolsrc/vcpkgmetricsuploader/Release"
 ```
 
 ### Linux & FreeBSD
@@ -33,6 +36,7 @@ Add `${VCPKG}` to the `PATH` environment variable.
 
 ```sh
 git clone https://github.com/Microsoft/vcpkg ${VCPKG}
+git clone https://github.com/qis/ice ${VCPKG}/ports/ice
 rm -rf ${VCPKG}/toolsrc/build.rel; mkdir ${VCPKG}/toolsrc/build.rel && cd ${VCPKG}/toolsrc/build.rel
 cmake -GNinja -DCMAKE_BUILD_TYPE=Debug \
   -DCMAKE_C_COMPILER=`which clang-devel || which clang` \
@@ -48,30 +52,24 @@ set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE "\${CMAKE_CURRENT_LIST_DIR}/toolchains/${VCPK
 EOF
 mkdir ${VCPKG}/triplets/toolchains
 cat > ${VCPKG}/triplets/toolchains/${VCPKG_DEFAULT_TRIPLET}.cmake <<EOF
-set(CMAKE_CROSSCOMPILING FALSE)
 set(CMAKE_SYSTEM_NAME `uname -s` CACHE STRING "")
-set(CMAKE_C_COMPILER `which clang-devel || which clang` CACHE STRING "")
-set(CMAKE_CXX_COMPILER `which clang++-devel || which clang++` CACHE STRING "")
-set(CMAKE_CXX_FLAGS "\${CMAKE_CXX_FLAGS} -stdlib=libc++")
-set(HAVE_STEADY_CLOCK ON)
-set(HAVE_STD_REGEX ON)
+set(CMAKE_CROSSCOMPILING OFF CACHE STRING "")
+set(CMAKE_C_COMPILER "`which clang-devel || which clang`" CACHE STRING "")
+set(CMAKE_CXX_COMPILER "`which clang++-devel || which clang++`" CACHE STRING "")
+set(CMAKE_CXX_FLAGS "\${CMAKE_CXX_FLAGS} -stdlib=libc++" CACHE STRING "")
+set(HAVE_STEADY_CLOCK ON CACHE STRING "")
+set(HAVE_STD_REGEX ON CACHE STRING "")
 EOF
-perl -pi -e 's/CMAKE_CXX_STANDARD 11/CMAKE_CXX_STANDARD 17/' ${VCPKG}/ports/date/CMakeLists.txt
-```
-
-Optional: Fix unofficial namespace names.
-
-```sh
-test `uname -s` = "FreeBSD" && \
-  find ${VCPKG}/ports -type f -exec sed -i '' -E 's/unofficial(-|::)?//g' '{}' ';' || \
-  find ${VCPKG}/ports -type f -exec sed -i    -E 's/unofficial(-|::)?//g' '{}' ';'
+cd && rm -rf ${VCPKG}/toolsrc/build.rel
 ```
 
 ## Ports
 Install Vcpkg ports.
 
 ```sh
-vcpkg install benchmark bzip2 date fmt liblzma libssh2 gtest openssl wtl zlib
+vcpkg install benchmark gtest
+vcpkg install bzip2 date fmt liblzma libssh2 nlohmann-json openssl wtl zlib
+vcpkg install boost-beast boost-serialization
 ```
 
 **NOTE**: Do not execute `vcpkg` in `cmd.exe` and `bash.exe` at the same time!
