@@ -89,7 +89,7 @@ Configure CMake projects with the following options on Linux and FreeBSD:
 -DVCPKG_TARGET_TRIPLET:PATH=${VCPKG_DEFAULT_TRIPLET}
 ```
 
-Add the following lines to the `CMakeLists.txt` file:
+Add the following lines to the `CMakeLists.txt` file (adjust or remove versions):
 
 ```cmake
 find_path(JSON_INCLUDE_DIR nlohmann/json.hpp)
