@@ -67,9 +67,9 @@ cd && rm -rf ${VCPKG}/toolsrc/build.rel
 Install Vcpkg ports.
 
 ```sh
-vcpkg install benchmark gtest
 vcpkg install bzip2 date fmt liblzma libssh2 nlohmann-json openssl wtl zlib
 vcpkg install boost-beast boost-serialization
+vcpkg install benchmark gtest
 ```
 
 **NOTE**: Do not execute `vcpkg` in `cmd.exe` and `bash.exe` at the same time!
@@ -89,22 +89,45 @@ Configure CMake projects with the following options on Linux and FreeBSD:
 -DVCPKG_TARGET_TRIPLET:PATH=${VCPKG_DEFAULT_TRIPLET}
 ```
 
-<!--
-find_package(benchmark REQUIRED)
-target_link_libraries(main PRIVATE benchmark::benchmark)
+Add the following lines to the `CMakeLists.txt` file:
 
-find_package(BZip2 REQUIRED)
-target_link_libraries(main PRIVATE BZip2::BZip2)
+```cmake
+find_path(JSON_INCLUDE_DIR nlohmann/json.hpp)
+target_include_directories(${PROJECT_NAME} PRIVATE ${JSON_INCLUDE_DIR})
 
-find_package(date REQUIRED)
-target_link_libraries(main PRIVATE date::tz date::date)
+# =============================================================================
 
-find_package(fmt REQUIRED)
-target_link_libraries(main PRIVATE fmt::fmt fmt::fmt-header-only)
+find_package(BZip2 1.0.6 REQUIRED)
+target_link_libraries(${PROJECT_NAME} PRIVATE BZip2::BZip2)
 
-find_package(LibLZMA REQUIRED)
-target_include_directories(main PRIVATE ${LIBLZMA_INCLUDE_DIRS})
-target_link_libraries(main PRIVATE ${LIBLZMA_LIBRARIES})
+find_package(unofficial-date CONFIG REQUIRED)
+target_link_libraries(${PROJECT_NAME} PRIVATE unofficial::date::tz unofficial::date::date)
+
+find_package(fmt 4.1.0 CONFIG REQUIRED)
+target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt fmt::fmt-header-only)
+
+find_package(LibLZMA 5.2.3 REQUIRED)
+target_include_directories(${PROJECT_NAME} PRIVATE ${LIBLZMA_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME} PRIVATE ${LIBLZMA_LIBRARIES})
+
+find_package(Libssh2 1.8.0 CONFIG REQUIRED)
+target_link_libraries(${PROJECT_NAME} PRIVATE Libssh2::libssh2)
+
+find_package(OpenSSL 1.0.2 REQUIRED)
+target_link_libraries(${PROJECT_NAME} PRIVATE OpenSSL::SSL OpenSSL::Crypto)
+
+find_package(ZLIB 1.2.11 REQUIRED)
+target_link_libraries(${PROJECT_NAME} PRIVATE ZLIB::ZLIB)
+
+# =============================================================================
+
+find_package(Boost 1.67.0 REQUIRED COMPONENTS system)
+target_link_libraries(${PROJECT_NAME} PRIVATE Boost::system)
+
+# =============================================================================
+
+find_package(benchmark CONFIG REQUIRED)
+target_link_libraries(${PROJECT_NAME} PRIVATE benchmark::benchmark)
 
 find_package(GTest)
 option(BUILD_TESTING "Build tests." ${GTEST_FOUND})
@@ -119,12 +142,4 @@ if(BUILD_TESTING)
   gtest_add_tests(TARGET tests WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 endif()
 
-find_package(OpenSSL REQUIRED)
-target_link_libraries(main PRIVATE OpenSSL::SSL OpenSSL::Crypto)
-
-find_package(libssh2 REQUIRED)
-target_link_libraries(main PRIVATE Libssh2::libssh2)
-
-find_package(ZLIB REQUIRED)
-target_link_libraries(main PRIVATE ZLIB::ZLIB)
--->
+```
