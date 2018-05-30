@@ -78,15 +78,15 @@ vcpkg install benchmark gtest
 Configure CMake projects with the following options on Windows:
 
 ```sh
--DCMAKE_TOOLCHAIN_FILE:PATH=%VCPKG%/scripts/buildsystems/vcpkg.cmake
--DVCPKG_TARGET_TRIPLET:PATH=%VCPKG_DEFAULT_TRIPLET%
+-DCMAKE_TOOLCHAIN_FILE=%VCPKG%/scripts/buildsystems/vcpkg.cmake
+-DVCPKG_TARGET_TRIPLET=%VCPKG_DEFAULT_TRIPLET%
 ```
 
 Configure CMake projects with the following options on Linux and FreeBSD:
 
 ```sh
--DCMAKE_TOOLCHAIN_FILE:PATH=${VCPKG}/scripts/buildsystems/vcpkg.cmake
--DVCPKG_TARGET_TRIPLET:PATH=${VCPKG_DEFAULT_TRIPLET}
+-DCMAKE_TOOLCHAIN_FILE=${VCPKG}/scripts/buildsystems/vcpkg.cmake
+-DVCPKG_TARGET_TRIPLET=${VCPKG_DEFAULT_TRIPLET}
 ```
 
 Add the following lines to the `CMakeLists.txt` file (adjust or remove versions):
