@@ -22,7 +22,6 @@ Add `%VCPKG%` to the `PATH` environment variable.
 
 ```cmd
 git clone https://github.com/Microsoft/vcpkg %VCPKG%
-git clone https://github.com/qis/ice %VCPKG%\ports\ice
 cd %VCPKG% && bootstrap-vcpkg.bat && vcpkg integrate install
 @echo set(VCPKG_TARGET_ARCHITECTURE x64)> %VCPKG%\triplets\%VCPKG_DEFAULT_TRIPLET%.cmake
 @echo set(VCPKG_CRT_LINKAGE dynamic)>>    %VCPKG%\triplets\%VCPKG_DEFAULT_TRIPLET%.cmake
@@ -36,7 +35,6 @@ Add `${VCPKG}` to the `PATH` environment variable.
 
 ```sh
 git clone https://github.com/Microsoft/vcpkg ${VCPKG}
-git clone https://github.com/qis/ice ${VCPKG}/ports/ice
 rm -rf ${VCPKG}/toolsrc/build.rel; mkdir ${VCPKG}/toolsrc/build.rel && cd ${VCPKG}/toolsrc/build.rel
 cmake -GNinja -DCMAKE_BUILD_TYPE=Debug \
   -DCMAKE_C_COMPILER=`which clang-devel || which clang` \
@@ -78,15 +76,17 @@ vcpkg install benchmark gtest
 Configure CMake projects with the following options on Windows:
 
 ```sh
--DCMAKE_TOOLCHAIN_FILE=%VCPKG%/scripts/buildsystems/vcpkg.cmake
--DVCPKG_TARGET_TRIPLET=%VCPKG_DEFAULT_TRIPLET%
+cmake -G "Visual Studio 15 2017 Win64" -DCMAKE_CONFIGURATION_TYPES="Debug;Release" ^
+  -DCMAKE_TOOLCHAIN_FILE=%VCPKG%/scripts/buildsystems/vcpkg.cmake ^
+  -DVCPKG_TARGET_TRIPLET=%VCPKG_DEFAULT_TRIPLET% ..
 ```
 
 Configure CMake projects with the following options on Linux and FreeBSD:
 
 ```sh
--DCMAKE_TOOLCHAIN_FILE=${VCPKG}/scripts/buildsystems/vcpkg.cmake
--DVCPKG_TARGET_TRIPLET=${VCPKG_DEFAULT_TRIPLET}
+cmake -GNinja -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_TOOLCHAIN_FILE=${VCPKG}/scripts/buildsystems/vcpkg.cmake \
+  -DVCPKG_TARGET_TRIPLET=${VCPKG_DEFAULT_TRIPLET} ..
 ```
 
 Add the following lines to the `CMakeLists.txt` file (adjust or remove versions):
