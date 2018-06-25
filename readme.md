@@ -606,7 +606,7 @@ USER=`id -un` GROUP=`id -gn` sudo chown $USER:$GROUP /opt
 Install development packages.
 
 ```sh
-sudo apt install build-essential binutils-dev libedit-dev ninja-build nasm git subversion swig
+sudo apt install build-essential binutils-dev gdb libedit-dev ninja-build nasm git subversion swig
 ```
 
 Install CMake.
