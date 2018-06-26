@@ -606,7 +606,7 @@ USER=`id -un` GROUP=`id -gn` sudo chown $USER:$GROUP /opt
 Install development packages.
 
 ```sh
-sudo apt install build-essential binutils-dev gdb libedit-dev ninja-build nasm git subversion swig
+sudo apt install build-essential binutils-dev gdb libedit-dev nasm git subversion swig
 ```
 
 Install CMake.
@@ -616,6 +616,12 @@ rm -rf /opt/cmake; mkdir /opt/cmake
 wget https://cmake.org/files/v3.12/cmake-3.12.0-rc1-Linux-x86_64.tar.gz
 tar xvf cmake-3.12.0-rc1-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
 find /opt/cmake -type d -exec chmod 0755 '{}' ';'
+```
+
+Install Ninja.
+```sh
+git clone -b release https://github.com/ninja-build/ninja
+cd ninja && ./configure.py --bootstrap && cp ninja /opt/cmake/bin/
 ```
 
 Install NodeJS.
