@@ -13,7 +13,6 @@ Set the `VCPKG` and `VCPKG_DEFAULT_TRIPLET` environment variables.
 | OS          | VCPKG                    | VCPKG_DEFAULT_TRIPLET |
 |-------------|--------------------------|-----------------------|
 | Windows     | `C:\Libraries\vcpkg`     | `x64-windows-static`  |
-| Linux (WSL) | `/mnt/c/Libraries/vcpkg` | `x64-linux-clang`     |
 | Linux       | `/opt/vcpkg`             | `x64-linux-clang`     |
 | FreeBSD     | `/opt/vcpkg`             | `x64-freebsd-devel`   |
 
@@ -35,8 +34,7 @@ git clone https://github.com/Microsoft/vcpkg ${VCPKG}
 rm -rf ${VCPKG}/toolsrc/build.rel; mkdir ${VCPKG}/toolsrc/build.rel && cd ${VCPKG}/toolsrc/build.rel
 cmake -GNinja -DCMAKE_BUILD_TYPE=Debug \
   -DCMAKE_C_COMPILER=`which clang-devel || which clang` \
-  -DCMAKE_CXX_COMPILER=`which clang++-devel || which clang++` \
-  -DCMAKE_CXX_FLAGS="-stdlib=libc++" ..
+  -DCMAKE_CXX_COMPILER=`which clang++-devel || which clang++` ..
 cmake --build . && cp vcpkg ${VCPKG}/
 cat > ${VCPKG}/triplets/${VCPKG_DEFAULT_TRIPLET}.cmake <<EOF
 set(VCPKG_TARGET_ARCHITECTURE x64)
