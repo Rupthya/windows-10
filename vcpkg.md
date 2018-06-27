@@ -59,7 +59,7 @@ cd && rm -rf ${VCPKG}/toolsrc/build.rel
 Install Vcpkg ports.
 
 ```sh
-vcpkg install bzip2 date fmt libjpeg-turbo liblzma libpng libssh2 nlohmann-json openssl wtl zlib
+vcpkg install asio bzip2 date fmt libjpeg-turbo liblzma libpng libssh2 nlohmann-json openssl wtl zlib
 vcpkg install boost-asio boost-beast boost-serialization
 vcpkg install benchmark gtest
 ```
@@ -95,44 +95,47 @@ endif()
 
 # =============================================================================
 
+find_path(ASIO_INCLUDE_DIR asio.hpp)
+target_include_directories(${PROJECT_NAME} PUBLIC ${ASIO_INCLUDE_DIR})
+
 find_package(BZip2 REQUIRED)
-target_link_libraries(main PUBLIC BZip2::BZip2)
+target_link_libraries(${PROJECT_NAME} PUBLIC BZip2::BZip2)
 
 find_package(unofficial-date CONFIG REQUIRED)
-target_link_libraries(main PUBLIC unofficial::date::tz unofficial::date::date)
+target_link_libraries(${PROJECT_NAME} PUBLIC unofficial::date::tz unofficial::date::date)
 
 find_package(fmt CONFIG REQUIRED)
-target_link_libraries(main PUBLIC fmt::fmt)  # or fmt::fmt-header-only
+target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt)  # or fmt::fmt-header-only
 
 find_package(JPEG REQUIRED)
-target_link_libraries(main PUBLIC JPEG::JPEG)
+target_link_libraries(${PROJECT_NAME} PUBLIC JPEG::JPEG)
 
 find_package(LibLZMA REQUIRED)
-target_include_directories(main PUBLIC ${LIBLZMA_INCLUDE_DIRS})
-target_link_libraries(main PUBLIC ${LIBLZMA_LIBRARIES})
+target_include_directories(${PROJECT_NAME} PUBLIC ${LIBLZMA_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME} PUBLIC ${LIBLZMA_LIBRARIES})
 
 find_package(PNG REQUIRED)
-target_link_libraries(main PUBLIC PNG::PNG)
+target_link_libraries(${PROJECT_NAME} PUBLIC PNG::PNG)
 
 find_package(Libssh2 CONFIG REQUIRED)
-target_link_libraries(main PUBLIC Libssh2::libssh2)
+target_link_libraries(${PROJECT_NAME} PUBLIC Libssh2::libssh2)
 
 find_path(JSON_INCLUDE_DIR nlohmann/json.hpp)
-target_include_directories(main PUBLIC ${JSON_INCLUDE_DIR})
+target_include_directories(${PROJECT_NAME} PUBLIC ${JSON_INCLUDE_DIR})
 
 find_package(OpenSSL REQUIRED)
-target_link_libraries(main PUBLIC OpenSSL::SSL OpenSSL::Crypto)
+target_link_libraries(${PROJECT_NAME} PUBLIC OpenSSL::SSL OpenSSL::Crypto)
 
 find_path(WTL_INCLUDE_DIR wtl/atlapp.h)
-target_include_directories(main PUBLIC ${WTL_INCLUDE_DIR})
+target_include_directories(${PROJECT_NAME} PUBLIC ${WTL_INCLUDE_DIR})
 
 find_package(ZLIB REQUIRED)
-target_link_libraries(main PUBLIC ZLIB::ZLIB)
+target_link_libraries(${PROJECT_NAME} PUBLIC ZLIB::ZLIB)
 
 # =============================================================================
 
 find_package(Boost REQUIRED COMPONENTS system)
-target_link_libraries(main PRIVATE Boost::system)
+target_link_libraries(${PROJECT_NAME} PRIVATE Boost::system)
 
 # =============================================================================
 
