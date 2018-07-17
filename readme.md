@@ -613,8 +613,8 @@ Install CMake.
 
 ```sh
 rm -rf /opt/cmake; mkdir /opt/cmake
-wget https://cmake.org/files/v3.12/cmake-3.12.0-rc1-Linux-x86_64.tar.gz
-tar xvf cmake-3.12.0-rc1-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
+wget https://cmake.org/files/v3.12/cmake-3.12.0-Linux-x86_64.tar.gz
+tar xvf cmake-3.12.0-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
 find /opt/cmake -type d -exec chmod 0755 '{}' ';'
 ```
 
