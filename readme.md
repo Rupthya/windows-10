@@ -439,6 +439,7 @@ Install third party software.
 * [Sketchbook Pro](http://www.autodesk.com/products/sketchbook-pro/overview)
 * [Sublime Text 3](https://www.sublimetext.com/)
 * [gVim](http://www.vim.org)
+* [Python 3](https://www.python.org/)
 * [CMake](https://cmake.org)
 * [NASM](http://www.nasm.us)
 * [HxD](https://mh-nexus.de/en/hxd)
