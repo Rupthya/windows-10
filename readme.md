@@ -618,7 +618,7 @@ sudo apt update
 sudo apt upgrade
 sudo apt dist-upgrade
 sudo apt autoremove
-sudo apt install apt-file p7zip p7zip-rar zip unzip tree htop pngcrush
+sudo apt install apt-file p7zip p7zip-rar zip unzip tree htop pngcrush sysstat
 sudo apt-file update
 ```
 
@@ -631,7 +631,7 @@ USER=`id -un` GROUP=`id -gn` sudo chown $USER:$GROUP /opt
 Install development packages.
 
 ```sh
-sudo apt install build-essential binutils-dev gdb libedit-dev nasm python python-pip git subversion swig sysstat
+sudo apt install build-essential binutils-dev gdb libedit-dev nasm python python-pip git subversion swig
 ```
 
 Install CMake.
