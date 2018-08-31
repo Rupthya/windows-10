@@ -1,5 +1,5 @@
 # Windows 10
-Installation and configuration instructions for Windows 10 Creators Update (Version 1703).
+Installation and configuration instructions for Windows 10 Creators Update (Version 1803).
 
 Set the BIOS date two days in the past before installing and correct it after time and time zone selection.
 
@@ -72,13 +72,14 @@ reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "BingSearchEn
 ```
 
 Repeat as a normal user.
-Configure Cortana using the search box in the taskbar, then disable her
+
+Configure and hide Cortana using the search box in the taskbar, then disable her.
 
 ```cmd
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "BingSearchEnabled" /t REG_DWORD /d 0 /f
 ```
 
-Uninstall unwanted apps in PowerShell.
+Uninstall unwanted apps in PowerShell. Do not copy & paste everything.
 
 ```ps
 get-appxpackage *onenote* | remove-appxpackage
@@ -108,7 +109,7 @@ get-appxpackage *Microsoft.GetHelp* | remove-appxpackage
 get-appxpackage *Microsoft.Messaging* | remove-appxpackage
 ```
 
-List apps.
+List apps and remove even more manually.
 
 ```ps
 get-appxpackage | select Name,PackageFullName | sort Name
@@ -147,9 +148,6 @@ Search
 
 Speech
 + Allow Automatic Update of Speech Data: Disabled
-
-Store
-+ Turn off the Store application: Enabled
 
 Windows Defender Antivirus
 + Turn off Windows Defender Antivirus: Enabled
@@ -203,7 +201,7 @@ sc delete diagtrack
 sc delete dmwappushservice
 ```
 
-Disable unwanted services.
+Disable unwanted services (ignore if missing).
 
 ```
 services.msc
@@ -212,6 +210,7 @@ services.msc
 + Microsoft Office Click-to-Run Service: Automatic -> Disabled
 + Superfetch: Automatic -> Disabled
 + Windows Biometric Service: Manual -> Disabled
++ Windows Mobile-2003-based device connectivity: Log on as "Local System account"
 + Xbox Accessory Management Service: Manual -> Disabled
 + Xbox Live …: Manual -> Disabled
 ```
@@ -226,7 +225,7 @@ Task Scheduler > Task Scheduler Library > Microsoft > Windows > Application Expe
 ```
 
 ## Drivers & Updates
-Disable automatic driver app installation.
+Disable automatic driver application installation.
 
 ```
 Control Panel > "System" > Advanced system settings > Hardware > Device Installation Settings
@@ -413,7 +412,6 @@ Enable or disable Windows features.
 ```
 Control Panel > Programs > Turn Windows features on or off
 [■] .NET Framework 3.5 (includes .NET 2.0 and 3.0)
-[ ] Media Features
 [✓] Windows Subsystem for Linux
 ```
 
@@ -487,6 +485,11 @@ Configure [Sublime Text 3 MarkdownEditing GFM Settings](https://packagecontrol.i
 ## Server
 Install software for Windows Server administration.
 
+<!--
+Possible future replacement for the SSMS link:
+https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms
+-->
+
 * [SQL Server Management Studio](https://msdn.microsoft.com/en-us/library/mt238290.aspx)
 * [Remote Server Administration Tools for Windows 10](https://www.microsoft.com/en-us/download/details.aspx?id=45520)
 
@@ -494,7 +497,7 @@ Configure the WinRM client.
 
 ```cmd
 Get-NetConnectionProfile
-Set-NetConnectionProfile -InterfaceIndex {Idx} -NetworkCategory Private
+Set-NetConnectionProfile -InterfaceIndex {InterfaceIndex} -NetworkCategory Private
 Set-Item WSMan:\localhost\Client\TrustedHosts -Value "*" -Force
 ```
 
@@ -537,21 +540,59 @@ Add Control Panel shortcuts to the Windows start menu (use icons from `C:\Window
 
 [Control Panel Command Line Commands](https://www.lifewire.com/command-line-commands-for-control-panel-applets-2626060)
 
+## Anti-Virus
+Suggested third party anti-virus exclusion lists.
+
+```
+Excluded Processes
+
+%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Professional\Common7\IDE\devenv.exe
+%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Professional\Common7\IDE\PerfWatson2.exe
+%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Professional\Common7\IDE\VcxprojReader.exe
+%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Professional\VC\Tools\MSVC\14.12.25827\bin\HostX86\x64\CL.exe
+%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Professional\VC\Tools\MSVC\14.12.25827\bin\HostX86\x64\link.exe
+
+Excluded Directories
+
+%ProgramFiles(x86)%\Microsoft Visual Studio\
+%UserProfile%\AppData\Local\lxss\
+C:\Workspace\
+```
+
 ## Windows Subsystem for Linux
+<!--
 Install [WSLtty](https://github.com/mintty/wsltty) for better terminal support.<br/>
 Install [VcXsrv](https://github.com/ArcticaProject/vcxsrv/releases) for Xorg application support.
-
-Fix `/etc/localtime` symlink.
+-->
+Configure [sudo(8)](http://manpages.ubuntu.com/manpages/xenial/man8/sudo.8.html) with `sudo EDITOR=vim visudo`.
 
 ```sh
-rm /etc/localtime
-ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
-echo Europe/Berlin > /etc/timezone
+# Locale settings.
+Defaults env_keep += "LANG LANGUAGE LINGUAS LC_* _XKB_CHARSET"
+
+# Profile settings.
+Defaults env_keep += "MM_CHARSET EDITOR PAGER CLICOLOR LSCOLORS TMUX SESSION"
+
+# User privilege specification.
+root  ALL=(ALL) ALL
+%sudo ALL=(ALL) NOPASSWD: ALL
+
+# See sudoers(5) for more information on "#include" directives:
+#includedir /etc/sudoers.d
+```
+
+Fix timezone information.
+
+```sh
+sudo rm /etc/localtime
+sudo ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
+echo Europe/Berlin | sudo tee /etc/timezone
 ```
 
 Add the following line to `/etc/mdadm/mdadm.conf` (fixes some `apt` warnings).
 
 ```sh
+# definitions of existing MD arrays
 ARRAY <ignore> devices=/dev/sda
 ```
 
@@ -570,23 +611,6 @@ enabled=true
 options=metadata,uid=1000,gid=1000,umask=022
 ```
 
-Configure [sudo(8)](http://manpages.ubuntu.com/manpages/xenial/man8/sudo.8.html) with `sudo EDITOR=vim visudo`.
-
-```sh
-# Locale settings.
-Defaults env_keep += "LANG LANGUAGE LINGUAS LC_* _XKB_CHARSET"
-
-# Profile settings.
-Defaults env_keep += "MM_CHARSET EDITOR PAGER CLICOLOR LSCOLORS TMUX SESSION"
-
-# User privilege specification.
-root  ALL=(ALL) ALL
-%sudo ALL=(ALL) NOPASSWD: ALL
-
-# See sudoers(5) for more information on "#include" directives:
-#includedir /etc/sudoers.d
-```
-
 Install packages.
 
 ```sh
@@ -594,7 +618,7 @@ sudo apt update
 sudo apt upgrade
 sudo apt dist-upgrade
 sudo apt autoremove
-sudo apt install apt-file p7zip p7zip-rar zip unzip tree htop pngcrush wrk
+sudo apt install apt-file p7zip p7zip-rar zip unzip tree htop pngcrush
 sudo apt-file update
 ```
 
@@ -607,15 +631,15 @@ USER=`id -un` GROUP=`id -gn` sudo chown $USER:$GROUP /opt
 Install development packages.
 
 ```sh
-sudo apt install build-essential binutils-dev gdb libedit-dev nasm git subversion swig
+sudo apt install build-essential binutils-dev gdb libedit-dev nasm python python-pip git subversion swig sysstat
 ```
 
 Install CMake.
 
 ```sh
 rm -rf /opt/cmake; mkdir /opt/cmake
-wget https://cmake.org/files/v3.12/cmake-3.12.0-Linux-x86_64.tar.gz
-tar xvf cmake-3.12.0-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
+wget https://cmake.org/files/v3.12/cmake-3.12.1-Linux-x86_64.tar.gz
+tar xvf cmake-3.12.1-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
 find /opt/cmake -type d -exec chmod 0755 '{}' ';'
 ```
 
@@ -629,8 +653,8 @@ Install NodeJS.
 
 ```sh
 rm -rf /opt/node; mkdir /opt/node
-wget https://nodejs.org/dist/v10.2.0/node-v10.2.0-linux-x64.tar.xz
-tar xvf node-v10.2.0-linux-x64.tar.xz -C /opt/node --strip-components 1
+wget https://nodejs.org/dist/v10.9.0/node-v10.9.0-linux-x64.tar.xz
+tar xvf node-v10.9.0-linux-x64.tar.xz -C /opt/node --strip-components 1
 find /opt/node -type d -exec chmod 0755 '{}' ';'
 ```
 
@@ -639,29 +663,3 @@ Consider using the [llvm](llvm.md) and [vcpkg](vcpkg.md) guides.
 ## Start Menu
 ![Start Menu](layout.png)
 
-Possible fix for a broken Start Menu: Enable and log in with the built-in Administrator account.
-
-```cmd
-rd /Q /S C:\Users\{Name}\AppData\Local\Packages\Microsoft.Windows.Cortana_cw5n1h2txyewy
-```
-
-<!--
-## Anti-Virus
-Suggested anti-virus exclusion lists.
-
-```
-Excluded Processes
-
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\devenv.exe
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\PerfWatson2.exe
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\VcxprojReader.exe
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Tools\MSVC\14.12.25827\bin\HostX86\x64\CL.exe
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Tools\MSVC\14.12.25827\bin\HostX86\x64\link.exe
-
-Excluded Directories
-
-C:\Program Files (x86)\Microsoft Visual Studio\
-C:\Users\Qis\AppData\Local\lxss\
-C:\Workspace\
-```
--->
