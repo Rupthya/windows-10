@@ -4,7 +4,7 @@ Installation and configuration instructions for Windows 10 Creators Update (Vers
 Set the BIOS date two days in the past before installing and correct it after time and time zone selection.
 
 ## Installation
-Download the latest [Windows 10](https://www.microsoft.com/en-us/windows/get-windows-10) image and create a USB stick.
+Download the latest [Windows 10](https://www.microsoft.com/en-us/software-download/windows10) image and create a USB stick.
 
 Create the file `\sources\ei.cfg` on the USB stick.
 
