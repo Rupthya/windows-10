@@ -406,6 +406,12 @@ People: Off
 Mouse wheel: Zoom in and out
 ```
 
+Configure [Outlook 2016](https://products.office.com/en/outlook).
+
+```cmd
+reg add "HKCU\SOFTWARE\Microsoft\Office\16.0\Outlook\Setup" /v "DisableOffice365SimplifiedAccountCreation" /t REG_DWORD /d 1 /f
+```
+
 ## Windows Features
 Enable or disable Windows features.
 
