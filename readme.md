@@ -561,6 +561,7 @@ Excluded Processes
 Excluded Directories
 
 %ProgramFiles(x86)%\Microsoft Visual Studio\
+%ProgramFiles(x86)%\Windows Kits\
 %UserProfile%\AppData\Local\lxss\
 C:\Workspace\
 ```
